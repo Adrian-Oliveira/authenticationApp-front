@@ -17,7 +17,7 @@ const UploadFile = ()=> {
     
 
     return(
-        <div className='grid-cols-1 h-screen'>
+        <div className='grid-cols-1 h-3/6'>
             <div className='w-48 h-64 self-center justify-self-center'>
                 <h1 className='text-3xl font-bold '>Upload your image</h1>
                 <h2 className=''>File should be Jpeg, Png,...</h2>
