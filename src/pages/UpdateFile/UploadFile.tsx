@@ -1,4 +1,8 @@
 import image from '../../assets/image.svg';
+import './registerPage.scss'
+import devChallengeLogo from '../../assets/devchallenges-light.svg'
+import facebookLogo from '../../assets/Facebook.svg'
+import githubLogo from '../../assets/Gihub.svg'
 import { ChangeEvent, DragEvent, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {uploadImage} from '../../redux/image/imageSlice'
@@ -17,21 +21,28 @@ const UploadFile = ()=> {
     
 
     return(
-        <div className='grid-cols-1 h-3/6'>
-            <div className='w-48 h-64 self-center justify-self-center'>
-                <h1 className='text-3xl font-bold '>Upload your image</h1>
-                <h2 className=''>File should be Jpeg, Png,...</h2>
+        <div className='registerPage'>
+            <div className='registerPage__registerContainer'>
+                <div>
+                    <img src={devChallengeLogo} alt="" />
+                    <h2>devchallenges</h2>
+                </div>
+                <h1 className=''>Join thousands of learners from around the world</h1>
+                <p>Master web development by making real-life projects. There are multiple paths for you to choose</p>
+                
+                <input type="email" name="" id="" />
+                <input type="password" name="" id="" />
+                <button>Start coding now</button>
 
-                <div className=' '>                     
-                    <img  className='' src={image} alt="" />
-                    <p className=''>Drag & Drop your image here</p>
-                    </div>
+                <span>or continue with these social profile</span>
 
-                <p className=''>or</p>
-                <label className='' >
-                    <input type="file" />
-                    Choose a file
-                </label>
+                <div>
+                    <img src={facebookLogo} alt="" />
+                    <img src={githubLogo} alt="" />
+                </div>
+
+
+                <span>Already a member? <a href="">Login</a></span>
             </div>
         </div>
     );
