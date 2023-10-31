@@ -1,6 +1,6 @@
 import image from '../../assets/image.svg';
 import './registerPage.scss'
-import devChallengeLogo from '../../assets/devchallenges-light.svg'
+import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
 import facebookLogo from '../../assets/Facebook.svg'
 import githubLogo from '../../assets/Gihub.svg'
 import { ChangeEvent, DragEvent, useEffect, useState } from 'react';
@@ -23,26 +23,43 @@ const UploadFile = ()=> {
     return(
         <div className='registerPage'>
             <div className='registerPage__registerContainer'>
-                <div>
-                    <img src={devChallengeLogo} alt="" />
-                    <h2>devchallenges</h2>
-                </div>
-                <h1 className=''>Join thousands of learners from around the world</h1>
-                <p>Master web development by making real-life projects. There are multiple paths for you to choose</p>
                 
-                <input type="email" name="" id="" />
-                <input type="password" name="" id="" />
-                <button>Start coding now</button>
+                <img 
+                    className='registerPage__registerContainer__LogoAndName' 
+                    src={devChallengeLogoAndName} 
+                    alt="" 
+                />
+                
+                <h1 className='registerPage__registerContainer__title'>Join thousands of learners from around the world</h1>
+                <p className='registerPage__registerContainer__text'>Master web development by making real-life projects. There are multiple paths for you to choose</p>
+                
+                <input  
+                    className='registerPage__registerContainer__email'
+                    type="email" name="" id="" 
+                />
 
-                <span>or continue with these social profile</span>
+                <input 
+                    className='registerPage__registerContainer__password'
+                    type="password" name="" id="" 
+                />
 
-                <div>
+                <button
+                    className='registerPage__registerContainer__registerButton'
+                    >Start coding now
+                </button>
+
+
+                <span className='registerPage__registerContainer__oAuthText'>or continue with these social profile</span>
+
+                <div className='registerPage__registerContainer__oAuthOptions'>
                     <img src={facebookLogo} alt="" />
                     <img src={githubLogo} alt="" />
                 </div>
 
-
-                <span>Already a member? <a href="">Login</a></span>
+                <span className='registerPage__registerContainer__login'>
+                    Already a member? 
+                    <a href="">Login</a>
+                </span>
             </div>
         </div>
     );
