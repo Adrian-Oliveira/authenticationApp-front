@@ -1,7 +1,7 @@
 import { } from 'react';
 import { Route, Routes, HashRouter} from 'react-router-dom';
 import { ToastProvider} from 'react-toast-notifications';
-import UploadFile from './pages/UpdateFile';
+import RegisterPage from './pages/RegisterPage';
 import SeeImage from './pages/SeeImage';
 
 function App() {
@@ -10,9 +10,7 @@ function App() {
     <ToastProvider>
       <HashRouter>
         <Routes>
-          <Route path='/' element={<UploadFile/>}/>
-          <Route path='/image/:imageID' element={<SeeImage/>}/>
-
+          <Route path='/login' element={<RegisterPage/>}/>
         </Routes>
       </HashRouter>
     </ToastProvider>

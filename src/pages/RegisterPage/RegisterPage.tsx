@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../core/hooks';
 import {  useToasts } from 'react-toast-notifications';
 
 
-const UploadFile = ()=> {
+const RegisterPage = ()=> {
 
 /*     const dispatch = useAppDispatch();
     const {addToast} = useToasts();
@@ -33,15 +33,29 @@ const UploadFile = ()=> {
                 <h1 className='registerPage__registerContainer__title'>Join thousands of learners from around the world</h1>
                 <p className='registerPage__registerContainer__text'>Master web development by making real-life projects. There are multiple paths for you to choose</p>
                 
-                <input  
-                    className='registerPage__registerContainer__email'
-                    type="email" name="" id="" 
-                />
+                <label 
+                    className='registerPage__registerContainer__email'>
+                    <i className="material-symbols-outlined">
+                        mail
+                    </i>
+                    <input  
+                        type="email" name="" id=""
+                        placeholder='Email' 
+                        />
+                </label>
 
-                <input 
-                    className='registerPage__registerContainer__password'
-                    type="password" name="" id="" 
-                />
+                <label 
+                    className='registerPage__registerContainer__password'>
+
+                    <i className="material-symbols-outlined">
+                        lock
+                    </i>
+            
+                    <input 
+                        type="password" name="" id=""
+                        placeholder='Password' 
+                    />
+                </label>
 
                 <button
                     className='registerPage__registerContainer__registerButton'
@@ -66,4 +80,4 @@ const UploadFile = ()=> {
 }
 
 
-export {UploadFile}
+export {RegisterPage}
