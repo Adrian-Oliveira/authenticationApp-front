@@ -1,6 +1,7 @@
 import { } from 'react';
 import { Route, Routes, HashRouter} from 'react-router-dom';
 import { ToastProvider} from 'react-toast-notifications';
+import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import SeeImage from './pages/SeeImage';
 
@@ -10,7 +11,8 @@ function App() {
     <ToastProvider>
       <HashRouter>
         <Routes>
-          <Route path='/login' element={<RegisterPage/>}/>
+          <Route path='/register' element={<RegisterPage/>}/>
+          <Route path='/login' element={<LoginPage/>}/>
         </Routes>
       </HashRouter>
     </ToastProvider>

@@ -1,0 +1,159 @@
+.loginPage{
+    width: 100%;
+    min-height:100dvh;
+    display: grid;
+}
+
+.loginPage__loginContainer{
+    align-self: center;
+    justify-self: center;
+
+    padding: 4.8rem 5.8rem 4.3rem 5.8rem ;
+
+    width: 473.831px;
+    min-height: 544.372px;
+
+    border-radius: 24px;
+    border: 1px solid #BDBDBD; 
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+    &__LogoAndName{
+        align-self: flex-start;
+        margin-bottom: 2.7rem;
+    }
+
+    &__title{
+        align-self: flex-start;
+
+        max-width: 31.8rem; 
+        margin-bottom: 2.7rem;
+
+        color: #333;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.63px; 
+    }
+
+    &__text{
+        align-self: flex-start;
+
+        max-width: 31.8rem; 
+        margin-bottom: 3.4rem;
+
+        color: #333;
+        font-family: Noto Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.56px; 
+    }
+
+    &__email{
+        margin-bottom: 1.4rem;
+
+        width: 100%;
+        height: 4.8rem;
+        
+        padding: 1.2rem;
+
+        display: flex;
+        align-items: center;
+        gap:1.1rem;
+        border-radius: 8px;
+        border: 1px solid #BDBDBD; 
+
+        color: #828282;
+        font-family: Noto Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.56px; 
+    }
+
+    &__password{
+        margin-bottom: 2.2rem;
+        
+        width: 100%;
+        height: 4.8rem;
+        
+        padding: 1.2rem;
+
+        display: flex;
+        align-items: center;
+        gap:1.1rem;
+        border-radius: 8px;
+        border: 1px solid #BDBDBD; 
+
+        color: #828282;
+        font-family: Noto Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.56px; 
+    }
+
+    &__loginButton{
+        margin-bottom: 3.1rem;
+
+        width: 100%;
+        height: 3.8rem;
+
+        border-radius: 8px;
+        background: var(--Blue-1, #2F80ED);
+
+        color: #FFF;
+        text-align: center;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        letter-spacing: -0.56px; 
+    }
+
+    &__oAuthText{
+        margin-bottom: 2.2rem;
+
+        color: #828282;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.49px;
+    }
+
+    &__oAuthOptions{
+        margin-bottom: 2.7rem;
+
+        display: flex;
+        gap: 2.093rem;
+    }
+
+    &__login{
+        color: #828282;
+        text-align: center;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        letter-spacing: -0.49px; 
+
+        a{
+            cursor: pointer;
+            color: #2D9CDB;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            letter-spacing: -0.49px;
+        }
+    }
+    
+}
