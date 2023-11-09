@@ -1,5 +1,5 @@
 import image from '../../assets/image.svg';
-import './loginPage.scss'
+import './resetPasswordPage.scss'
 import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
 import facebookLogo from '../../assets/Facebook.svg'
 import githubLogo from '../../assets/Gihub.svg'
@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../core/hooks';
 import {  useToasts } from 'react-toast-notifications';
 
 
-const LoginPage = ()=> {
+const ResetPasswordPage = ()=> {
 
 /*     const dispatch = useAppDispatch();
     const {addToast} = useToasts();
@@ -22,19 +22,19 @@ const LoginPage = ()=> {
     
 
     return(
-        <div className='loginPage'>
-            <div className='loginPage__loginContainer'>
+        <div className='resetPasswordPage'>
+            <div className='resetPasswordPage__resetPasswordContainer'>
                 
                 <img 
-                    className='loginPage__loginContainer__LogoAndName' 
+                    className='resetPasswordPage__resetPasswordContainer__LogoAndName' 
                     src={devChallengeLogoAndName} 
                     alt="" 
                 />
                 
-                <h1 className="loginPage__loginContainer__title">Login</h1>
+                <h1 className="resetPasswordPage__resetPasswordContainer__title">Find your account</h1>
                 
                 <label 
-                    className='loginPage__loginContainer__email'>
+                    className='resetPasswordPage__resetPasswordContainer__email'>
                     <i className="material-symbols-outlined">
                         mail
                     </i>
@@ -44,38 +44,12 @@ const LoginPage = ()=> {
                         />
                 </label>
 
-                <label 
-                    className='loginPage__loginContainer__password'>
-
-                    <i className="material-symbols-outlined">
-                        lock
-                    </i>
-            
-                    <input 
-                        type="password" name="" id=""
-                        placeholder='Password' 
-                    />
-                </label>
-
                 <button
-                    className='loginPage__loginContainer__loginButton'
-                    >Start coding now
+                    className='resetPasswordPage__resetPasswordContainer__loginButton'
+                    >Send the code to my email
                 </button>
 
-
-                <span className='loginPage__loginContainer__oAuthText'>or continue with these social profile</span>
-
-                <div className='loginPage__loginContainer__oAuthOptions'>
-                    <img src={facebookLogo} alt="" />
-                    <img src={githubLogo} alt="" />
-                </div>
-
-                <span className='loginPage__loginContainer__reset'>
-                    Forgot your password? 
-                    <a href="#">Recover</a>
-                </span>
-
-                <span className='loginPage__loginContainer__login'>
+                <span className='resetPasswordPage__resetPasswordContainer__login'>
                     Already a member? 
                     <a href="#">Register</a>
                 </span>
@@ -85,4 +59,4 @@ const LoginPage = ()=> {
 }
 
 
-export {LoginPage}
+export {ResetPasswordPage}
