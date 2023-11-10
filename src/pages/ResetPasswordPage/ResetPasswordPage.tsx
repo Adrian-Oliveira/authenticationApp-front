@@ -10,16 +10,107 @@ import { useAppDispatch, useAppSelector } from '../../core/hooks';
 import {  useToasts } from 'react-toast-notifications';
 
 
+const Input = ()=>{
+
+    const [emailSend, setEmailSend] = useState(false);
+    const [rightResetCode, setRightResetCode] = useState(false);
+
+    
+    if(emailSend && rightResetCode){
+        return(
+            <>
+                <label 
+                    className='resetPasswordPage__resetPasswordContainer__email'>
+                    <i className="material-symbols-outlined">
+                        mail
+                    </i>
+                    <input  
+                        type="password" name="" id=""
+                        defaultValue=''
+                        placeholder='Password' 
+                        />
+                </label>
+
+
+                <label 
+                    className='resetPasswordPage__resetPasswordContainer__email'>
+                    <i className="material-symbols-outlined">
+                        mail
+                    </i>
+                    <input  
+                        type="password" name="" id=""
+                        defaultValue=''
+                        placeholder='Confirm the password' 
+                        />
+                </label>
+
+                    
+                <button
+                    className='resetPasswordPage__resetPasswordContainer__loginButton'
+                    onClick={()=>{}}
+                    >Change the password 
+                </button>
+            </>
+        )
+    }
+
+    else if(emailSend){
+        return(
+            <>
+                <label 
+                    className='resetPasswordPage__resetPasswordContainer__email'>
+                    <i className="material-symbols-outlined">
+                        lock
+                    </i>
+                    <input  
+                        type="password" name="" id="resetPasswordPage__resetPasswordContainer__code"
+                        defaultValue=''
+                        placeholder='Code' 
+                        />
+                </label>
+
+                <button
+                    className='resetPasswordPage__resetPasswordContainer__loginButton'
+                    onClick={()=>{setRightResetCode(true)}}
+                    >Confirm the code 
+                </button>
+            </>
+        )
+    }
+
+    else{
+        return(
+            <>
+                <label 
+                    className='resetPasswordPage__resetPasswordContainer__email'>
+                    <i className="material-symbols-outlined">
+                        mail
+                    </i>
+                    <input  
+                        type="email" name="" id="resetPasswordPage__resetPasswordContainer__email"
+                        defaultValue={''}
+                        placeholder='Email' 
+                        />
+                </label>
+
+                <button
+                    className='resetPasswordPage__resetPasswordContainer__loginButton'
+                    onClick={()=>{setEmailSend(true)}}
+                    >Send the code to my email
+                </button>
+            </>
+        )
+    }
+
+
+    
+    
+}
+
+
 const ResetPasswordPage = ()=> {
 
-/*     const dispatch = useAppDispatch();
-    const {addToast} = useToasts();
-    const navigate = useNavigate();
 
-    const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
-    const uploading = useAppSelector((state)=>state.image.uploading); 
-    */
-    
 
     return(
         <div className='resetPasswordPage'>
@@ -33,21 +124,7 @@ const ResetPasswordPage = ()=> {
                 
                 <h1 className="resetPasswordPage__resetPasswordContainer__title">Find your account</h1>
                 
-                <label 
-                    className='resetPasswordPage__resetPasswordContainer__email'>
-                    <i className="material-symbols-outlined">
-                        mail
-                    </i>
-                    <input  
-                        type="email" name="" id=""
-                        placeholder='Email' 
-                        />
-                </label>
-
-                <button
-                    className='resetPasswordPage__resetPasswordContainer__loginButton'
-                    >Send the code to my email
-                </button>
+                <Input/>
 
                 <span className='resetPasswordPage__resetPasswordContainer__login'>
                     Already a member? 
