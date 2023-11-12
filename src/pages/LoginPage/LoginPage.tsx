@@ -1,8 +1,8 @@
 import image from '../../assets/image.svg';
 import './loginPage.scss'
 import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
-import facebookLogo from '../../assets/Facebook.svg'
-import githubLogo from '../../assets/Gihub.svg'
+import googleLogo from '../../assets/Google.svg'
+import githubLogo from '../../assets/Github.svg'
 import { ChangeEvent, DragEvent, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {uploadImage} from '../../redux/image/imageSlice'
@@ -66,7 +66,7 @@ const LoginPage = ()=> {
                 <span className='loginPage__loginContainer__oAuthText'>or continue with these social profile</span>
 
                 <div className='loginPage__loginContainer__oAuthOptions'>
-                    <img src={facebookLogo} alt="" />
+                    <img src={googleLogo} alt="" />
                     <img src={githubLogo} alt="" />
                 </div>
 
