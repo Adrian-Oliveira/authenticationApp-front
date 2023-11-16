@@ -4,7 +4,6 @@ import { ToastProvider} from 'react-toast-notifications';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
-import SeeImage from './pages/SeeImage';
 
 function App() {
 
