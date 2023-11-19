@@ -1,5 +1,6 @@
 import { } from 'react';
-import { Route, Routes, HashRouter} from 'react-router-dom';
+import { Route, Routes, HashRouter, Navigate} from 'react-router-dom';
+import PrivateRoutes from './core/PrivateRoutes';
 import { ToastProvider} from 'react-toast-notifications';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -14,6 +15,13 @@ function App() {
           <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/reset' element={<ResetPasswordPage/>}/>
+
+          <Route element={<PrivateRoutes/>} >
+            <Route path='profile' element={<ResetPasswordPage/>} />
+          </Route>   
+
+
+            <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </HashRouter>
     </ToastProvider>
