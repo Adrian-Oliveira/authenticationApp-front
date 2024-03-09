@@ -3,6 +3,7 @@ import './loginPage.scss'
 import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
 import googleLogo from '../../assets/Google.svg'
 import githubLogo from '../../assets/Github.svg'
+import { Link } from "react-router-dom";
 import { ChangeEvent, DragEvent, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {uploadImage} from '../../redux/image/imageSlice'
@@ -77,7 +78,7 @@ const LoginPage = ()=> {
 
                 <span className='loginPage__loginContainer__login'>
                     Already a member? 
-                    <a href="#">Register</a>
+                    <Link to='/register'>Register</Link>
                 </span>
             </div>
         </div>

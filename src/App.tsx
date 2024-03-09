@@ -17,7 +17,7 @@ function App() {
           <Route path='/reset' element={<ResetPasswordPage/>}/>
 
           <Route element={<PrivateRoutes/>} >
-            <Route path='profile' element={<ResetPasswordPage/>} />
+            <Route path='/profile' element={<ResetPasswordPage/>} />
           </Route>   
 
 
