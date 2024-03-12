@@ -1,13 +1,6 @@
-import image from '../../assets/image.svg';
 import './resetPasswordPage.scss'
 import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
-import facebookLogo from '../../assets/Facebook.svg'
-import githubLogo from '../../assets/Gihub.svg'
-import { ChangeEvent, DragEvent, useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
-import {uploadImage} from '../../redux/image/imageSlice'
-import { useAppDispatch, useAppSelector } from '../../core/hooks';
-import {  useToasts } from 'react-toast-notifications';
+import { useState } from 'react';
 
 
 const Input = ()=>{

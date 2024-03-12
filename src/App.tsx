@@ -5,6 +5,7 @@ import { ToastProvider} from 'react-toast-notifications';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import ProfilePage from './pages/ProfilePage';
 
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
           <Route path='/reset' element={<ResetPasswordPage/>}/>
 
           <Route element={<PrivateRoutes/>} >
-            <Route path='/profile' element={<ResetPasswordPage/>} />
+            <Route path='/profile' element={<ProfilePage/>} />
           </Route>   
 
 

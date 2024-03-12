@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
-
+import { useAppSelector } from "./hooks";
 const useAuth=()=>{
     const user=localStorage.getItem('user');
 
@@ -13,9 +13,10 @@ const useAuth=()=>{
 
 const PrivateRoutes=() =>{
 
-    const auth=useAuth();
+    const auth = useAuth();
+    const user = useAppSelector(state=>state.user.isLogged)
 
-    if(auth){
+    if(user){
         return <Outlet />;
     }
     else{
