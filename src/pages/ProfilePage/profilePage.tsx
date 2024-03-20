@@ -1,13 +1,14 @@
 import './profilePage.scss'
-
-
-
+import TopNav from '../../components/TopNav';
 const ProfilePage = ()=> {
 
     return(
-        <div className='profilePage'>
-            <h1>profile</h1>            
-        </div>
+        <>
+            <TopNav/>
+            <div className='profilePage'>
+                <h1>profile</h1>            
+            </div>
+        </>
     );
 }
 

@@ -1,0 +1,40 @@
+.topNav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center ;
+    position: fixed;
+    top: 0px;
+    width: 100dvw;
+    background-color: #FAFAFB;
+    padding: 2.6rem 8rem 0rem 7.2rem ;
+
+    &__logo{
+        width: 13rem;
+        height: 1.8rem;
+    }
+
+    &__profile{
+        display: flex;
+        justify-content:flex-start;
+        align-items: center ;
+        &__image{
+           width: 3.2rem; 
+           height: 3.2rem;
+           border-radius: 0.8rem;
+        }
+        &__name{
+            margin-left: 1.1rem;
+
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 16.34px;
+            letter-spacing: -0.035em;
+            text-align: left;
+
+        }
+        &__icon{
+            margin-left: 2rem;
+            cursor: pointer;
+        }
+    }
+}
