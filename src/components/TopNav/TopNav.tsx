@@ -3,7 +3,7 @@ import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
 
 import { useAppDispatch } from '../../core/hooks';
 import { setLogged } from '../../redux/user/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
 const TopNav = ()=> {
@@ -34,7 +34,28 @@ const TopNav = ()=> {
                 </div>
 
                 <div className={`topNav__popup topNav__popup--${openPopup?'active':'inactive'}`}>
+                    <button className='topNav__popup__button'>
+                        <i className="material-icons">
+                            account_circle
+                        </i>
+                        <span>My Profile</span>
+                    </button>  
+
+                    <button className='topNav__popup__button'>
+                        <i className="material-icons">
+                            group
+                        </i>    
+                        <span>Group Chat</span>
+                    </button>
+
+                    <hr/>
                     
+                    <button className='topNav__popup__button topNav__popup__button--logout'>
+                        <i className="material-icons">
+                            logout
+                        </i> 
+                        <span>Logout</span>
+                    </button>          
                 </div>
             </div>
         </div>
