@@ -4,10 +4,26 @@ import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
 import { useAppDispatch } from '../../core/hooks';
 import { setLogged } from '../../redux/user/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const TopNav = ()=> {
     const [openPopup, setOpenPopup] = useState(false)
+    let menuRef = useRef<HTMLDivElement>(null)
+
+    useEffect(()=>{
+        const handler = (e:any)=>{
+            if(!menuRef.current?.contains(e.target)){
+                setOpenPopup(false)
+
+            }
+        }
+        document.addEventListener('mousedown', handler)
+
+        return()=>{
+            document.removeEventListener('mousedown', handler)
+        }
+    })
+
 
     return(
         <div className='topNav'>
@@ -33,7 +49,7 @@ const TopNav = ()=> {
                     }
                 </div>
 
-                <div className={`topNav__popup topNav__popup--${openPopup?'active':'inactive'}`}>
+                <div className={`topNav__popup topNav__popup--${openPopup?'active':'inactive'}`} ref={menuRef}>
                     <button className='topNav__popup__button'>
                         <i className="material-icons">
                             account_circle
