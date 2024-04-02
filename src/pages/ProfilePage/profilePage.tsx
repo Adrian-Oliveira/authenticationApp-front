@@ -9,56 +9,61 @@ const ProfilePage = ()=> {
                 <h1 className='profilePage__title'>Personal info</h1>            
                 <p className='profilePage__subtitle'>Basic info, like your name and photo</p>   
                 <div className="profilePage__profile"> 
-                    <div className="profilePage__profile__item">
-                        <h2 className="first">
-                        Profile
-                        </h2>
+                    <div className="profilePage__profile__header">
+                        <div className='profilePage__profile__header__text'>
+                            <h2 className="profilePage__profile__header__title">
+                                Profile
+                            </h2>
+                            <p className="profilePage__profile__header__subtitle">Some info may be visible to other people</p>
+                        </div>
+
+                        <button className="profilePage__profile__header__editButton">Edit</button>
                     </div>
                     <div className="profilePage__profile__item">
-                        <div className="first">
-                        PHOTO
+                        <div className="label">
+                            PHOTO
                         </div>
-                        <p>
+                        <p className="data">
                         Xanthe Neal
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
-                        <div className="first">
-                        NAME
+                        <div className="label">
+                            NAME
                         </div>
-                        <p>
+                        <p className="data">
                         Xanthe Neal
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
-                        <div className="first">
-                        BIO
+                        <div className="label">
+                            BIO
                         </div>
-                        <p>
-                        I am a software developer and a big fan of devchallenges...
+                        <p className="data">
+                        I am a software developer and a big fan of devchallenges...wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
-                        <div className="first">
-                        PHONE
+                        <div className="label">
+                            PHONE
                         </div>
-                        <p>
+                        <p className="data">
                         908249274292
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
-                        <div className="first">
-                        EMAIL
+                        <div className="label">
+                            EMAIL
                         </div>
-                        <p>
+                        <p className="data">
                         xanthe.neal@gmail.com
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
-                        <div className="first">
-                        PASSWORD
+                        <div className="label">
+                            PASSWORD
                         </div>
-                        <p>
+                        <p className="data">
                         ************
                         </p>
                     </div>

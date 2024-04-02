@@ -1,5 +1,6 @@
 .profilePage{
     padding-top: 10.2rem;
+    padding-bottom: 10.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -33,6 +34,44 @@
 
         display: flex;
         flex-direction: column;
+        &__header{
+            width: 100%;
+            min-height: 7.3rem;
+            padding: 1.2rem 0rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            
+            border-bottom: 1px solid #E0E0E0;
+            padding: 2.8rem 4.8rem 3.7rem 4.9rem;
+            
+            &__title{
+                color: #000000;
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 32.69px;
+                letter-spacing: -0.035em;
+                text-align: left;
+
+            }
+            &__subtitle{
+                color: #828282;
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 17.71px;
+                letter-spacing: -0.035em;
+                text-align: left;
+
+            }
+
+            &__editButton{
+                width: 9.534rem;
+                height: 3.8rem;
+                border-radius: 12px;
+                color: #828282;
+                border: 1px solid #828282
+            }
+        }
 
         &__item{
             width: 100%;
@@ -40,13 +79,31 @@
             padding: 1.2rem 0rem;
             display: flex;
             align-items: center;
-
+            
             border-bottom: 1px solid #E0E0E0;
             
-            .first{
+            .label{
                 width: 100%;
-                max-width: 2.8rem;
+                max-width: 28rem;
                 padding-left: 5rem;
+
+                color: #BDBDBD;
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 17.71px;
+                letter-spacing: -0.035em;
+                text-align: left;
+
+            }
+
+            .data{
+                overflow: hidden;
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 24.52px;
+                letter-spacing: -0.035em;
+                text-align: left;
+
             }
         }
 
