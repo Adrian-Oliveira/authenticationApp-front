@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import ProfilePage from './pages/ProfilePage';
+import EditProfilePage from './pages/EditProfilePage';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
 
           <Route element={<PrivateRoutes/>} >
             <Route path='/profile' element={<ProfilePage/>} />
+            <Route path='/editProfile' element={<EditProfilePage/>} />
           </Route>   
 
 

@@ -77,7 +77,8 @@
             width: 100%;
             min-height: 7.3rem;
             padding: 1.2rem 0rem;
-            display: flex;
+            display: grid;
+            grid-template-columns: 28rem auto;
             align-items: center;
             
             border-bottom: 1px solid #E0E0E0;
@@ -97,7 +98,9 @@
             }
 
             .data{
-                overflow: hidden;
+
+                overflow:scroll;
+                max-height: 14.6rem;
                 font-size: 18px;
                 font-weight: 500;
                 line-height: 24.52px;

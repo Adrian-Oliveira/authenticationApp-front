@@ -8,11 +8,12 @@ import { useState, useEffect, useRef } from 'react';
 
 const TopNav = ()=> {
     const [openPopup, setOpenPopup] = useState(false)
-    let menuRef = useRef<HTMLDivElement>(null)
+    let popupRef = useRef<HTMLDivElement>(null)
+    let closeRef = useRef<HTMLElement>(null)
 
     useEffect(()=>{
         const handler = (e:any)=>{
-            if(!menuRef.current?.contains(e.target)){
+            if(!popupRef.current?.contains(e.target) && !closeRef.current?.contains(e.target) ){
                 setOpenPopup(false)
 
             }
@@ -35,13 +36,13 @@ const TopNav = ()=> {
                     <p className='topNav__profile__name'>Xanthe Neal</p>
 
                     {openPopup? 
-                    <i className='topNav__profile__icon' onClick={()=>setOpenPopup(!openPopup)}>
+                    <i className='topNav__profile__icon' onClick={()=>setOpenPopup(!openPopup)} ref={closeRef}>
                         <span className="material-symbols-outlined">
                             arrow_drop_up
                         </span>
                     </i>
                     : 
-                    <i className='topNav__profile__icon' onClick={()=>setOpenPopup(!openPopup)}>
+                    <i className='topNav__profile__icon' onClick={()=>{setOpenPopup(!openPopup)}} >
                         <span className="material-symbols-outlined">
                             arrow_drop_down
                         </span>
@@ -49,7 +50,7 @@ const TopNav = ()=> {
                     }
                 </div>
 
-                <div className={`topNav__popup topNav__popup--${openPopup?'active':'inactive'}`} ref={menuRef}>
+                <div className={`topNav__popup topNav__popup--${openPopup?'active':'inactive'}`} ref={popupRef}>
                     <button className='topNav__popup__button'>
                         <i className="material-icons">
                             account_circle

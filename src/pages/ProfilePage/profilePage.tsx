@@ -1,6 +1,15 @@
 import './profilePage.scss'
 import TopNav from '../../components/TopNav';
+import { useNavigate } from 'react-router-dom';
+
+
+
+
 const ProfilePage = ()=> {
+
+    const navigate = useNavigate();
+
+    
 
     return(
         <>
@@ -17,7 +26,8 @@ const ProfilePage = ()=> {
                             <p className="profilePage__profile__header__subtitle">Some info may be visible to other people</p>
                         </div>
 
-                        <button className="profilePage__profile__header__editButton">Edit</button>
+                        <button className="profilePage__profile__header__editButton"
+                                onClick={()=>{navigate("/editProfile")}}>Edit</button>
                     </div>
                     <div className="profilePage__profile__item">
                         <div className="label">
@@ -40,7 +50,10 @@ const ProfilePage = ()=> {
                             BIO
                         </div>
                         <p className="data">
-                        I am a software developer and a big fan of devchallenges...wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+                            I am a software developer and a big fan of devchallenges...wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+                            I am a software developer and a big fan of devchallenges...wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+                            I am a software developer and a big fan of devchallenges...wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
