@@ -13,7 +13,29 @@ const EditProfilePage = ()=> {
                     </i>
                     Back
                 </Link>
-                <div className="editProfilePage__edit"></div>
+                <div className="editProfilePage__edit">
+                    <div className='editProfilePage__edit__titles'>
+                        <h1 className="editProfilePage__edit__title">
+                            Change Info
+                        </h1>
+                        <h2 className='editProfilePage__edit__subtitle'>
+                            Changes will be reflected to every services
+                        </h2>
+                    </div>
+
+                    <label>
+                        <img src="" alt="" />
+                        <p>CHANGE PHOTO</p>
+                    </label>
+
+                    <div>
+                        <label htmlFor="">
+                            
+                            <input type="text" name="" id="" />
+                        </label>
+                    </div>
+
+                </div>
             </div>
         </>
     );
