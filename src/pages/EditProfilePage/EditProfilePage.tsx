@@ -30,9 +30,31 @@ const EditProfilePage = ()=> {
 
                     <div>
                         <label htmlFor="">
-                            
+                            <div>Name</div>
                             <input type="text" name="" id="" />
                         </label>
+
+                        <label htmlFor="">
+                            <div>Bio</div>
+                            <textarea name="" id="" cols={30} rows={10}></textarea>
+                        </label>
+
+                        <label htmlFor="">
+                            <div>Phone</div>
+                            <input type="number" name="" id="" />
+                        </label>
+
+                        <label htmlFor="">
+                            <div>email</div>
+                            <input type="email" name="" id="" />
+                        </label>
+
+                        <label htmlFor="">
+                            <div>password</div>
+                            <input type='password' name="" id="" />
+                        </label>
+
+                        <button>Save</button>
                     </div>
 
                 </div>
