@@ -27,9 +27,86 @@
     &__edit{
         width: 100%;
         min-height: 82.756rem;
+        padding: 3rem 4.8rem;
         border: 1px solid #E0E0E0;
         border-radius: 12px;
 
-        
+        &__title{
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 32.69px;
+            letter-spacing: -0.035em;
+            text-align: left;
+            color: #000000;
+
+        }
+
+        &__subtitle{
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 17.71px;
+            letter-spacing: -0.035em;
+            text-align: left;
+            color: #828282;
+        }
+
+        &__photoInput{
+            display: flex;
+            gap: 2.75rem;
+            align-items: center;
+            margin-top: 2.5rem;
+
+            &__photo{
+                position: relative;
+                width: 7.2rem;
+                height: 7.2rem;
+                border-radius: 8px;
+
+                img{
+                    width: 100%;
+                    border-radius: 8px;
+                }
+
+                i{
+                    position: absolute;
+                    top:2.4rem;
+                    left:2.4rem;
+                    color: #FFFFFF;
+                }
+                p{
+                    font-size: 13px;
+                    font-weight: 500;
+                    line-height: 17.71px;
+                    letter-spacing: -0.035em;
+                    text-align: left;
+                    color: #828282;
+
+                }
+            }
+        }
+
+        &__textInputs{
+            width: 41.693rem;
+            height: 7.383rem;
+            display: flex;
+            flex-direction: column;
+            gap:2.4rem;
+            margin-top: 3.2rem;
+
+        }
+
+        &__input{
+            width: 100%;
+            
+        }
+        &__inputName{
+            font-size: 13px;
+            font-weight: 500;
+            line-height: 17.71px;
+            letter-spacing: -0.035em;
+            text-align: left;
+            color: #4F4F4F;
+
+        }
     }
 }
