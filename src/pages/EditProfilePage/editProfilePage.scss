@@ -5,6 +5,7 @@
     display: flex;
     gap: 2.4rem;
     flex-direction: column;
+
     &__back{
         width: max-content;
         color: #2D9CDB;
@@ -24,12 +25,15 @@
         }
 
     }
+
     &__edit{
         width: 100%;
         min-height: 82.756rem;
         padding: 3rem 4.8rem;
         border: 1px solid #E0E0E0;
         border-radius: 12px;
+
+
 
         &__title{
             font-size: 24px;
@@ -49,6 +53,8 @@
             text-align: left;
             color: #828282;
         }
+
+
 
         &__photoInput{
             display: flex;
@@ -85,9 +91,11 @@
             }
         }
 
+
+
         &__textInputs{
             width: 41.693rem;
-            height: 7.383rem;
+            height: fit-content;
             display: flex;
             flex-direction: column;
             gap:2.4rem;
@@ -97,8 +105,12 @@
 
         &__input{
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: .38rem;
             
         }
+
         &__inputName{
             font-size: 13px;
             font-weight: 500;
@@ -107,6 +119,35 @@
             text-align: left;
             color: #4F4F4F;
 
+        }
+
+        &__inputValue{
+            width: 100%;
+            min-height: 52px;
+
+            padding: 1.7rem 1.8rem;
+            border-radius: 12px ;
+            border: 1px solid #828282
+        }
+
+
+        &__button{
+            width: 8.2rem;
+            height: 3.8rem;
+            border-radius: 8px;
+            background: #2F80ED;
+
+            color: #FFFFFF;
+
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 21.79px;
+            letter-spacing: -0.035em;
+            text-align: center;
+
+
+
+            
         }
     }
 }

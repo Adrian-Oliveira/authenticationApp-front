@@ -41,15 +41,9 @@ const EditProfilePage = ()=> {
 
                         <label className='editProfilePage__edit__input'>
                             <div className='editProfilePage__edit__inputName'>Name</div>
-                            <div className='editProfilePage__edit__inputName'>Name</div>
-                            <div className='editProfilePage__edit__inputName'>Name</div>
-                            <div className='editProfilePage__edit__inputName'>Name</div>
-                            <div className='editProfilePage__edit__inputName'>Name</div>
-                            <div className='editProfilePage__edit__inputName'>Name</div>
-                            <div className='editProfilePage__edit__inputName'>Name</div>
                             <input className='editProfilePage__edit__inputValue'
                             type="text" name="" id="" placeholder='Enter your name...' />
-                        </label>
+                        </label> 
 
                         <label className='editProfilePage__edit__input'>
                             <div className='editProfilePage__edit__inputName'>Bio</div>
@@ -64,18 +58,19 @@ const EditProfilePage = ()=> {
                         </label>
 
                         <label className='editProfilePage__edit__input'>
-                            <div className='editProfilePage__edit__inputName'>email</div>
+                            <div className='editProfilePage__edit__inputName'>Email</div>
                             <input className='editProfilePage__edit__inputValue' 
                             type="email" name="" id="" placeholder='Enter your email...' />
                         </label>
 
                         <label className='editProfilePage__edit__input'>
-                            <div className='editProfilePage__edit__inputName'>password</div>
+                            <div className='editProfilePage__edit__inputName'>Password</div>
                             <input className='editProfilePage__edit__inputValue' 
                             type='password' name="" id="" placeholder='Enter your password...' />
                         </label>
 
-                        <button>Save</button>
+                        <button className='editProfilePage__edit__button'>Save</button>
+
                     </div>
 
                 </div>
