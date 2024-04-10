@@ -21,6 +21,7 @@
         display: flex;
         justify-content:flex-start;
         align-items: center ;
+        cursor: pointer;
         &__image{
            width: 3.2rem; 
            height: 3.2rem;
@@ -38,7 +39,6 @@
         }
         &__icon{
             margin-left: 2rem;
-            cursor: pointer;
         }
     }
 

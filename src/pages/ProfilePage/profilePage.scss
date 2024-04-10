@@ -69,7 +69,15 @@
                 height: 3.8rem;
                 border-radius: 12px;
                 color: #828282;
-                border: 1px solid #828282
+                border: 1px solid #828282;
+
+                font-family: "Noto Sans";
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 21.79px;
+                letter-spacing: -0.035em;
+                text-align: center;
+
             }
         }
 
@@ -115,5 +123,26 @@
             border-bottom: none;
         }
         
+    }
+}
+
+
+@media only screen and (max-width: 768px ) {
+    .resetPasswordPage{
+        width: 100%;
+        min-height:100dvh;
+        display: grid;
+        padding: 0rem 0rem;
+    }
+
+    .resetPasswordPage__resetPasswordContainer{
+        align-self:baseline;
+        justify-self:baseline;
+
+        padding: 1.724rem 2.142rem 11.6rem 1.8rem ;
+        width: 100%;
+        min-height: 63.4rem;
+
+        border-radius: 0px;
     }
 }

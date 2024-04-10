@@ -3,7 +3,8 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 
 
 export interface UserState {
-  isLogged: boolean
+  isLogged: boolean,
+  
 }
 
 const initialState:UserState = {

@@ -9,13 +9,16 @@ import { useState, useEffect, useRef } from 'react';
 const TopNav = ()=> {
     const [openPopup, setOpenPopup] = useState(false)
     let popupRef = useRef<HTMLDivElement>(null)
-    let closeRef = useRef<HTMLElement>(null)
+    let menuRef = useRef<HTMLDivElement>(null)
 
     useEffect(()=>{
         const handler = (e:any)=>{
-            if(!popupRef.current?.contains(e.target) && !closeRef.current?.contains(e.target) ){
+            if(openPopup && (!popupRef.current?.contains(e.target) || menuRef.current?.contains(e.target))){
                 setOpenPopup(false)
 
+            }
+            else if(!openPopup && menuRef.current?.contains(e.target)){
+                setOpenPopup(true)
             }
         }
         document.addEventListener('mousedown', handler)
@@ -30,19 +33,19 @@ const TopNav = ()=> {
         <div className='topNav'>
             <img className='topNav__logo' src={devChallengeLogoAndName}/>
 
-            <div className="topNav__menu">
+            <div className="topNav__menu" ref={menuRef} >
                 <div className='topNav__profile'>
                     <img src="" alt=""  className='topNav__profile__image'/>
                     <p className='topNav__profile__name'>Xanthe Neal</p>
 
                     {openPopup? 
-                    <i className='topNav__profile__icon' onClick={()=>setOpenPopup(!openPopup)} ref={closeRef}>
+                    <i className='topNav__profile__icon' >
                         <span className="material-symbols-outlined">
                             arrow_drop_up
                         </span>
                     </i>
                     : 
-                    <i className='topNav__profile__icon' onClick={()=>{setOpenPopup(!openPopup)}} >
+                    <i className='topNav__profile__icon' >
                         <span className="material-symbols-outlined">
                             arrow_drop_down
                         </span>
