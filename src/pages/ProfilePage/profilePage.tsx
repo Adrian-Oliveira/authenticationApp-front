@@ -3,6 +3,9 @@ import TopNav from '../../components/TopNav';
 import { useNavigate } from 'react-router-dom';
 
 
+import imageProfile from '../../assets/imageProfile.png'
+
+
 
 
 const ProfilePage = ()=> {
@@ -33,9 +36,9 @@ const ProfilePage = ()=> {
                         <div className="label">
                             PHOTO
                         </div>
-                        <p className="data">
-                        Xanthe Neal
-                        </p>
+
+                        <img src={imageProfile} alt="" className='image' width={'7.2rem'} height={'7.2rem'} />
+
                     </div>
                     <div className="profilePage__profile__item">
                         <div className="label">
