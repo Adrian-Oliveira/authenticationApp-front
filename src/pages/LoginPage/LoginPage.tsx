@@ -32,14 +32,16 @@ const LoginPage = ()=> {
                 <img 
                     className='loginPage__loginContainer__LogoAndName' 
                     src={devChallengeLogoAndName} 
+                    
                     alt="" 
                 />
+
                 
                 <h1 className="loginPage__loginContainer__title">Login</h1>
                 
                 <label 
                     className='loginPage__loginContainer__email'>
-                    <i className="material-symbols-outlined">
+                    <i className="material-symbols-outlined loginPage__loginContainer__email__icon"  >
                         mail
                     </i>
                     <input  
@@ -51,7 +53,7 @@ const LoginPage = ()=> {
                 <label 
                     className='loginPage__loginContainer__password'>
 
-                    <i className="material-symbols-outlined">
+                    <i className="material-symbols-outlined loginPage__loginContainer__password__icon">
                         lock
                     </i>
             

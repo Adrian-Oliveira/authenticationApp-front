@@ -20,9 +20,14 @@
     flex-direction: column;
     align-items: center;
 
+    
     &__LogoAndName{
+        width: 13.017rem;
+        height: 1.8rem;
+
         align-self: flex-start;
         margin-bottom: 2.7rem;
+
     }
 
     &__title{
@@ -69,12 +74,18 @@
         border: 1px solid #BDBDBD; 
 
         color: #828282;
-        font-family: Noto Sans;
+        font-family: 'Noto Sans';
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.56px; 
+
+        &__icon{
+            width: 2.4rem;
+            height: 2.4rem;
+
+        }
     }
 
     &__password{
@@ -92,12 +103,17 @@
         border: 1px solid #BDBDBD; 
 
         color: #828282;
-        font-family: Noto Sans;
+        font-family: 'Noto Sans';
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
         letter-spacing: -0.56px; 
+
+        &__icon{
+            width: 2.4rem;
+            height: 2.4rem;
+        }
     }
 
     &__loginButton{
