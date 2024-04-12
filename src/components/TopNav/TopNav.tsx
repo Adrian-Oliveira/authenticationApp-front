@@ -2,14 +2,21 @@ import './topNav.scss'
 import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
 
 import { useAppDispatch } from '../../core/hooks';
-import { setLogged } from '../../redux/user/userSlice';
+import { setLogged, setUser, removeUser } from '../../redux/user/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 
+
 const TopNav = ()=> {
+    const dispatch = useAppDispatch();
+
     const [openPopup, setOpenPopup] = useState(false)
     let popupRef = useRef<HTMLDivElement>(null)
     let menuRef = useRef<HTMLDivElement>(null)
+
+    const logOut = ()=>{
+        dispatch(removeUser())
+    }
 
     useEffect(()=>{
         const handler = (e:any)=>{
@@ -70,7 +77,7 @@ const TopNav = ()=> {
 
                     <hr/>
                     
-                    <button className='topNav__popup__button topNav__popup__button--logout'>
+                    <button className='topNav__popup__button topNav__popup__button--logout' onClick={logOut}>
                         <i className="material-icons">
                             logout
                         </i> 
