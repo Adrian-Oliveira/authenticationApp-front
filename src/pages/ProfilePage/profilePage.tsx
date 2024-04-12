@@ -26,7 +26,9 @@ const ProfilePage = ()=> {
                             <h2 className="profilePage__profile__header__title">
                                 Profile
                             </h2>
-                            <p className="profilePage__profile__header__subtitle">Some info may be visible to other people</p>
+                            <p className="profilePage__profile__header__subtitle">
+                                Some info may be visible to other people
+                            </p>
                         </div>
 
                         <button className="profilePage__profile__header__editButton"
@@ -37,7 +39,9 @@ const ProfilePage = ()=> {
                             PHOTO
                         </div>
 
-                        <img src={imageProfile} alt="" className='image' width={'7.2rem'} height={'7.2rem'} />
+                        <img src={imageProfile} alt="" className='image' 
+                            style={{width:'7.2rem', height:'7.2rem'}}
+                        />
 
                     </div>
                     <div className="profilePage__profile__item">
@@ -45,7 +49,7 @@ const ProfilePage = ()=> {
                             NAME
                         </div>
                         <p className="data">
-                        Xanthe Neal
+                            Xanthe Neal
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
@@ -53,10 +57,7 @@ const ProfilePage = ()=> {
                             BIO
                         </div>
                         <p className="data">
-                            I am a software developer and a big fan of devchallenges...wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-                            I am a software developer and a big fan of devchallenges...wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-                            I am a software developer and a big fan of devchallenges...wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-
+                            I am a software developer and a big fan of devchallenges...
                         </p>
                     </div>
                     <div className="profilePage__profile__item">

@@ -35,7 +35,7 @@ const TopNav = ()=> {
 
             <div className="topNav__menu" ref={menuRef} >
                 <div className='topNav__profile'>
-                    <img src="" alt=""  className='topNav__profile__image'/>
+                    <img src="" alt=""  className='topNav__profile__image' style={{width:'3.2rem', height:'3.2rem'}} />
                     <p className='topNav__profile__name'>Xanthe Neal</p>
 
                     {openPopup? 
