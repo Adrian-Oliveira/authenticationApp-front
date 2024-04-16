@@ -4,7 +4,11 @@ import { Link } from 'react-router-dom';
 
 import profile from '../../assets/imageProfile.png'
 
+import { useAppSelector } from '../../core/hooks';
+
 const EditProfilePage = ()=> {
+
+    const user = useAppSelector(state=> state.user)
 
     return(
         <>
@@ -42,31 +46,22 @@ const EditProfilePage = ()=> {
                         <label className='editProfilePage__edit__input'>
                             <div className='editProfilePage__edit__inputName'>Name</div>
                             <input className='editProfilePage__edit__inputValue'
-                            type="text" name="" id="" placeholder='Enter your name...' />
+                            type="text" name="" id="" placeholder='Enter your name...' 
+                            defaultValue={user.name}/>
                         </label> 
 
                         <label className='editProfilePage__edit__input'>
                             <div className='editProfilePage__edit__inputName'>Bio</div>
                             <textarea className='editProfilePage__edit__inputValue' 
-                            id="" cols={30} rows={10} placeholder='Enter your bio...'></textarea>
+                            id="" cols={30} rows={10} placeholder='Enter your bio...' 
+                            defaultValue={user.bio}></textarea>
                         </label>
 
                         <label className='editProfilePage__edit__input'>
                             <div className='editProfilePage__edit__inputName'>Phone</div>
                             <input className='editProfilePage__edit__inputValue' 
-                            type="text" name="" id="" placeholder='Enter your phone...' />
-                        </label>
-
-                        <label className='editProfilePage__edit__input'>
-                            <div className='editProfilePage__edit__inputName'>Email</div>
-                            <input className='editProfilePage__edit__inputValue' 
-                            type="email" name="" id="" placeholder='Enter your email...' />
-                        </label>
-
-                        <label className='editProfilePage__edit__input'>
-                            <div className='editProfilePage__edit__inputName'>Password</div>
-                            <input className='editProfilePage__edit__inputValue' 
-                            type='password' name="" id="" placeholder='Enter your password...' />
+                            type="text" name="" id="" placeholder='Enter your phone...' 
+                            defaultValue={user.phone}/>
                         </label>
 
                         <button className='editProfilePage__edit__button'>Save</button>

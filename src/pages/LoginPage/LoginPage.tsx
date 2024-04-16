@@ -12,6 +12,7 @@ const LoginPage = ()=> {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
+
     /*     const dispatch = useAppDispatch();
 
     const {addToast} = useToasts();
@@ -21,7 +22,7 @@ const LoginPage = ()=> {
     const uploading = useAppSelector((state)=>state.image.uploading); 
     */
     const clickHandler = ()=>{
-        dispatch(setLogged(true))
+        dispatch(setLogged())
         navigate("/profile")
     }
 

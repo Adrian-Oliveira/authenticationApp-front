@@ -2,6 +2,7 @@ import './profilePage.scss'
 import TopNav from '../../components/TopNav';
 import { useNavigate } from 'react-router-dom';
 
+import { useAppSelector } from '../../core/hooks';
 
 import imageProfile from '../../assets/imageProfile.png'
 
@@ -11,8 +12,9 @@ import imageProfile from '../../assets/imageProfile.png'
 const ProfilePage = ()=> {
 
     const navigate = useNavigate();
-
     
+    const user = useAppSelector(state=>state.user)
+
 
     return(
         <>
@@ -49,7 +51,7 @@ const ProfilePage = ()=> {
                             NAME
                         </div>
                         <p className="data">
-                            Xanthe Neal
+                            {user.name}
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
@@ -57,7 +59,8 @@ const ProfilePage = ()=> {
                             BIO
                         </div>
                         <p className="data">
-                            I am a software developer and a big fan of devchallenges...
+                            {user.bio}
+
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
@@ -65,7 +68,7 @@ const ProfilePage = ()=> {
                             PHONE
                         </div>
                         <p className="data">
-                        908249274292
+                            {user.phone}
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
@@ -73,17 +76,10 @@ const ProfilePage = ()=> {
                             EMAIL
                         </div>
                         <p className="data">
-                        xanthe.neal@gmail.com
+                            {user.email}
                         </p>
                     </div>
-                    <div className="profilePage__profile__item">
-                        <div className="label">
-                            PASSWORD
-                        </div>
-                        <p className="data">
-                        ************
-                        </p>
-                    </div>
+
                 </div>         
             </div>
         </>

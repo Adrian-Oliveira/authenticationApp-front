@@ -1,7 +1,7 @@
 import './topNav.scss'
 import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
 
-import { useAppDispatch } from '../../core/hooks';
+import { useAppDispatch, useAppSelector } from '../../core/hooks';
 import { setLogged, setUser, removeUser } from '../../redux/user/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
@@ -10,6 +10,7 @@ import { useState, useEffect, useRef } from 'react';
 const TopNav = ()=> {
     const dispatch = useAppDispatch();
 
+    const user =  useAppSelector(store=>store.user)
     const [openPopup, setOpenPopup] = useState(false)
     let popupRef = useRef<HTMLDivElement>(null)
     let menuRef = useRef<HTMLDivElement>(null)
@@ -43,7 +44,7 @@ const TopNav = ()=> {
             <div className="topNav__menu" ref={menuRef} >
                 <div className='topNav__profile'>
                     <img src="" alt=""  className='topNav__profile__image' style={{width:'3.2rem', height:'3.2rem'}} />
-                    <p className='topNav__profile__name'>Xanthe Neal</p>
+                    <p className='topNav__profile__name'>{user.name}</p>
 
                     {openPopup? 
                     <i className='topNav__profile__icon' >
