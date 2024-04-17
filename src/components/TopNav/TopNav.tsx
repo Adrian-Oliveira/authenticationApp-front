@@ -71,9 +71,9 @@ const TopNav = ()=> {
 
                     <button className='topNav__popup__button'>
                         <i className="material-icons">
-                            group
+                            lock
                         </i>    
-                        <span>Group Chat</span>
+                        <span>Change Password</span>
                     </button>
 
                     <hr/>
