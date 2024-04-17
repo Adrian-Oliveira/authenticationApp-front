@@ -7,6 +7,7 @@ import RegisterPage from './pages/RegisterPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import ProfilePage from './pages/ProfilePage';
 import EditProfilePage from './pages/EditProfilePage';
+import ChangePasswordPage from './pages/ChangePasswordPage';
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
           <Route element={<PrivateRoutes/>} >
             <Route path='/profile' element={<ProfilePage/>} />
             <Route path='/editProfile' element={<EditProfilePage/>} />
+            <Route path='/changePassword' element={<ChangePasswordPage/>} />
           </Route>   
 
 

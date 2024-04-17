@@ -9,6 +9,7 @@ import { useState, useEffect, useRef } from 'react';
 
 const TopNav = ()=> {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const user =  useAppSelector(store=>store.user)
     const [openPopup, setOpenPopup] = useState(false)
@@ -69,7 +70,7 @@ const TopNav = ()=> {
                         <span>My Profile</span>
                     </button>  
 
-                    <button className='topNav__popup__button'>
+                    <button className='topNav__popup__button' onClick={()=>navigate('/changePassword')}>
                         <i className="material-icons">
                             lock
                         </i>    
