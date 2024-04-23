@@ -12,6 +12,10 @@ const ChangePasswordPage = ()=> {
     const [newPssWrd ,setNewPssWrd]= useState<string>('')
     const [repeatNewPssWrd ,setRepeatNewPssWrd]= useState<string>('')
 
+    const isValid = (inputString:string)=>{
+        return /^.{12,}$/.test(inputString)
+    }
+
     return(
         <>
             <TopNav/>
@@ -44,6 +48,13 @@ const ChangePasswordPage = ()=> {
                             placeholder='Enter your new password...'
                             onChange={(e)=>setNewPssWrd(e.target.value)}
                             value={newPssWrd} />
+
+<p 
+                            className={`changePassword__edit__error 
+                            ${(isValid(newPssWrd))?
+                                '':
+                                'changePassword__edit__error--active'}`}>
+                            Your new password need to have at least 12 characters</p>
                         </label>
 
                         <label className='changePassword__edit__input'>
