@@ -2,8 +2,6 @@ import './changePasswordPage.scss'
 import TopNav from '../../components/TopNav';
 import { Link } from 'react-router-dom';
 
-
-import { useAppSelector} from '../../core/hooks';
 import { useState } from 'react';
 
 const ChangePasswordPage = ()=> {
@@ -49,7 +47,7 @@ const ChangePasswordPage = ()=> {
                             onChange={(e)=>setNewPssWrd(e.target.value)}
                             value={newPssWrd} />
 
-<p 
+                            <p 
                             className={`changePassword__edit__error 
                             ${(isValid(newPssWrd))?
                                 '':

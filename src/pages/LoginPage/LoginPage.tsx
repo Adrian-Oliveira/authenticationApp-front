@@ -80,7 +80,7 @@ const LoginPage = ()=> {
 
                 <span className='loginPage__loginContainer__reset'>
                     Forgot your password? 
-                    <a href="#">Recover</a>
+                    <Link to='/reset/step1'>Recover</Link>
                 </span>
 
                 <span className='loginPage__loginContainer__login'>

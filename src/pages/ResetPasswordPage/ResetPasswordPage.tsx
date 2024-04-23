@@ -1,109 +1,108 @@
 import './resetPasswordPage.scss'
 import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
 import { useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 
+/* 
 
-const Input = ()=>{
+export const Step1 = ()=>{
+    const navigate = useNavigate();
 
-    const [emailSend, setEmailSend] = useState(false);
-    const [rightResetCode, setRightResetCode] = useState(false);
+    return(
+        <>
+            <label 
+                className='resetPasswordPage__resetPasswordContainer__email'>
+                <i className="material-symbols-outlined">
+                    mail
+                </i>
+                <input  
+                    type="email" name="" id="resetPasswordPage__resetPasswordContainer__email"
+                    defaultValue={''}
+                    placeholder='Email' 
+                    />
+            </label>
 
-    
-    if(emailSend && rightResetCode){
-        return(
-            <>
-                <label 
-                    className='resetPasswordPage__resetPasswordContainer__email'>
-                    <i className="material-symbols-outlined">
-                        mail
-                    </i>
-                    <input  
-                        type="password" name="" id=""
-                        defaultValue=''
-                        placeholder='Password' 
-                        />
-                </label>
+            <button
+                className='resetPasswordPage__resetPasswordContainer__loginButton'
+                onClick={()=>navigate('/step2')}
+                >Send the code to my email
+            </button>
+        </>
+    );
 
-
-                <label 
-                    className='resetPasswordPage__resetPasswordContainer__email'>
-                    <i className="material-symbols-outlined">
-                        mail
-                    </i>
-                    <input  
-                        type="password" name="" id=""
-                        defaultValue=''
-                        placeholder='Confirm the password' 
-                        />
-                </label>
-
-                    
-                <button
-                    className='resetPasswordPage__resetPasswordContainer__loginButton'
-                    onClick={()=>{}}
-                    >Change the password 
-                </button>
-            </>
-        )
-    }
-
-    else if(emailSend){
-        return(
-            <>
-                <label 
-                    className='resetPasswordPage__resetPasswordContainer__email'>
-                    <i className="material-symbols-outlined">
-                        lock
-                    </i>
-                    <input  
-                        type="password" name="" id="resetPasswordPage__resetPasswordContainer__code"
-                        defaultValue=''
-                        placeholder='Code' 
-                        />
-                </label>
-
-                <button
-                    className='resetPasswordPage__resetPasswordContainer__loginButton'
-                    onClick={()=>{setRightResetCode(true)}}
-                    >Confirm the code 
-                </button>
-            </>
-        )
-    }
-
-    else{
-        return(
-            <>
-                <label 
-                    className='resetPasswordPage__resetPasswordContainer__email'>
-                    <i className="material-symbols-outlined">
-                        mail
-                    </i>
-                    <input  
-                        type="email" name="" id="resetPasswordPage__resetPasswordContainer__email"
-                        defaultValue={''}
-                        placeholder='Email' 
-                        />
-                </label>
-
-                <button
-                    className='resetPasswordPage__resetPasswordContainer__loginButton'
-                    onClick={()=>{setEmailSend(true)}}
-                    >Send the code to my email
-                </button>
-            </>
-        )
-    }
-
-
-    
-    
 }
 
 
+export  const Step2 = ()=>{
+    const navigate = useNavigate();
+
+    return(
+        <>
+            <label 
+                className='resetPasswordPage__resetPasswordContainer__email'>
+                <i className="material-symbols-outlined">
+                    lock
+                </i>
+                <input  
+                    type="password" name="" id="resetPasswordPage__resetPasswordContainer__code"
+                    defaultValue=''
+                    placeholder='Code' 
+                    />
+            </label>
+
+            <button
+                className='resetPasswordPage__resetPasswordContainer__loginButton'
+                onClick={()=>navigate('/step2')}
+                >Confirm the code 
+            </button>
+        </>
+    );
+
+}
+
+export const Step3 = ()=>{
+    const navigate = useNavigate();
+
+    return(
+        <>
+        <label 
+            className='resetPasswordPage__resetPasswordContainer__email'>
+            <i className="material-symbols-outlined">
+                mail
+            </i>
+            <input  
+                type="password" name="" id=""
+                defaultValue=''
+                placeholder='Password' 
+                />
+        </label>
+
+
+        <label 
+            className='resetPasswordPage__resetPasswordContainer__email'>
+            <i className="material-symbols-outlined">
+                mail
+            </i>
+            <input  
+                type="password" name="" id=""
+                defaultValue=''
+                placeholder='Confirm the password' 
+                />
+        </label>
+
+            
+        <button
+            className='resetPasswordPage__resetPasswordContainer__loginButton'
+            onClick={()=>navigate('login')}
+            >Change the password 
+        </button>
+    </>
+    );
+
+}
+ */
+
 const ResetPasswordPage = ()=> {
-
-
 
     return(
         <div className='resetPasswordPage'>
@@ -115,9 +114,10 @@ const ResetPasswordPage = ()=> {
                     alt="" 
                 />
                 
-                <h1 className="resetPasswordPage__resetPasswordContainer__title">Find your account</h1>
-                
-                <Input/>
+                <h1 className="resetPasswordPage__resetPasswordContainer__title">Recover Password</h1>
+
+                <Outlet/>
+
 
                 <span className='resetPasswordPage__resetPasswordContainer__login'>
                     Already a member? 

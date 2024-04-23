@@ -9,6 +9,10 @@ import ProfilePage from './pages/ProfilePage';
 import EditProfilePage from './pages/EditProfilePage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 
+import { Step1 } from './pages/ResetPasswordPage/Step1';
+import { Step2 } from './pages/ResetPasswordPage/Step2';
+import { Step3 } from './pages/ResetPasswordPage/Step3';
+
 function App() {
 
   return (
@@ -17,7 +21,12 @@ function App() {
         <Routes>
           <Route path='/register' element={<RegisterPage/>}/>
           <Route path='/login' element={<LoginPage/>}/>
-          <Route path='/reset' element={<ResetPasswordPage/>}/>
+
+          <Route path='/reset' element={<ResetPasswordPage/>}>
+            <Route path='step1' element={<Step1/>} />
+            <Route path='step2' element={<Step2/>} />
+            <Route path='step3' element={<Step3/>} />
+          </Route>
 
           <Route element={<PrivateRoutes/>} >
             <Route path='/profile' element={<ProfilePage/>} />
