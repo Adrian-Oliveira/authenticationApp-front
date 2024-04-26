@@ -2,13 +2,29 @@ import './editProfilePage.scss'
 import TopNav from '../../components/TopNav';
 import { Link } from 'react-router-dom';
 
-import profile from '../../assets/imageProfile.png'
 
 import { useAppSelector } from '../../core/hooks';
+import { ChangeEvent, useState } from 'react';
 
 const EditProfilePage = ()=> {
 
     const user = useAppSelector(state=> state.user)
+
+    const [base64Img, setBase64Img] = useState<string>(user.photo)
+
+
+  const handleFileChange = (event:ChangeEvent<HTMLInputElement>) => {   
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const base64 = reader.result as string;
+      setBase64Img(base64);
+    };
+
+    // Read the image file as a data URL
+    reader.readAsDataURL(file);
+  };
 
     return(
         <>
@@ -32,8 +48,8 @@ const EditProfilePage = ()=> {
 
                     <label className='editProfilePage__edit__photoInput'>
                         <div className='editProfilePage__edit__photoInput__photo' >
-                            <img src={profile} alt="" />
-                            <input type="file" />
+                            <img src={base64Img} alt="" style={{width:'7.2rem', height:'7.2rem'}}/>
+                            <input type="file" onChange={handleFileChange}/>
                             <i className="material-icons">
                                 photo_camera
                             </i>

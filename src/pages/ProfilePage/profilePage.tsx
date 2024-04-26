@@ -3,8 +3,8 @@ import TopNav from '../../components/TopNav';
 import { useNavigate } from 'react-router-dom';
 
 import { useAppSelector } from '../../core/hooks';
+import { useState } from 'react';
 
-import imageProfile from '../../assets/imageProfile.png'
 
 
 
@@ -41,7 +41,7 @@ const ProfilePage = ()=> {
                             PHOTO
                         </div>
 
-                        <img src={imageProfile} alt="" className='image' 
+                        <img src={user.photo} alt="" className='image' 
                             style={{width:'7.2rem', height:'7.2rem'}}
                         />
 
