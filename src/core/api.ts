@@ -5,6 +5,14 @@ export default {
   getTwoFactor:()=>{},
   postProfile:()=>{},
   getProfile:()=>{},
+  recoverPassword:()=>{},
   loginWithEmail:()=>{},
-  register:()=>{}
+  register: async(email:String, password:String)=>{
+    try{
+
+    }
+    catch(err){
+      
+    }
+  }
 }
