@@ -1,13 +1,61 @@
 const baseUrl = import.meta.env.VITE_BACKEND_API_URL;
 import axios from "axios";
 export default {
-  delTwoFactor:()=>{},
-  postTwoFactor:()=>{},
-  getTwoFactor:()=>{},
-  postProfile:()=>{},
-  getProfile:()=>{},
-  recoverPassword:()=>{},
-  postLoginWithEmail:()=>{},
+  delUserTwoFactor:async()=>{
+    try{
+      const res = await axios.delete(`${baseUrl}/user/twofactor`)
+      return res
+    }
+    catch(err){
+      console.log(err)
+    }
+  },
+  postUserTwoFactor:async(totp:String)=>{
+    try{
+      const res = await axios.post(`${baseUrl}/user/twofactor`, {totp})
+      return res
+    }
+    catch(err){
+      console.log(err)
+    }
+  },
+  getUserTwoFactor:async()=>{
+    try{
+      const res = await axios.get(`${baseUrl}/user/twofactor`)
+      return res
+    }
+    catch(err){
+      console.log(err)
+    }
+  },
+  getUserProfile:async()=>{
+    try{
+      const res = await axios.get(`${baseUrl}/user/profile`)
+      return res
+    }
+    catch(err){
+      console.log(err)
+    }
+  },
+  postUserProfile:async(name:String, bio:String,phone:String, photo:Uint8Array)=>{
+    try{
+      const res = await axios.post(`${baseUrl}/user/profile`,{name, bio, phone, photo})
+      return res
+
+    }
+    catch(err){
+      console.log(err)
+    }
+  },
+  postUserLoginWithEmail:async(email:String, password:String, totp:String = '')=>{
+    try{    
+      const res = await axios.post(`${baseUrl}/user/login`,{email, password, totp})
+      return res
+    }
+    catch(err){
+      console.log(err)
+    }
+  },
   postRegister: async(email:String, password:String)=>{
     try{
 
@@ -35,3 +83,4 @@ export default {
     }
   }
 }
+
