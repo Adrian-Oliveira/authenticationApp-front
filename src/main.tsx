@@ -6,11 +6,18 @@ import App from './App.tsx'
 import './index.scss'
 import 'material-icons/iconfont/filled.css';
 import 'material-icons/iconfont/outlined.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    <ReactQueryDevtools initialIsOpen={false}/>
+    </QueryClientProvider>
   </React.StrictMode>,
 )

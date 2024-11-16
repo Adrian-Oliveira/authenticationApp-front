@@ -7,12 +7,11 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from '../../core/hooks';
 import { setLogged } from '../../redux/user/userSlice';
 import { useNavigate } from 'react-router-dom';
+import api from '../../core/api';
 
 const LoginPage = ()=> {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-
-
     /*     const dispatch = useAppDispatch();
 
     const {addToast} = useToasts();
@@ -29,14 +28,12 @@ const LoginPage = ()=> {
     return(
         <div className='loginPage'>
             <div className='loginPage__loginContainer'>
-                
                 <img 
                     className='loginPage__loginContainer__LogoAndName' 
                     src={devChallengeLogoAndName} 
                     
                     alt="" 
                 />
-
                 
                 <h1 className="loginPage__loginContainer__title">Login</h1>
                 

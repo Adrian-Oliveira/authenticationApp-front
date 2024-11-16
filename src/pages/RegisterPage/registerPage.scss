@@ -134,6 +134,10 @@
 
         display: flex;
         gap: 2.093rem;
+        
+        &__img{
+            cursor: pointer;
+        }
     }
 
     &__login{

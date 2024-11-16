@@ -3,23 +3,32 @@ import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
 import googleLogo from '../../assets/Google.svg'
 import githubLogo from '../../assets/Github.svg'
 import { Link } from "react-router-dom";
-
-
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import api from '../../core/api';
+import { useState } from 'react';
 
 const RegisterPage = ()=> {
 
-/*     const dispatch = useAppDispatch();
+    /*     
+    const dispatch = useAppDispatch();
     const {addToast} = useToasts();
     const navigate = useNavigate();
 
     const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
-    const uploading = useAppSelector((state)=>state.image.uploading); */
+    const uploading = useAppSelector((state)=>state.image.uploading);
+    */
+
+    const registerUserMutation = useMutation({
+        mutationFn: (user:{email: String, password: String})=> api.postRegister(user.email, user.password)
+    })
     
+    const [email, setEmail] = useState<String>('')
+    const [password, setPassword] = useState<String>('')
 
     return(
         <div className='registerPage'>
-            <div className='registerPage__registerContainer'>
-                
+            <div className='registerPage__registerContainer'>             
+
                 <img 
                     className='registerPage__registerContainer__LogoAndName' 
                     src={devChallengeLogoAndName} 
@@ -36,7 +45,8 @@ const RegisterPage = ()=> {
                     </i>
                     <input  
                         type="email" name="" id=""
-                        placeholder='Email' 
+                        placeholder='Email'
+                        onChange={(e)=>setEmail(e.target.value)} 
                         />
                 </label>
 
@@ -50,10 +60,15 @@ const RegisterPage = ()=> {
                     <input 
                         type="password" name="" id=""
                         placeholder='Password' 
+                        onChange={(e)=>setPassword(e.target.value)} 
+
                     />
                 </label>
 
                 <button
+                    onClick={()=>{
+                        registerUserMutation.mutate({email, password})
+                    }}
                     className='registerPage__registerContainer__registerButton'
                     >Start coding now
                 </button>
@@ -62,8 +77,8 @@ const RegisterPage = ()=> {
                 <span className='registerPage__registerContainer__oAuthText'>or continue with these social profile</span>
 
                 <div className='registerPage__registerContainer__oAuthOptions'>
-                    <img src={googleLogo} alt="" />
-                    <img src={githubLogo} alt="" />
+                    <img src={googleLogo} alt="google"  className='registerPage__registerContainer__oAuthOptions__img'/>
+                    <img src={githubLogo} alt="github" className='registerPage__registerContainer__oAuthOptions__img'/>
                 </div>
 
                 <span className='registerPage__registerContainer__login'>
