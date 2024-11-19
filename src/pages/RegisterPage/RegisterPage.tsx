@@ -6,20 +6,26 @@ import { Link } from "react-router-dom";
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import api from '../../core/api';
 import { useState } from 'react';
+import { useToasts } from 'react-toast-notifications';
 
 const RegisterPage = ()=> {
 
-    /*     
-    const dispatch = useAppDispatch();
-    const {addToast} = useToasts();
-    const navigate = useNavigate();
-
-    const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
-    const uploading = useAppSelector((state)=>state.image.uploading);
-    */
+    const { addToast } = useToasts();
 
     const registerUserMutation = useMutation({
-        mutationFn: (user:{email: String, password: String})=> api.postRegister(user.email, user.password)
+        mutationFn: (user:{email: String, password: String})=> api.postRegister(user.email, user.password),
+        onError: (error, variables, context) => {
+            // An error happened!
+            console.log("error")
+            console.log(error)
+            addToast('Erro', { appearance: 'error' });
+        },
+        onSuccess(data, variables, context) {
+            console.log("data")
+            console.log(data)
+            addToast('Saved Successfully', { appearance: 'success' });
+        },
+
     })
     
     const [email, setEmail] = useState<String>('')
@@ -66,6 +72,7 @@ const RegisterPage = ()=> {
                 </label>
 
                 <button
+                    
                     onClick={()=>{
                         registerUserMutation.mutate({email, password})
                     }}

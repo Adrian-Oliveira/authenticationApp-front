@@ -79,7 +79,7 @@ export default {
     catch(err){
 
       console.log(err)
-      return err
+      throw err
     }
   }
 }
