@@ -16,14 +16,11 @@ const RegisterPage = ()=> {
         mutationFn: (user:{email: String, password: String})=> api.postRegister(user.email, user.password),
         onError: (error, variables, context) => {
             // An error happened!
-            console.log("error")
-            console.log(error)
-            addToast('Erro', { appearance: 'error' });
+            const msg = error.response?.data.message ? error.response.data.message: error.message ;
+            addToast(`${msg}`, { appearance: 'error' });
         },
         onSuccess(data, variables, context) {
-            console.log("data")
-            console.log(data)
-            addToast('Saved Successfully', { appearance: 'success' });
+            addToast(`${data.data.message}`, { appearance: 'success' });
         },
 
     })
