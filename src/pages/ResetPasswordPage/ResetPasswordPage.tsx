@@ -20,7 +20,6 @@ const ResetPasswordPage = ()=> {
 
                 <Outlet/>
 
-
                 <span className='resetPasswordPage__resetPasswordContainer__login'>
                     Not a member yet? 
                     <a href="#">Register</a>

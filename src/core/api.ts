@@ -10,6 +10,7 @@ export default {
       console.log(err)
     }
   },
+
   postUserTwoFactor:async(totp:String)=>{
     try{
       const res = await axios.post(`${baseUrl}/user/twofactor`, {totp})
@@ -28,13 +29,31 @@ export default {
       console.log(err)
     }
   },
+  postGenerateTokenToResetPassword:async(email:String)=>{
+    try{
+      const res = await axios.post(`${baseUrl}/resetPassword/generateToken`, {email})
+      return res
+    }
+    catch(err){
+      throw err
+    }
+  },
+  postNewPasswordWithToken:async(token:String, newPassword:String)=>{
+    try{
+      const res = await axios.post(`${baseUrl}/resetPassword/generateToken`, {token, newPassword})
+      return res
+    }
+    catch(err){
+      throw err
+    }
+  }, 
   getUserProfile:async()=>{
     try{
       const res = await axios.get(`${baseUrl}/user/profile`)
       return res
     }
     catch(err){
-      console.log(err)
+      throw err
     }
   },
   postUserProfile:async(name:String, bio:String,phone:String, photo:Uint8Array)=>{
