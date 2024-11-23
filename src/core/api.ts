@@ -71,8 +71,6 @@ export default {
       // Format the timestamp as ISO 8601 string with timezone
       const isoTimestamp = dateWithTimezone.toISOString();
 
-      console.log(isoTimestamp);
-
       const res = await axios.post(`${baseUrl}/register`,{email, password, timestamp:isoTimestamp})
       return res
     }

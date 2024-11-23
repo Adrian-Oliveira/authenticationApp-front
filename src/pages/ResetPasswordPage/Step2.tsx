@@ -17,11 +17,44 @@ export  const Step2 = ()=>{
                     />
             </label>
 
-            <button
-                className='resetPasswordPage__resetPasswordContainer__loginButton'
-                onClick={()=>navigate('../step3')}
-                >Confirm the code 
-            </button>
+                    <label 
+            className='resetPasswordPage__resetPasswordContainer__email'>
+            <i className="material-symbols-outlined">
+                mail
+            </i>
+            <input  
+                type="password" name="" id=""
+                defaultValue=''
+                placeholder='Password' 
+                />
+        </label>
+
+
+        <label 
+            className='resetPasswordPage__resetPasswordContainer__email'>
+            <i className="material-symbols-outlined">
+                mail
+            </i>
+            <input  
+                type="password" name="" id=""
+                defaultValue=''
+                placeholder='Confirm the password' 
+                />
+        </label>
+
+            
+        <button
+            className='resetPasswordPage__resetPasswordContainer__loginButton'
+            onClick={()=>navigate('../login')}
+            >Change the password 
+        </button>
+
+        <button
+            className='resetPasswordPage__resetPasswordContainer__loginButton'
+            onClick={()=>navigate('../step1')}
+            >Select another email
+        </button>
+
         </>
     );
 

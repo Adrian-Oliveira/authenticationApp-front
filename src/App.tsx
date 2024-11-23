@@ -25,7 +25,6 @@ function App() {
           <Route path='/reset' element={<ResetPasswordPage/>}>
             <Route path='step1' element={<Step1/>} />
             <Route path='step2' element={<Step2/>} />
-            <Route path='step3' element={<Step3/>} />
           </Route>
 
           <Route element={<PrivateRoutes/>} >
