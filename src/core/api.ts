@@ -40,7 +40,7 @@ export default {
   },
   postNewPasswordWithToken:async(token:String, newPassword:String)=>{
     try{
-      const res = await axios.post(`${baseUrl}/resetPassword/generateToken`, {token, newPassword})
+      const res = await axios.post(`${baseUrl}/resetPassword/withEmailToken`, {token, newPassword})
       return res
     }
     catch(err){
