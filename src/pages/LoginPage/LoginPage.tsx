@@ -1,93 +1,102 @@
-import './loginPage.scss'
-import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
-import googleLogo from '../../assets/Google.svg'
-import githubLogo from '../../assets/Github.svg'
+import "./loginPage.scss";
+import devChallengeLogoAndName from "../../assets/devChallengeLogoAndName.svg";
+import googleLogo from "../../assets/Google.svg";
+import githubLogo from "../../assets/Github.svg";
 import { Link } from "react-router-dom";
 
-import { useAppDispatch } from '../../core/hooks';
-import { setLogged } from '../../redux/user/userSlice';
-import { useNavigate } from 'react-router-dom';
-import api from '../../core/api';
+import { useAppDispatch } from "../../core/hooks";
+import { setLogged } from "../../redux/user/userSlice";
+import { useNavigate } from "react-router-dom";
+import api from "../../core/api";
+import { useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import { useToasts } from "react-toast-notifications";
 
-const LoginPage = ()=> {
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-    /*     const dispatch = useAppDispatch();
+const LoginPage = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { addToast } = useToasts();
+  const [email, setEmail] = useState<String>("");
+  const [pass, setPass] = useState<String>("");
 
-    const {addToast} = useToasts();
-    const navigate = useNavigate();
+  const loginWithEmailAndPass = useMutation({
+    mutationFn: (user: { email: String; pass: String }) =>
+      api.postUserLoginWithEmail(user.email, user.pass),
+    onError: (error, variables, context) => {
+      // An error happened!
+      const msg = error.response?.data.message
+        ? error.response.data.message
+        : error.message;
+      addToast(`${msg}`, { appearance: "error" });
+    },
+    onSuccess(data, variables, context) {
+      addToast(`${data.data.message}`, { appearance: "success" });
+      dispatch(setLogged());
+      navigate("/profile");
+    },
+  });
 
-    const [isDraggingOver, setIsDraggingOver] = useState<boolean>(false);
-    const uploading = useAppSelector((state)=>state.image.uploading); 
-    */
-    const clickHandler = ()=>{
-        dispatch(setLogged())
-        navigate("/profile")
-    }
+  const clickHandler = () => {
+    dispatch(setLogged());
+    navigate("/profile");
+  };
 
-    return(
-        <div className='loginPage'>
-            <div className='loginPage__loginContainer'>
-                <img 
-                    className='loginPage__loginContainer__LogoAndName' 
-                    src={devChallengeLogoAndName} 
-                    
-                    alt="" 
-                />
-                
-                <h1 className="loginPage__loginContainer__title">Login</h1>
-                
-                <label 
-                    className='loginPage__loginContainer__email'>
-                    <i className="material-symbols-outlined loginPage__loginContainer__email__icon"  >
-                        mail
-                    </i>
-                    <input  
-                        type="email" name="" id=""
-                        placeholder='Email' 
-                        />
-                </label>
+  return (
+    <div className="loginPage">
+      <div className="loginPage__loginContainer">
+        <img
+          className="loginPage__loginContainer__LogoAndName"
+          src={devChallengeLogoAndName}
+          alt=""
+        />
 
-                <label 
-                    className='loginPage__loginContainer__password'>
+        <h1 className="loginPage__loginContainer__title">Login</h1>
 
-                    <i className="material-symbols-outlined loginPage__loginContainer__password__icon">
-                        lock
-                    </i>
-            
-                    <input 
-                        type="password" name="" id=""
-                        placeholder='Password' 
-                    />
-                </label>
+        <label className="loginPage__loginContainer__email">
+          <i className="material-symbols-outlined loginPage__loginContainer__email__icon">
+            mail
+          </i>
+          <input onChange={(e)=>setEmail(e.target.value)} type="email" name="" id="" placeholder="Email" />
+        </label>
 
-                <button
-                    className='loginPage__loginContainer__loginButton'
-                    onClick={clickHandler}
-                    >Start coding now
-                </button>
+        <label className="loginPage__loginContainer__password">
+          <i className="material-symbols-outlined loginPage__loginContainer__password__icon">
+            lock
+          </i>
 
+          <input onChange={(e)=>setPass(e.target.value)} type="password" name="" id="" placeholder="Password" />
+        </label>
 
-                <span className='loginPage__loginContainer__oAuthText'>or continue with these social profile</span>
+        <button
+          className="loginPage__loginContainer__loginButton"
+          onClick={() => {
+            loginWithEmailAndPass.mutate({ email, pass });
+          }}
+        >
+          Start coding now
+        </button>
 
-                <div className='loginPage__loginContainer__oAuthOptions'>
-                    <img src={googleLogo} alt="" />
-                    <img src={githubLogo} alt="" />
-                </div>
+        <span className="loginPage__loginContainer__oAuthText">
+          or continue with these social profile
+        </span>
 
-                <span className='loginPage__loginContainer__reset'>
-                    Forgot your password? 
-                    <Link to='/reset/step1'>Recover</Link>
-                </span>
-
-                <span className='loginPage__loginContainer__login'>
-                    Already a member? 
-                    <Link to='/register'>Register</Link>
-                </span>
-            </div>
+        <div className="loginPage__loginContainer__oAuthOptions">
+          <img src={googleLogo} alt="" />
+          <img src={githubLogo} alt="" />
         </div>
-    );
-}
 
+        <span className="loginPage__loginContainer__reset">
+          Forgot your password?
+          <Link to="/reset/step1">Recover</Link>
+        </span>
 
-export {LoginPage}
+        <span className="loginPage__loginContainer__login">
+          Already a member?
+          <Link to="/register">Register</Link>
+        </span>
+      </div>
+    </div>
+  );
+};
+
+export { LoginPage };

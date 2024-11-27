@@ -1,10 +1,11 @@
 import './resetPasswordPage.scss'
 import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
 import { useState } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate , Link} from 'react-router-dom';
 
 
 const ResetPasswordPage = ()=> {
+    const navigate = useNavigate();
 
     return(
         <div className='resetPasswordPage'>
@@ -22,7 +23,12 @@ const ResetPasswordPage = ()=> {
 
                 <span className='resetPasswordPage__resetPasswordContainer__login'>
                     Not a member yet? 
-                    <a href="#">Register</a>
+                    <Link to='/register'> Register</Link>
+                </span>
+
+                <span className='resetPasswordPage__resetPasswordContainer__login'>
+                    Already has a profile? 
+                    <Link to='/login'> Login</Link>
                 </span>
             </div>
         </div>
