@@ -36,11 +36,6 @@ const LoginPage = () => {
     },
   });
 
-  const clickHandler = () => {
-    dispatch(setLogged());
-    navigate("/profile");
-  };
-
   return (
     <div className="loginPage">
       <div className="loginPage__loginContainer">

@@ -2,20 +2,33 @@ import './profilePage.scss'
 import TopNav from '../../components/TopNav';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppSelector } from '../../core/hooks';
+import { useAppSelector, useAppDispatch } from '../../core/hooks';
 import { useState } from 'react';
-
-
-
+import { useMutation, useQueries, useQuery } from '@tanstack/react-query';
+import api from '../../core/api';
+import { setLogged,setUser } from '../../redux/user/userSlice';
 
 
 const ProfilePage = ()=> {
 
     const navigate = useNavigate();
+    const { isPending, isError, data, error } = useQuery({
+        queryKey: ['userData'],
+        queryFn: api.getUserProfile,
+    })
+
+    /* 
+    const dispatch = useAppDispatch()
+    const user = useAppSelector(state=>state.user) 
+    */
+   if(isPending){
+    return <div>fetching your data ...</div>
+   }
+   if(error){
+    return <div>error</div>
+   }
+   
     
-    const user = useAppSelector(state=>state.user)
-
-
     return(
         <>
             <TopNav/>
@@ -41,7 +54,7 @@ const ProfilePage = ()=> {
                             PHOTO
                         </div>
 
-                        <img src={user.photo} alt="" className='image' 
+                        <img src={data.photo} alt="" className='image' 
                             style={{width:'7.2rem', height:'7.2rem'}}
                         />
 
@@ -51,7 +64,7 @@ const ProfilePage = ()=> {
                             NAME
                         </div>
                         <p className="data">
-                            {user.name}
+                            {data.name}
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
@@ -59,7 +72,7 @@ const ProfilePage = ()=> {
                             BIO
                         </div>
                         <p className="data">
-                            {user.bio}
+                            {data.bio}
 
                         </p>
                     </div>
@@ -68,7 +81,7 @@ const ProfilePage = ()=> {
                             PHONE
                         </div>
                         <p className="data">
-                            {user.phone}
+                            {data.phone}
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
@@ -76,7 +89,7 @@ const ProfilePage = ()=> {
                             EMAIL
                         </div>
                         <p className="data">
-                            {user.email}
+                            {data.email}
                         </p>
                     </div>
 
