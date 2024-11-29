@@ -1,5 +1,6 @@
 const baseUrl = import.meta.env.VITE_BACKEND_API_URL;
 import axios from "axios";
+axios.defaults.withCredentials = true
 export default {
   delUserTwoFactor: async () => {
     try {
@@ -49,7 +50,8 @@ export default {
   getUserProfile: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/profile`);
-      return res;
+      console.log(res)
+      return res.data;
     } catch (err) {
       throw err;
     }
