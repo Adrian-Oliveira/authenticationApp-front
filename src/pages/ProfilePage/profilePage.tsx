@@ -32,6 +32,7 @@ const ProfilePage = ()=> {
     return(
         <>
             <TopNav/>
+            <div>{JSON.stringify(data)}</div>
             <div className='profilePage'>
                 <h1 className='profilePage__title'>Personal info</h1>            
                 <p className='profilePage__subtitle'>Basic info, like your name and photo</p>   
