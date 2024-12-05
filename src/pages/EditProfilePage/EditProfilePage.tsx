@@ -1,30 +1,56 @@
 import './editProfilePage.scss'
 import TopNav from '../../components/TopNav';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
+import api from '../../core/api';
 
 import { useAppSelector } from '../../core/hooks';
 import { ChangeEvent, useState } from 'react';
+import { useToasts } from 'react-toast-notifications';
+import { useMutation } from '@tanstack/react-query';
 
 const EditProfilePage = ()=> {
 
     const user = useAppSelector(state=> state.user)
 
+    const { addToast } = useToasts();
+
+    const navigate = useNavigate();
+
     const [base64Img, setBase64Img] = useState<string>(user.photo)
+    const [name, setName] = useState<string>('')
+    const [bio, setBio] = useState<string>('')
+    const [phone, setPhone] = useState<string>('')
 
+    const updateUserProfile = useMutation({
+        mutationFn: (user: { name: String; bio: String, phone:String }) =>
+          api.putUserProfile(user.name, user.bio, user.phone, null),
+        onError: (error, variables, context) => {
+          // An error happened!
+          const msg = error.response?.data.message
+            ? error.response.data.message
+            : error.message;
+          addToast(`${msg}`, { appearance: "error" });
+        },
+        onSuccess(data, variables, context) {
+          addToast(`${data.data.message}`, { appearance: "success" });
+          
+          navigate("/profile");
+        },
+      });
 
-  const handleFileChange = (event:ChangeEvent<HTMLInputElement>) => {   
+    const handleFileChange = (event:ChangeEvent<HTMLInputElement>) => {   
     const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = () => {
-      const base64 = reader.result as string;
-      setBase64Img(base64);
+        const base64 = reader.result as string;
+        setBase64Img(base64);
     };
 
     // Read the image file as a data URL
     reader.readAsDataURL(file);
-  };
+    };
 
     return(
         <>
@@ -62,13 +88,18 @@ const EditProfilePage = ()=> {
                         <label className='editProfilePage__edit__input'>
                             <div className='editProfilePage__edit__inputName'>Name</div>
                             <input className='editProfilePage__edit__inputValue'
+                            onChange={(e)=>setName(e.target.value)}
                             type="text" name="" id="" placeholder='Enter your name...' 
-                            defaultValue={user.name}/>
+                            
+                            defaultValue={user.name}
+                            />
                         </label> 
 
                         <label className='editProfilePage__edit__input'>
                             <div className='editProfilePage__edit__inputName'>Bio</div>
                             <textarea className='editProfilePage__edit__inputValue' 
+                            onChange={(e)=>setBio(e.target.value)}
+
                             id="" cols={30} rows={10} placeholder='Enter your bio...' 
                             defaultValue={user.bio}></textarea>
                         </label>
@@ -76,11 +107,18 @@ const EditProfilePage = ()=> {
                         <label className='editProfilePage__edit__input'>
                             <div className='editProfilePage__edit__inputName'>Phone</div>
                             <input className='editProfilePage__edit__inputValue' 
+                            onChange={(e)=>setPhone(e.target.value)}
                             type="text" name="" id="" placeholder='Enter your phone...' 
                             defaultValue={user.phone}/>
                         </label>
 
-                        <button className='editProfilePage__edit__button'>Save</button>
+                        <button 
+                            className='editProfilePage__edit__button'
+                            onClick={()=>updateUserProfile.mutate({name, bio, phone})}
+                            >
+                                Save
+                        </button>
+
 
                     </div>
 
