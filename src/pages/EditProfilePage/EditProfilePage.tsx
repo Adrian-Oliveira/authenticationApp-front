@@ -7,7 +7,7 @@ import api from '../../core/api';
 import { useAppSelector } from '../../core/hooks';
 import { ChangeEvent, useState } from 'react';
 import { useToasts } from 'react-toast-notifications';
-import { useMutation } from '@tanstack/react-query';
+import { useQueryClient,useMutation } from '@tanstack/react-query';
 
 const EditProfilePage = ()=> {
 
@@ -16,6 +16,8 @@ const EditProfilePage = ()=> {
     const { addToast } = useToasts();
 
     const navigate = useNavigate();
+
+    const queryClient = useQueryClient();
 
     const [base64Img, setBase64Img] = useState<string>(user.photo)
     const [name, setName] = useState<string>('')
@@ -30,11 +32,12 @@ const EditProfilePage = ()=> {
           const msg = error.response?.data.message
             ? error.response.data.message
             : error.message;
+
           addToast(`${msg}`, { appearance: "error" });
         },
         onSuccess(data, variables, context) {
           addToast(`${data.data.message}`, { appearance: "success" });
-          
+          queryClient.setQueryData(['userData'], data.data)
           navigate("/profile");
         },
       });
