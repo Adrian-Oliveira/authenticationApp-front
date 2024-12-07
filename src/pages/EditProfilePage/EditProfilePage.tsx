@@ -19,14 +19,14 @@ const EditProfilePage = ()=> {
 
     const queryClient = useQueryClient();
 
-    const [base64Img, setBase64Img] = useState<string>(user.photo)
+    const [photo, setPhoto] = useState<Uint8Array>([])
     const [name, setName] = useState<string>('')
     const [bio, setBio] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
 
     const updateUserProfile = useMutation({
-        mutationFn: (user: { name: String; bio: String, phone:String }) =>
-          api.putUserProfile(user.name, user.bio, user.phone, null),
+        mutationFn: (user: { name: String; bio: String, phone:String, photo:Uint8Array }) =>
+          api.putUserProfile(user.name, user.bio, user.phone, user.photo),
         onError: (error, variables, context) => {
           // An error happened!
           const msg = error.response?.data.message
@@ -41,9 +41,10 @@ const EditProfilePage = ()=> {
           navigate("/profile");
         },
       });
-
+/* 
     const handleFileChange = (event:ChangeEvent<HTMLInputElement>) => {   
     const file = event.target.files[0];
+
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -53,7 +54,31 @@ const EditProfilePage = ()=> {
 
     // Read the image file as a data URL
     reader.readAsDataURL(file);
-    };
+    }; */
+
+    const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files[0];
+      
+        if (!file) {
+          return; // Handle potential error or no file selected
+        }
+      
+        const reader = new FileReader();
+      
+        reader.onload = () => {
+            const arrayBuffer = reader.result as ArrayBuffer;
+            const uint8Array = new Uint8Array(arrayBuffer);
+        
+            // Now you have the file data stored in the uint8Array variable
+            // You can use this data for further processing
+            console.log(uint8Array);
+            
+            setPhoto(uint8Array)
+        };
+      
+        // Read the file as an ArrayBuffer
+        reader.readAsArrayBuffer(file);
+      };
 
     return(
         <>
@@ -77,7 +102,7 @@ const EditProfilePage = ()=> {
 
                     <label className='editProfilePage__edit__photoInput'>
                         <div className='editProfilePage__edit__photoInput__photo' >
-                            <img src={base64Img} alt="" style={{width:'7.2rem', height:'7.2rem'}}/>
+                            <img alt="" style={{width:'7.2rem', height:'7.2rem'}}/>
                             <input type="file" onChange={handleFileChange}/>
                             <i className="material-icons">
                                 photo_camera
@@ -117,7 +142,7 @@ const EditProfilePage = ()=> {
 
                         <button 
                             className='editProfilePage__edit__button'
-                            onClick={()=>updateUserProfile.mutate({name, bio, phone})}
+                            onClick={()=>updateUserProfile.mutate({name, bio, phone, photo})}
                             >
                                 Save
                         </button>
