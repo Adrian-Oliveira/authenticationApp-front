@@ -7,11 +7,18 @@ import api from '../../core/api';
 import { useAppSelector } from '../../core/hooks';
 import { ChangeEvent, useState } from 'react';
 import { useToasts } from 'react-toast-notifications';
-import { useQueryClient,useMutation } from '@tanstack/react-query';
+import { useQueryClient,useMutation, useQuery } from '@tanstack/react-query';
 
 const EditProfilePage = ()=> {
-
     const user = useAppSelector(state=> state.user)
+ 
+/*     const user  = useQuery({queryKey:['userDA']})
+ */    
+
+    const { isPending, isError, data, error } = useQuery({
+        queryKey: ['userData'],
+        queryFn: api.getUserProfile,
+    })
 
     const { addToast } = useToasts();
 
@@ -119,7 +126,7 @@ const EditProfilePage = ()=> {
                             onChange={(e)=>setName(e.target.value)}
                             type="text" name="" id="" placeholder='Enter your name...' 
                             
-                            defaultValue={user.name}
+                            defaultValue={data.name}
                             />
                         </label> 
 
@@ -129,7 +136,7 @@ const EditProfilePage = ()=> {
                             onChange={(e)=>setBio(e.target.value)}
 
                             id="" cols={30} rows={10} placeholder='Enter your bio...' 
-                            defaultValue={user.bio}></textarea>
+                            defaultValue={data.bio}></textarea>
                         </label>
 
                         <label className='editProfilePage__edit__input'>
@@ -137,7 +144,7 @@ const EditProfilePage = ()=> {
                             <input className='editProfilePage__edit__inputValue' 
                             onChange={(e)=>setPhone(e.target.value)}
                             type="text" name="" id="" placeholder='Enter your phone...' 
-                            defaultValue={user.phone}/>
+                            defaultValue={data.phone}/>
                         </label>
 
                         <button 
