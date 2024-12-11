@@ -50,8 +50,15 @@ export default {
   getUserProfile: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/profile`);
+        // Create a Blob from the Uint8Array
+      const blob = new Blob([res.data.photo], { type: 'image/png' }); // Adjust the MIME type as needed
+
+      // Create a Data URL
+      const imageUrl = URL.createObjectURL(blob);
+
       console.log(res)
-      return res.data;
+
+      return {... res.data, imageUrl};
     } catch (err) {
       throw err;
     }

@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../../core/api';
 
 import { useAppSelector } from '../../core/hooks';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { useToasts } from 'react-toast-notifications';
 import { useQueryClient,useMutation, useQuery } from '@tanstack/react-query';
 
@@ -26,7 +26,8 @@ const EditProfilePage = ()=> {
 
     const queryClient = useQueryClient();
 
-    const [photo, setPhoto] = useState<Uint8Array>([])
+    const imgRef = useRef()
+    const [photo, setPhoto] = useState<string>('')
     const [name, setName] = useState<string>('')
     const [bio, setBio] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
@@ -47,44 +48,22 @@ const EditProfilePage = ()=> {
           queryClient.setQueryData(['userData'], data.data)
           navigate("/profile");
         },
-      });
-/* 
-    const handleFileChange = (event:ChangeEvent<HTMLInputElement>) => {   
-    const file = event.target.files[0];
-
-    const reader = new FileReader();
-
-    reader.onload = () => {
-        const base64 = reader.result as string;
-        setBase64Img(base64);
-    };
-
-    // Read the image file as a data URL
-    reader.readAsDataURL(file);
-    }; */
+    });
 
     const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files[0];
-      
         if (!file) {
           return; // Handle potential error or no file selected
         }
-      
         const reader = new FileReader();
-      
         reader.onload = () => {
-            const arrayBuffer = reader.result as ArrayBuffer;
-            const uint8Array = new Uint8Array(arrayBuffer);
-        
-            // Now you have the file data stored in the uint8Array variable
-            // You can use this data for further processing
-            console.log(uint8Array);
-            
-            setPhoto(uint8Array)
+            const base64Image = reader.result as string;
+            if(imgRef.current){
+                imgRef.current.src = base64Image;
+            }
         };
-      
-        // Read the file as an ArrayBuffer
-        reader.readAsArrayBuffer(file);
+
+        reader.readAsDataURL(file);    
       };
 
     return(
@@ -109,7 +88,7 @@ const EditProfilePage = ()=> {
 
                     <label className='editProfilePage__edit__photoInput'>
                         <div className='editProfilePage__edit__photoInput__photo' >
-                            <img alt="" style={{width:'7.2rem', height:'7.2rem'}}/>
+                            <img alt="" src={data.imageUrl} ref={imgRef} style={{width:'7.2rem', height:'7.2rem'}}/>
                             <input type="file" onChange={handleFileChange}/>
                             <i className="material-icons">
                                 photo_camera
