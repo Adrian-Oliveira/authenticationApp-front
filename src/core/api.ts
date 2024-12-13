@@ -67,14 +67,13 @@ export default {
     name: String,
     bio: String,
     phone: String,
-    photo: Uint8Array
+    photo: String
   ) => {
     try {
       const res = await axios.put(`${baseUrl}/user/profile`, {
         name,
         bio,
         phone,
-        photo,
       });
       return res;
     } catch (err) {

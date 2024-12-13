@@ -5,36 +5,49 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../../core/api';
 
 import { useAppSelector } from '../../core/hooks';
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useToasts } from 'react-toast-notifications';
 import { useQueryClient,useMutation, useQuery } from '@tanstack/react-query';
+import { DetailedHTMLProps, ImgHTMLAttributes } from 'react';
 
 const EditProfilePage = ()=> {
     const user = useAppSelector(state=> state.user)
- 
-/*     const user  = useQuery({queryKey:['userDA']})
- */    
-
-    const { isPending, isError, data, error } = useQuery({
-        queryKey: ['userData'],
-        queryFn: api.getUserProfile,
-    })
-
+   
     const { addToast } = useToasts();
 
     const navigate = useNavigate();
 
     const queryClient = useQueryClient();
 
-    const imgRef = useRef()
+    const imgRef = useRef<HTMLImageElement>(null)
     const [photo, setPhoto] = useState<string>('')
     const [name, setName] = useState<string>('')
     const [bio, setBio] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
 
+    const { isPending, isError, data, error , isSuccess} = useQuery({
+        queryKey: ['userData'],
+        queryFn: api.getUserProfile,
+    })
+
+    if(isPending){
+        return (
+            <>
+                <div>Loading ...</div>
+            </>
+        );
+    }
+
+    useEffect(()=>{
+        setName(data.name)
+        setBio(data.bio)
+        setPhone(data.phone)
+    },[data])
+
+
     const updateUserProfile = useMutation({
-        mutationFn: (user: { name: String; bio: String, phone:String, photo:Uint8Array }) =>
-          api.putUserProfile(user.name, user.bio, user.phone, user.photo),
+        mutationFn: (user: { name: String; bio: String, phone:String, photo:String }) =>
+          api.putUserProfile(user.name, user.bio, user.phone, ''),
         onError: (error, variables, context) => {
           // An error happened!
           const msg = error.response?.data.message
@@ -60,6 +73,7 @@ const EditProfilePage = ()=> {
             const base64Image = reader.result as string;
             if(imgRef.current){
                 imgRef.current.src = base64Image;
+                setPhoto(base64Image)
             }
         };
 
@@ -88,7 +102,7 @@ const EditProfilePage = ()=> {
 
                     <label className='editProfilePage__edit__photoInput'>
                         <div className='editProfilePage__edit__photoInput__photo' >
-                            <img alt="" src={data.imageUrl} ref={imgRef} style={{width:'7.2rem', height:'7.2rem'}}/>
+                            <img alt="" ref={imgRef} style={{width:'7.2rem', height:'7.2rem'}}/>
                             <input type="file" onChange={handleFileChange}/>
                             <i className="material-icons">
                                 photo_camera
@@ -102,10 +116,10 @@ const EditProfilePage = ()=> {
                         <label className='editProfilePage__edit__input'>
                             <div className='editProfilePage__edit__inputName'>Name</div>
                             <input className='editProfilePage__edit__inputValue'
+                            defaultValue={name}
                             onChange={(e)=>setName(e.target.value)}
                             type="text" name="" id="" placeholder='Enter your name...' 
-                            
-                            defaultValue={data.name}
+
                             />
                         </label> 
 
@@ -113,17 +127,18 @@ const EditProfilePage = ()=> {
                             <div className='editProfilePage__edit__inputName'>Bio</div>
                             <textarea className='editProfilePage__edit__inputValue' 
                             onChange={(e)=>setBio(e.target.value)}
-
+                            defaultValue={bio}
                             id="" cols={30} rows={10} placeholder='Enter your bio...' 
-                            defaultValue={data.bio}></textarea>
+                            ></textarea>
                         </label>
 
                         <label className='editProfilePage__edit__input'>
                             <div className='editProfilePage__edit__inputName'>Phone</div>
                             <input className='editProfilePage__edit__inputValue' 
                             onChange={(e)=>setPhone(e.target.value)}
-                            type="text" name="" id="" placeholder='Enter your phone...' 
-                            defaultValue={data.phone}/>
+                            defaultValue={phone}
+                            type='tel' name="" id="" placeholder='Enter your phone...' 
+                            />
                         </label>
 
                         <button 
