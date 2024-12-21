@@ -25,6 +25,9 @@ const EditProfilePage = ()=> {
     const [bio, setBio] = useState<string>('')
     const [phone, setPhone] = useState<string>('')
 
+    const [imageData, setImageData] = useState<Uint8Array | null>(null);
+
+
     const { isPending, isError, data, error , isSuccess} = useQuery({
         queryKey: ['userData'],
         queryFn: api.getUserProfile,
@@ -46,8 +49,8 @@ const EditProfilePage = ()=> {
 
 
     const updateUserProfile = useMutation({
-        mutationFn: (user: { name: String; bio: String, phone:String, photo:String }) =>
-          api.putUserProfile(user.name, user.bio, user.phone, ''),
+        mutationFn: (user: { name: String; bio: String, phone:String, photo:string }) =>
+          api.putUserProfile(user.name, user.bio, user.phone, user.photo),
         onError: (error, variables, context) => {
           // An error happened!
           const msg = error.response?.data.message
@@ -68,9 +71,11 @@ const EditProfilePage = ()=> {
         if (!file) {
           return; // Handle potential error or no file selected
         }
+
         const reader = new FileReader();
         reader.onload = () => {
             const base64Image = reader.result as string;
+            
             if(imgRef.current){
                 imgRef.current.src = base64Image;
                 setPhoto(base64Image)
@@ -78,6 +83,28 @@ const EditProfilePage = ()=> {
         };
 
         reader.readAsDataURL(file);    
+
+        const reader2 = new FileReader();
+
+        reader2.onload = () => {
+            if (reader2.result instanceof ArrayBuffer) {
+                const arrayBuffer = reader2.result;
+                const uint8Array = new Uint8Array(arrayBuffer);
+                setImageData(uint8Array); // Update the useState variable
+                console.log(arrayBuffer)
+                console.log(uint8Array)
+                const base64Image = btoa(String.fromCharCode(...uint8Array));
+                console.log(base64Image.substring(0,40))
+            } else {
+            console.error("Unexpected file reading result:", reader2.result);
+            }
+        };
+
+        reader2.onerror = (error) => {
+            console.error("Error reading file:", error);
+        };
+
+        reader2.readAsArrayBuffer(file);
       };
 
     return(

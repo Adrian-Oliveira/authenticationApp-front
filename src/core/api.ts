@@ -50,15 +50,17 @@ export default {
   getUserProfile: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/profile`);
-        // Create a Blob from the Uint8Array
-      const blob = new Blob([res.data.photo], { type: 'image/png' }); // Adjust the MIME type as needed
 
-      // Create a Data URL
-      const imageUrl = URL.createObjectURL(blob);
+
+      const binaryString = res.data.photo ? String.fromCharCode(...res.data.photo): null;
+      const base64String = res.data.photo && binaryString ? btoa(binaryString): null;
+      
+
+      if(base64String)
+      console.log(base64String.substring(0,40))
 
       console.log(res)
-
-      return {... res.data, imageUrl};
+      return {... res.data, base64Image:base64String};
     } catch (err) {
       throw err;
     }
@@ -67,16 +69,31 @@ export default {
     name: String,
     bio: String,
     phone: String,
-    photo: String
+    photo: null
   ) => {
     try {
+
+      console.log(0)
+      const binaryString = atob(photo); 
+      console.log(1)
+
+      const bytes = new Uint8Array(binaryString.length);
+      console.log(2)
+    
+      for (let i = 0; i < binaryString.length; i++) {
+        bytes[i] = binaryString.charCodeAt(i); 
+      }
+      console.log(3)
+    
       const res = await axios.put(`${baseUrl}/user/profile`, {
         name,
         bio,
         phone,
+        photo: bytes
       });
       return res;
     } catch (err) {
+      console.error(err)
       throw err;
     }
   },

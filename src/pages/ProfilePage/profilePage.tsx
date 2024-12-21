@@ -15,6 +15,7 @@ const ProfilePage = ()=> {
     const { isPending, isError, data, error } = useQuery({
         queryKey: ['userData'],
         queryFn: api.getUserProfile,
+        
     })
 
     /* 
@@ -25,6 +26,7 @@ const ProfilePage = ()=> {
     return <div>fetching your data ...</div>
    }
    if(error){
+    
     return <div>error</div>
    }
    
@@ -54,7 +56,7 @@ const ProfilePage = ()=> {
                             PHOTO
                         </div>
 
-                        <img src={data.photo} alt="" className='image' 
+                        <img alt="" className='image' 
                             style={{width:'7.2rem', height:'7.2rem'}}
                         />
 
