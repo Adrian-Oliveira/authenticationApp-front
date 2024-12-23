@@ -50,18 +50,21 @@ export default {
   getUserProfile: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/profile`);
-
-
-      const binaryString = res.data.photo ? String.fromCharCode(...res.data.photo): null;
-      const base64String = res.data.photo && binaryString ? btoa(binaryString): null;
-      
-
-      if(base64String)
-      console.log(base64String.substring(0,40))
+      const imageDataArray = res.data.photo.data.map((n:number)=>String.fromCharCode(n)).join('').split(',')
+      imageDataArray[0].replace("{", "")
+      imageDataArray[imageDataArray.length -1].replace("}", "")
+      const decodedStringImageData = imageDataArray.map((pair:string)=>String.fromCharCode(parseInt(pair.split(':')[1])))
+      const base64Image = btoa(decodedStringImageData.join(''))
+      console.log(base64Image.substring(0,40))
+/*       const base64Image = res.data.photo? btoa(String.fromCharCode(...res.data.photo.data)): null;
+if(base64Image)
+console.log(base64Image.substring(0,40))
+*/
 
       console.log(res)
-      return {... res.data, base64Image:base64String};
+      return {... res.data, base64Image:`data:image/png;base64,${base64Image}`};
     } catch (err) {
+      console.error(err)
       throw err;
     }
   },
@@ -69,27 +72,15 @@ export default {
     name: String,
     bio: String,
     phone: String,
-    photo: null
+    photo: Uint8Array|null 
   ) => {
     try {
 
-      console.log(0)
-      const binaryString = atob(photo); 
-      console.log(1)
-
-      const bytes = new Uint8Array(binaryString.length);
-      console.log(2)
-    
-      for (let i = 0; i < binaryString.length; i++) {
-        bytes[i] = binaryString.charCodeAt(i); 
-      }
-      console.log(3)
-    
       const res = await axios.put(`${baseUrl}/user/profile`, {
         name,
         bio,
         phone,
-        photo: bytes
+        photo
       });
       return res;
     } catch (err) {

@@ -56,7 +56,7 @@ const ProfilePage = ()=> {
                             PHOTO
                         </div>
 
-                        <img alt="" className='image' 
+                        <img alt="" className='image' src={data.base64Image}
                             style={{width:'7.2rem', height:'7.2rem'}}
                         />
 

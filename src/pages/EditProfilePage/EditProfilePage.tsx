@@ -49,7 +49,7 @@ const EditProfilePage = ()=> {
 
 
     const updateUserProfile = useMutation({
-        mutationFn: (user: { name: String; bio: String, phone:String, photo:string }) =>
+        mutationFn: (user: { name: String; bio: String, phone:String, photo:Uint8Array|null }) =>
           api.putUserProfile(user.name, user.bio, user.phone, user.photo),
         onError: (error, variables, context) => {
           // An error happened!
@@ -170,7 +170,7 @@ const EditProfilePage = ()=> {
 
                         <button 
                             className='editProfilePage__edit__button'
-                            onClick={()=>updateUserProfile.mutate({name, bio, phone, photo})}
+                            onClick={()=>updateUserProfile.mutate({name, bio, phone, photo:imageData})}
                             >
                                 Save
                         </button>
