@@ -5,11 +5,19 @@ import { useAppDispatch, useAppSelector } from '../../core/hooks';
 import { setLogged, setUser, removeUser } from '../../redux/user/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import api from '../../core/api';
 
 
 const TopNav = ()=> {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const { data } = useQuery({
+        queryKey: ['userData'],
+        queryFn: api.getUserProfile,
+        
+    })
 
     const user =  useAppSelector(store=>store.user)
     const [openPopup, setOpenPopup] = useState(false)
@@ -44,7 +52,7 @@ const TopNav = ()=> {
 
             <div className="topNav__menu" ref={menuRef} >
                 <div className='topNav__profile'>
-                    <img src={user.photo} alt=""  className='topNav__profile__image' style={{width:'3.2rem', height:'3.2rem'}} />
+                    <img src={data.base64Image} alt=""  className='topNav__profile__image' style={{width:'3.2rem', height:'3.2rem'}} />
                     <p className='topNav__profile__name'>{user.name}</p>
 
                     {openPopup? 

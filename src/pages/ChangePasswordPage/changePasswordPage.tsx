@@ -4,14 +4,15 @@ import { Link } from 'react-router-dom';
 
 import { useState } from 'react';
 
+import api from '../../core/api';
+
 const ChangePasswordPage = ()=> {
 
-    const [oldPssWrd ,setOldPssWrd]= useState<string>('')
     const [newPssWrd ,setNewPssWrd]= useState<string>('')
     const [repeatNewPssWrd ,setRepeatNewPssWrd]= useState<string>('')
 
     const isValid = (inputString:string)=>{
-        return /^.{12,}$/.test(inputString)
+        return /^.{10,}$/.test(inputString)
     }
 
     return(
@@ -29,16 +30,6 @@ const ChangePasswordPage = ()=> {
                     <div className='changePassword__edit__textInputs'>
 
                         <label className='changePassword__edit__input'>
-                            <div className='changePassword__edit__inputName'>Old Password</div>
-                            <input className='changePassword__edit__inputValue'
-                            type="password" 
-                            name="OldPassword"  
-                            placeholder='Enter your old password...'
-                            onChange={(e)=>setOldPssWrd(e.target.value)}
-                            value={oldPssWrd}/>
-                        </label> 
-
-                        <label className='changePassword__edit__input'>
                             <div className='changePassword__edit__inputName'>New Password</div>
                             <input className='changePassword__edit__inputValue'
                             type="password" 
@@ -52,7 +43,7 @@ const ChangePasswordPage = ()=> {
                             ${(isValid(newPssWrd))?
                                 '':
                                 'changePassword__edit__error--active'}`}>
-                            Your new password need to have at least 12 characters</p>
+                            Your new password need to have at least 10 characters</p>
                         </label>
 
                         <label className='changePassword__edit__input'>
