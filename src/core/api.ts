@@ -26,6 +26,16 @@ export default {
       console.log(err);
     }
   },
+  postNewPasswordWithJwtToken: async (newPassword: String) => {
+    try {
+      const res = await axios.post(`${baseUrl}/resetPassword/withJwtToken`, {
+        newPassword,
+      });
+      return res;
+    } catch (err) {
+      throw err;
+    }
+  },
   postGenerateTokenToResetPassword: async (email: String) => {
     try {
       const res = await axios.post(`${baseUrl}/resetPassword/generateToken`, {
@@ -55,13 +65,7 @@ export default {
       imageDataArray[imageDataArray.length -1].replace("}", "")
       const decodedStringImageData = imageDataArray.map((pair:string)=>String.fromCharCode(parseInt(pair.split(':')[1])))
       const base64Image = btoa(decodedStringImageData.join(''))
-      console.log(base64Image.substring(0,40))
-/*       const base64Image = res.data.photo? btoa(String.fromCharCode(...res.data.photo.data)): null;
-if(base64Image)
-console.log(base64Image.substring(0,40))
-*/
 
-      console.log(res)
       return {... res.data, base64Image:`data:image/png;base64,${base64Image}`};
     } catch (err) {
       console.error(err)

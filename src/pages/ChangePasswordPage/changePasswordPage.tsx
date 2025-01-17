@@ -3,13 +3,38 @@ import TopNav from '../../components/TopNav';
 import { Link } from 'react-router-dom';
 
 import { useState } from 'react';
-
+import { useToasts } from 'react-toast-notifications';
 import api from '../../core/api';
+
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 
 const ChangePasswordPage = ()=> {
 
     const [newPssWrd ,setNewPssWrd]= useState<string>('')
     const [repeatNewPssWrd ,setRepeatNewPssWrd]= useState<string>('')
+
+    const {addToast} = useToasts();
+
+    const navigate = useNavigate()
+
+    const updatePassword = useMutation({
+        mutationFn: (user: { newPassword: String; repeatNewPassword: String }) =>
+            api.postNewPasswordWithJwtToken(user.newPassword),
+        onError: (error, variables, context) => {
+          // An error happened!
+          const msg = error.response?.data.message
+            ? error.response.data.message
+            : error.message;
+
+          addToast(`${msg}`, { appearance: "error" });
+        },
+        onSuccess(data, variables, context) {
+          addToast(`${data.data.message}`, { appearance: "success" });
+          navigate("/profile");
+        },
+    });
+
 
     const isValid = (inputString:string)=>{
         return /^.{10,}$/.test(inputString)
@@ -65,7 +90,10 @@ const ChangePasswordPage = ()=> {
                             The new password and the confirmation need to be equal</p>
                         </label>
 
-                        <button className='changePassword__edit__button'>Change Password</button>
+                        <button 
+                        className='changePassword__edit__button'
+                        onClick={()=>updatePassword.mutate({newPassword:newPssWrd,repeatNewPassword: repeatNewPssWrd})}
+                        >Change Password</button>
 
                     </div>
 

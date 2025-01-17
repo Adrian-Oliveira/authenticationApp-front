@@ -91,10 +91,6 @@ const EditProfilePage = ()=> {
                 const arrayBuffer = reader2.result;
                 const uint8Array = new Uint8Array(arrayBuffer);
                 setImageData(uint8Array); // Update the useState variable
-                console.log(arrayBuffer)
-                console.log(uint8Array)
-                const base64Image = btoa(String.fromCharCode(...uint8Array));
-                console.log(base64Image.substring(0,40))
             } else {
             console.error("Unexpected file reading result:", reader2.result);
             }
