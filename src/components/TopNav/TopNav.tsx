@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import api from '../../core/api';
 
+import twoFAicon from '../../assets/mdi--two-factor-authentication.svg'
 
 const TopNav = ()=> {
     const dispatch = useAppDispatch();
@@ -85,6 +86,10 @@ const TopNav = ()=> {
                         <span>Change Password</span>
                     </button>
 
+                    <button className='topNav__popup__button' onClick={()=>navigate('/registerTwoFA')}>
+                        <img src={twoFAicon} alt="Two factor authentication icon" />    
+                        <span>Two factor authentication</span>
+                    </button>
                     <hr/>
                     
                     <button className='topNav__popup__button topNav__popup__button--logout' onClick={logOut}>

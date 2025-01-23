@@ -8,6 +8,7 @@ import ResetPasswordPage from './pages/ResetPasswordPage';
 import ProfilePage from './pages/ProfilePage';
 import EditProfilePage from './pages/EditProfilePage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
+import Register2FAPage from './pages/Register2FA';
 
 import { Step1 } from './pages/ResetPasswordPage/Step1';
 import { Step2 } from './pages/ResetPasswordPage/Step2';
@@ -31,10 +32,11 @@ function App() {
             <Route path='/profile' element={<ProfilePage/>} />
             <Route path='/editProfile' element={<EditProfilePage/>} />
             <Route path='/changePassword' element={<ChangePasswordPage/>} />
+            <Route path='/registerTwoFA' element={<Register2FAPage/>} />
           </Route>   
 
 
-            <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </HashRouter>
     </ToastProvider>
