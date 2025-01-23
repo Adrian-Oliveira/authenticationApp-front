@@ -20,7 +20,7 @@ const ChangePasswordPage = ()=> {
 
     const updatePassword = useMutation({
         mutationFn: (user: { newPassword: String; repeatNewPassword: String }) =>
-            api.postNewPasswordWithJwtToken(user.newPassword),
+            api.postNewPasswordWithJwtToken(user.newPassword,user.repeatNewPassword),
         onError: (error, variables, context) => {
           // An error happened!
           const msg = error.response?.data.message

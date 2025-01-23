@@ -26,8 +26,11 @@ export default {
       console.log(err);
     }
   },
-  postNewPasswordWithJwtToken: async (newPassword: String) => {
+  postNewPasswordWithJwtToken: async (newPassword: String, repeatNewPassword:String) => {
     try {
+      if(newPassword !== repeatNewPassword){
+        throw new Error("New password and confirmation new password need to match.")
+      }
       const res = await axios.post(`${baseUrl}/resetPassword/withJwtToken`, {
         newPassword,
       });
