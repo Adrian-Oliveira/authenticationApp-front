@@ -20,7 +20,7 @@ export const Step1 = ()=>{
         },
         onSuccess(data, variables, context) {
             addToast(`${data.data.message}`, { appearance: 'success' });
-            navigate('../login')
+            navigate('../step2')
         },
 
     })
