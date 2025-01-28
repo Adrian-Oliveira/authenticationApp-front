@@ -16,7 +16,8 @@ export  const Step2 = ()=>{
     const [confirmNewPassword, setConfirmNewPassword] = useState<String>('')
 
     const changePassword = useMutation({
-        mutationFn: (user:{token: String, newPassword:String})=> api.postNewPasswordWithToken(user.token, user.newPassword),
+        mutationFn: (user:{token:String, newPassword:String,confirmNewPassword:String })=> 
+            api.postNewPasswordWithEmailToken(user.token,user.newPassword, user.confirmNewPassword),
         onError: (error, variables, context) => {
             // An error happened!
             const msg = error.response?.data.message ? error.response.data.message: error.message ;
@@ -28,15 +29,6 @@ export  const Step2 = ()=>{
         },
 
     })
-
-    const handleAttemptToChangePassword = ()=>{
-        if(newPassword !== confirmNewPassword){
-            addToast('New Password and Confirm New Password does not match', { appearance: 'error' });
-        }
-        else{
-            changePassword.mutate({token, newPassword})
-        }
-    }
 
     return(
         <>
@@ -83,7 +75,7 @@ export  const Step2 = ()=>{
             
         <button
             className='resetPasswordPage__resetPasswordContainer__loginButton'
-            onClick={()=>handleAttemptToChangePassword()}
+            onClick={()=>changePassword.mutate({token,newPassword,confirmNewPassword})}
             >Change the password 
         </button>
 

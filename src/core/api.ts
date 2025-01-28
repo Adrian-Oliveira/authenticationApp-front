@@ -29,7 +29,7 @@ export default {
   postNewPasswordWithJwtToken: async (newPassword: String, repeatNewPassword:String) => {
     try {
       if(newPassword !== repeatNewPassword){
-        throw new Error("New password and confirmation new password need to match. 4")
+        throw new Error("New password and confirmation new password need to match.")
       }
       const res = await axios.post(`${baseUrl}/resetPassword/withJwtToken`, {
         newPassword,
@@ -49,8 +49,11 @@ export default {
       throw err;
     }
   },
-  postNewPasswordWithToken: async (token: String, newPassword: String) => {
+  postNewPasswordWithEmailToken: async (token: String, newPassword: String, confirmNewPassword:String) => {
     try {
+      if(newPassword !== confirmNewPassword){
+        throw new Error("New password and confirmation new password need to match. ")
+      }
       const res = await axios.post(`${baseUrl}/resetPassword/withEmailToken`, {
         token,
         newPassword,

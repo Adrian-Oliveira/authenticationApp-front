@@ -45,6 +45,11 @@ export const Step1 = ()=>{
                 onClick={()=>generateToken2ResetPassword.mutate({email})}
                 >Send the code to my email
             </button>
+            <button
+                className='resetPasswordPage__resetPasswordContainer__loginButton'
+                onClick={()=>navigate('../step2')}
+                >Already have a code
+            </button>
         </>
     );
 
