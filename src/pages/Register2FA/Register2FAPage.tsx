@@ -20,19 +20,10 @@ const Register2FAPage = ()=> {
 
     const [totp, setTotp] = useState<string>('');
 
-/*     const { isPending, isError, data, error , isSuccess} = useQuery({
+    const { isPending, isError, data, error , isSuccess} = useQuery({
         queryKey: ['2fa'],
         queryFn: api.getUserTwoFactor,
     })
-
-    if(isPending){
-        return (
-            <>
-                <div>Loading ...</div>
-            </>
-        );
-    }
- */
 
     const updateUserProfile = useMutation({
         mutationFn: (user: { totp: String}) =>
@@ -53,6 +44,17 @@ const Register2FAPage = ()=> {
     });
 
 
+    if(isPending){
+        return (
+            <>
+                <div>Loading ...</div>
+            </>
+        );
+    }
+
+    console.log(data)
+
+
     return(
         <>
             <TopNav/>
@@ -65,7 +67,7 @@ const Register2FAPage = ()=> {
                 </Link>
                 <div className="register2FA__edit">
 
-
+                    <p>{data?.secret32}</p>
                     <div className='register2FA__edit__textInputs'>
 
                         <label className='register2FA__edit__input'>

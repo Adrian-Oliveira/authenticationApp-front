@@ -21,7 +21,7 @@ export default {
   getUserTwoFactor: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/twofactor`);
-      return res;
+      return res.data;
     } catch (err) {
       console.log(err);
     }
