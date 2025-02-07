@@ -66,13 +66,19 @@ export default {
   getUserProfile: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/profile`);
-      const imageDataArray = res.data.photo.data.map((n:number)=>String.fromCharCode(n)).join('').split(',')
-      imageDataArray[0].replace("{", "")
-      imageDataArray[imageDataArray.length -1].replace("}", "")
-      const decodedStringImageData = imageDataArray.map((pair:string)=>String.fromCharCode(parseInt(pair.split(':')[1])))
-      const base64Image = btoa(decodedStringImageData.join(''))
+      if(res.data.photo){
 
-      return {... res.data, base64Image:`data:image/png;base64,${base64Image}`};
+        const imageDataArray = res.data.photo.data.map((n:number)=>String.fromCharCode(n)).join('').split(',')
+        imageDataArray[0].replace("{", "")
+        imageDataArray[imageDataArray.length -1].replace("}", "")
+        const decodedStringImageData = imageDataArray.map((pair:string)=>String.fromCharCode(parseInt(pair.split(':')[1])))
+        let base64Image = btoa(decodedStringImageData.join(''))
+        return {... res.data, base64Image:`data:image/png;base64,${base64Image}`};
+      }
+      console.log(res.data)
+
+      return {... res.data}
+
     } catch (err) {
       console.error(err)
       throw err;

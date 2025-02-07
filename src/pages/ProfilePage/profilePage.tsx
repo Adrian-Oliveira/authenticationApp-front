@@ -66,7 +66,7 @@ const ProfilePage = ()=> {
                             NAME
                         </div>
                         <p className="data">
-                            {data.name}
+                            {data.name ? data.name: ''}
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
