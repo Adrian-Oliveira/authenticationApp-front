@@ -52,7 +52,6 @@ const Register2FAPage = ()=> {
         );
     }
 
-    console.log(data)
 
 
     return(

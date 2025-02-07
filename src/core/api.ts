@@ -63,6 +63,18 @@ export default {
       throw err;
     }
   },
+  getIsLogged: async () => {
+    try {
+      await axios.get(`${baseUrl}/user/logged`);
+
+
+      return true
+
+    } catch (err) {
+      console.error(err)
+      return err
+    }
+  },
   getUserProfile: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/profile`);
