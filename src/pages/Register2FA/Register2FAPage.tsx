@@ -10,6 +10,10 @@ import { useToasts } from 'react-toast-notifications';
 import { useQueryClient,useMutation, useQuery } from '@tanstack/react-query';
 import { DetailedHTMLProps, ImgHTMLAttributes } from 'react';
 
+import { QRCode } from 'qrcode';
+
+
+
 const Register2FAPage = ()=> {
    
     const { addToast } = useToasts();
@@ -25,21 +29,24 @@ const Register2FAPage = ()=> {
         queryFn: api.getUserTwoFactor,
     })
 
+    
     const updateUserProfile = useMutation({
         mutationFn: (user: { totp: String}) =>
           api.postUserTwoFactor(user.totp),
         onError: (error, variables, context) => {
-          // An error happened!
-          const msg = error.response?.data.message
+            // An error happened!
+            const msg = error.response?.data.message
             ? error.response.data.message
             : error.message;
 
           addToast(`${msg}`, { appearance: "error" });
         },
-        onSuccess(data, variables, context) {
-          addToast(`${data.data.message}`, { appearance: "success" });
-          queryClient.setQueryData(['userData'], data.data)
-          navigate("/profile");
+        onSuccess:(data, variables, context)=> {
+
+            addToast(`${data?.data.message}`, { appearance: "success" });
+            queryClient.setQueryData(['userData'], data?.data)
+            navigate("/profile");  
+            
         },
     });
 
@@ -52,7 +59,13 @@ const Register2FAPage = ()=> {
         );
     }
 
-
+    if(isError){
+        return (
+            <>
+                <div>Error</div>
+            </>
+        );
+    }
 
     return(
         <>
@@ -65,7 +78,7 @@ const Register2FAPage = ()=> {
                     Back
                 </Link>
                 <div className="register2FA__edit">
-
+                    <img src={data?.qrCodeDataUrl} alt="Qr code" />
                     <p>{data?.secret32}</p>
                     <div className='register2FA__edit__textInputs'>
 

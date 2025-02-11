@@ -1,5 +1,6 @@
 const baseUrl = import.meta.env.VITE_BACKEND_API_URL;
 import axios from "axios";
+import  QRCode  from "qrcode";
 axios.defaults.withCredentials = true
 export default {
   delUserTwoFactor: async () => {
@@ -21,7 +22,14 @@ export default {
   getUserTwoFactor: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/twofactor`);
-      return res.data;
+      // @ts-ignore
+      await QRCode.toDataURL(res.data.secret32, function (err, url) {
+        console.log(url)
+      })
+      // @ts-ignore
+      const qrCodeDataUrl = await QRCode.toDataURL(res.data.secret32)
+      console.log(qrCodeDataUrl)
+      return{ ...res.data, qrCodeDataUrl};
     } catch (err) {
       console.log(err);
     }

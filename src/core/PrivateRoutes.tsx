@@ -1,20 +1,6 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useAppSelector } from "./hooks";
 import { useQuery } from "@tanstack/react-query";
 import api from "./api";
-
-const useAuth= async()=>{
-    try{
-
-        const isLogged = await api.getIsLogged()
-        return isLogged
-
-    }
-    catch(e){
-        return false
-    }
-}
-
 
 const PrivateRoutes=() =>{
     
