@@ -125,7 +125,7 @@ const EditProfilePage = ()=> {
 
                     <label className='editProfilePage__edit__photoInput'>
                         <div className='editProfilePage__edit__photoInput__photo' >
-                            <img alt="" ref={imgRef} style={{width:'7.2rem', height:'7.2rem'}}/>
+                            <img alt="" src={data.base64Image} style={{width:'7.2rem', height:'7.2rem'}}/>
                             <input type="file" onChange={handleFileChange}/>
                             <i className="material-icons">
                                 photo_camera

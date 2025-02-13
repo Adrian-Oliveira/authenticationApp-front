@@ -18,10 +18,6 @@ const ProfilePage = ()=> {
         
     })
 
-    /* 
-    const dispatch = useAppDispatch()
-    const user = useAppSelector(state=>state.user) 
-    */
    if(isPending){
     return <div>fetching your data ...</div>
    }
