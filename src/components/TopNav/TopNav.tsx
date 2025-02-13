@@ -5,14 +5,17 @@ import { useAppDispatch, useAppSelector } from '../../core/hooks';
 import { setLogged, setUser, removeUser } from '../../redux/user/userSlice';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import api from '../../core/api';
+import { useToasts } from 'react-toast-notifications';
 
 import twoFAicon from '../../assets/mdi--two-factor-authentication.svg'
 
 const TopNav = ()=> {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+
 
     const { data } = useQuery({
         queryKey: ['userData'],
@@ -25,9 +28,27 @@ const TopNav = ()=> {
     let popupRef = useRef<HTMLDivElement>(null)
     let menuRef = useRef<HTMLDivElement>(null)
 
-    const logOut = ()=>{
-        dispatch(removeUser())
-    }
+
+    const { addToast } = useToasts();
+
+    const getLogout = useMutation({
+        mutationFn: () =>
+          api.getLogout(),
+        onError: (error, variables, context) => {
+          // An error happened!
+          const msg = error.response?.data.message
+            ? error.response.data.message
+            : error.message;
+
+          addToast(`${msg}`, { appearance: "error" });
+          addToast(`We can't logout you`, { appearance: "error" });
+        },
+        onSuccess(data, variables, context) {
+          addToast(`You have logged out successfully`, { appearance: "success" });
+          navigate("/login");
+        },
+    });
+
 
     useEffect(()=>{
         const handler = (e:any)=>{
@@ -92,7 +113,7 @@ const TopNav = ()=> {
                     </button>
                     <hr/>
                     
-                    <button className='topNav__popup__button topNav__popup__button--logout' onClick={logOut}>
+                    <button className='topNav__popup__button topNav__popup__button--logout' onClick={()=>getLogout.mutate()}>
                         <i className="material-icons">
                             logout
                         </i> 

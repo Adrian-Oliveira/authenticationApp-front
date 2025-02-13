@@ -79,6 +79,17 @@ export default {
       return err
     }
   },
+  getLogout:async()=>{
+    try {
+      await axios.get(`${baseUrl}/user/logout`);
+
+      return true
+
+    } catch (err) {
+      console.error(err)
+      return err
+    }
+  },
   getUserProfile: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/profile`);
@@ -125,7 +136,7 @@ export default {
     password: String,
     totp: String 
   ) => {
-    
+
     try {
       const res = await axios.post(`${baseUrl}/user/login`, {
         email,
