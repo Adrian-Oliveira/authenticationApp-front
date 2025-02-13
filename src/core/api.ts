@@ -22,13 +22,9 @@ export default {
   getUserTwoFactor: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/twofactor`);
-      // @ts-ignore
-      await QRCode.toDataURL(res.data.secret32, function (err, url) {
-        console.log(url)
-      })
+
       // @ts-ignore
       const qrCodeDataUrl = await QRCode.toDataURL(res.data.secret32)
-      console.log(qrCodeDataUrl)
       return{ ...res.data, qrCodeDataUrl};
     } catch (err) {
       console.log(err);
@@ -127,8 +123,9 @@ export default {
   postUserLoginWithEmail: async (
     email: String,
     password: String,
-    totp: String = ""
+    totp: String 
   ) => {
+    
     try {
       const res = await axios.post(`${baseUrl}/user/login`, {
         email,

@@ -12,16 +12,20 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useToasts } from "react-toast-notifications";
 
+import twoFAicon from '../../assets/mdi--two-factor-authentication.svg'
+
+
 const LoginPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { addToast } = useToasts();
   const [email, setEmail] = useState<String>("");
   const [pass, setPass] = useState<String>("");
+  const [totp, setTotp] = useState<String>("");
 
   const loginWithEmailAndPass = useMutation({
-    mutationFn: (user: { email: String; pass: String }) =>
-      api.postUserLoginWithEmail(user.email, user.pass),
+    mutationFn: (user: { email: String; pass: String, totp:String }) =>
+      api.postUserLoginWithEmail(user.email, user.pass, user.totp),
     onError: (error, variables, context) => {
       // An error happened!
       const msg = error.response?.data.message
@@ -61,11 +65,17 @@ const LoginPage = () => {
 
           <input onChange={(e)=>setPass(e.target.value)} type="password" name="" id="" placeholder="Password" />
         </label>
+        
+        <label className="loginPage__loginContainer__password">
+          <img src={twoFAicon} alt="Two factor authentication icon" />    
+
+          <input onChange={(e)=>setTotp(e.target.value)} type="text" name="" id="" placeholder="Totp" />
+        </label>
 
         <button
           className="loginPage__loginContainer__loginButton"
           onClick={() => {
-            loginWithEmailAndPass.mutate({ email, pass });
+            loginWithEmailAndPass.mutate({ email, pass, totp });
           }}
         >
           Start coding now
