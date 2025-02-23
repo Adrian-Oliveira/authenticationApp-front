@@ -78,7 +78,9 @@ const Register2FAPage = ()=> {
                     Back
                 </Link>
                 <div className="register2FA__edit">
-                    <img src={data?.qrCodeDataUrl} alt="Qr code" />
+                    <h3>Scan the QR code</h3>
+                    <img src={data?.qrCodeDataUrl} className="register2FA__edit__qrcode" alt="Qr code" />
+                    <h3>Or use the secret in your authentication app:</h3>
                     <p>{data?.secret32}</p>
                     <div className='register2FA__edit__textInputs'>
 
@@ -87,7 +89,7 @@ const Register2FAPage = ()=> {
                             <input className='register2FA__edit__inputValue'
                             defaultValue={totp}
                             onChange={(e)=>setTotp(e.target.value)}
-                            type="text" name="" id="" placeholder='Enter your name...' 
+                            type="text" name="" id="" placeholder='Enter the code...' 
 
                             />
                         </label> 
