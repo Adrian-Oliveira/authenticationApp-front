@@ -29,8 +29,29 @@ const Register2FAPage = ()=> {
         queryFn: api.getUserTwoFactor,
     })
 
+        
+    const disable2FA = useMutation({
+        mutationFn: () =>
+          api.delUserTwoFactor(),
+        onError: (error, variables, context) => {
+            // An error happened!
+            const msg = error.response?.data.message
+            ? error.response.data.message
+            : error.message;
+
+          addToast(`${msg}`, { appearance: "error" });
+        },
+        onSuccess:(data, variables, context)=> {
+
+            addToast(`${data?.data.message}`, { appearance: "success" });
+            queryClient.setQueryData(['userData'], data?.data)
+            navigate("/profile");  
+            
+        },
+    });
+
     
-    const updateUserProfile = useMutation({
+    const enable2FA = useMutation({
         mutationFn: (user: { totp: String}) =>
           api.postUserTwoFactor(user.totp),
         onError: (error, variables, context) => {
@@ -78,6 +99,8 @@ const Register2FAPage = ()=> {
                     Back
                 </Link>
                 <div className="register2FA__edit">
+
+                    <button className='register2FA__edit__button--red' onClick={()=>disable2FA.mutate({})}>Disable 2FA</button>
                     <h3>Scan the QR code</h3>
                     <img src={data?.qrCodeDataUrl} className="register2FA__edit__qrcode" alt="Qr code" />
                     <h3>Or use the secret in your authentication app:</h3>
@@ -97,7 +120,7 @@ const Register2FAPage = ()=> {
 
                         <button 
                             className='register2FA__edit__button'
-                            onClick={()=>updateUserProfile.mutate({totp})}
+                            onClick={()=>enable2FA  .mutate({totp})}
                             >
                                 Register
                         </button>

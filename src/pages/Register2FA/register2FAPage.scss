@@ -101,7 +101,7 @@
 
         &__textInputs{
             align-self: flex-start;
-            
+
             width: 41.693rem;
             height: fit-content;
             display: flex;
@@ -136,6 +136,21 @@
             padding: 1.7rem 1.8rem;
             border-radius: 12px ;
             border: 1px solid #828282
+        }
+
+        &__button--red{
+            width: 10.2rem;
+            height: 3.8rem;
+            border-radius: 8px;
+            background: #ed2fae;
+            color: #FFFFFF;
+
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 21.79px;
+            letter-spacing: -0.035em;
+            text-align: center;
+            
         }
 
 
@@ -296,6 +311,22 @@
                 border: 1px solid #828282
             }
     
+            
+            &__button--red{
+                width: 8.2rem;
+                height: 3.8rem;
+                border-radius: 8px;
+                background: #ed2fae;
+    
+                color: #FFFFFF;
+    
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 21.79px;
+                letter-spacing: -0.035em;
+                text-align: center;
+                
+            }
     
             &__button{
                 width: 8.2rem;
@@ -311,7 +342,9 @@
                 letter-spacing: -0.035em;
                 text-align: center;
                 
+
             }
+
         }
     }
     
