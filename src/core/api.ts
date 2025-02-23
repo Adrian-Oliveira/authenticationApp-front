@@ -3,12 +3,13 @@ import axios from "axios";
 import  QRCode  from "qrcode";
 axios.defaults.withCredentials = true
 export default {
-  delUserTwoFactor: async () => {
+  delUserTwoFactor: async (totp:String) => {
     try {
-      const res = await axios.delete(`${baseUrl}/user/twofactor`);
+      const res = await axios.delete(`${baseUrl}/user/twofactor`,{totp});
       return res;
     } catch (err) {
-      console.log(err);
+      console.log(err)
+      throw err;
     }
   },
   postUserTwoFactor: async (totp: String) => {
@@ -16,7 +17,8 @@ export default {
       const res = await axios.post(`${baseUrl}/user/twofactor`, { totp });
       return res;
     } catch (err) {
-      console.log(err);
+      console.error(err)
+      throw err;
     }
   },
   getUserTwoFactor: async () => {
@@ -27,7 +29,9 @@ export default {
       const qrCodeDataUrl = await QRCode.toDataURL(res.data.secret32)
       return{ ...res.data, qrCodeDataUrl};
     } catch (err) {
-      console.log(err);
+      console.error(err);
+
+      throw err;
     }
   },
   postNewPasswordWithJwtToken: async (newPassword: String, repeatNewPassword:String) => {
@@ -76,7 +80,7 @@ export default {
 
     } catch (err) {
       console.error(err)
-      return err
+      throw err;
     }
   },
   getLogout:async()=>{
@@ -87,7 +91,7 @@ export default {
 
     } catch (err) {
       console.error(err)
-      return err
+      throw err;
     }
   },
   getUserProfile: async () => {

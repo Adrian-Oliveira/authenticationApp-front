@@ -31,8 +31,8 @@ const Register2FAPage = ()=> {
 
         
     const disable2FA = useMutation({
-        mutationFn: () =>
-          api.delUserTwoFactor(),
+        mutationFn: (user:{totp:String}) =>
+          api.delUserTwoFactor(user.totp),
         onError: (error, variables, context) => {
             // An error happened!
             const msg = error.response?.data.message
@@ -44,7 +44,6 @@ const Register2FAPage = ()=> {
         onSuccess:(data, variables, context)=> {
 
             addToast(`${data?.data.message}`, { appearance: "success" });
-            queryClient.setQueryData(['userData'], data?.data)
             navigate("/profile");  
             
         },
@@ -100,7 +99,7 @@ const Register2FAPage = ()=> {
                 </Link>
                 <div className="register2FA__edit">
 
-                    <button className='register2FA__edit__button--red' onClick={()=>disable2FA.mutate({})}>Disable 2FA</button>
+                    <button className='register2FA__edit__button--red' onClick={()=>disable2FA.mutate({totp})}>Disable 2FA</button>
                     <h3>Scan the QR code</h3>
                     <img src={data?.qrCodeDataUrl} className="register2FA__edit__qrcode" alt="Qr code" />
                     <h3>Or use the secret in your authentication app:</h3>
@@ -120,7 +119,7 @@ const Register2FAPage = ()=> {
 
                         <button 
                             className='register2FA__edit__button'
-                            onClick={()=>enable2FA  .mutate({totp})}
+                            onClick={()=>enable2FA.mutate({totp})}
                             >
                                 Register
                         </button>
