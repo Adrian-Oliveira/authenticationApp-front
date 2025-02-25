@@ -25,6 +25,9 @@ export default {
     try {
       const res = await axios.get(`${baseUrl}/user/twofactor`);
 
+      if(res.data.alreadyHave2FA){
+        return {...res.data}
+      }
       // @ts-ignore
       const qrCodeDataUrl = await QRCode.toDataURL(res.data.secret32)
       return{ ...res.data, qrCodeDataUrl};
@@ -74,7 +77,6 @@ export default {
   getIsLogged: async () => {
     try {
       await axios.get(`${baseUrl}/user/logged`);
-
 
       return true
 
