@@ -5,7 +5,7 @@ axios.defaults.withCredentials = true
 export default {
   delUserTwoFactor: async (totp:String) => {
     try {
-      const res = await axios.delete(`${baseUrl}/user/twofactor`,{totp});
+      const res = await axios.delete(`${baseUrl}/user/twofactor`,{ data:{totp} });
       return res;
     } catch (err) {
       console.log(err)
