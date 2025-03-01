@@ -61,7 +61,8 @@ const EditProfilePage = ()=> {
         },
         onSuccess(data, variables, context) {
           addToast(`${data.data.message}`, { appearance: "success" });
-          queryClient.setQueryData(['userData'], data.data)
+          /* queryClient.setQueryData(['userData'], data.data) */
+          queryClient.invalidateQueries({ queryKey: ['userData'] }),
           navigate("/profile");
         },
     });

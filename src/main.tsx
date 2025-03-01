@@ -12,12 +12,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: Infinity, 
+
       cacheTime: Infinity,
     },
   },  
 });
-
+/* staleTime: Infinity,  */
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
