@@ -65,9 +65,7 @@ const Register2FAPage = ()=> {
 
             addToast(`${data?.data.message}`, { appearance: "success" });
             queryClient.invalidateQueries({ queryKey: ['userData'] }),
-
-/*             queryClient.setQueryData(['userData'], data?.data)
- */
+            
             navigate("/profile");  
             
         },

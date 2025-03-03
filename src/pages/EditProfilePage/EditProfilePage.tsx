@@ -45,6 +45,7 @@ const EditProfilePage = ()=> {
         setName(data.name)
         setBio(data.bio)
         setPhone(data.phone)
+        setImageData(data.photo)
     },[data])
 
 
