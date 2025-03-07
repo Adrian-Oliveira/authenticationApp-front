@@ -11,7 +11,6 @@ import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { DetailedHTMLProps, ImgHTMLAttributes } from "react";
 
 const EditProfilePage = () => {
-  const user = useAppSelector((state) => state.user);
 
   const { addToast } = useToasts();
 
@@ -19,7 +18,6 @@ const EditProfilePage = () => {
 
   const queryClient = useQueryClient();
 
-  const imgRef = useRef<HTMLImageElement>(null);
   const [photoBase64Image, setPhotoBase64Image] = useState<string>("");
   const [name, setName] = useState<string>("");
   const [bio, setBio] = useState<string>("");
@@ -54,7 +52,24 @@ const EditProfilePage = () => {
       bio: String;
       phone: String;
       photo: Uint8Array | null;
+      base64Image:String;
     }) => api.putUserProfile(user.name, user.bio, user.phone, user.photo),
+    onMutate: async(newUser)=>{
+      // Cancel any outgoing refetches
+      // (so they don't overwrite our optimistic update)
+      await queryClient.cancelQueries({ queryKey: ['userData'] })
+
+    // Snapshot the previous value
+    const previousUser = queryClient.getQueryData(['userData'])
+    console.log(previousUser)
+    // Optimistically update to the new value
+    queryClient.setQueryData(['userData'],{...newUser, email:previousUser.email})
+    
+    navigate("/profile");
+    
+    // Return a context with the previous and new todo
+    return { previousUser, newUser }
+    },
     onError: (error, variables, context) => {
       // An error happened!
       const msg = error.response?.data.message
@@ -62,13 +77,22 @@ const EditProfilePage = () => {
         : error.message;
 
       addToast(`${msg}`, { appearance: "error" });
+
+      // undo the optimistic update if the request fail
+      queryClient.setQueryData(
+        ['todos'],
+        context?.previousUser,
+      )
     },
     onSuccess(data, variables, context) {
       addToast(`${data.data.message}`, { appearance: "success" });
-      /* queryClient.setQueryData(['userData'], data.data) */
       queryClient.invalidateQueries({ queryKey: ["userData"] }),
-        navigate("/profile");
+      navigate("/profile");
     },
+    onSettled: (newUser)=>{
+      queryClient.invalidateQueries({ queryKey: ['userData'] })
+      navigate("/profile");
+    }
   });
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -178,7 +202,7 @@ const EditProfilePage = () => {
             <button
               className="editProfilePage__edit__button"
               onClick={() =>
-                updateUserProfile.mutate({ name, bio, phone, photo: imageData })
+                updateUserProfile.mutate({ name, bio, phone, photo: imageData, base64Image:photoBase64Image})
               }
             >
               Save

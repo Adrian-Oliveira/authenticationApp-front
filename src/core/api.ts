@@ -82,7 +82,7 @@ export default {
 
     } catch (err) {
       console.error(err)
-      throw err;
+      return false
     }
   },
   getLogout:async()=>{
