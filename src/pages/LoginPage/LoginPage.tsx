@@ -13,29 +13,33 @@ import { useState } from "react";
 import { useToasts } from "react-toast-notifications";
 
 import twoFAicon from '../../assets/mdi--two-factor-authentication.svg'
-
+import Loading from "../../components/Loading";
 
 const LoginPage = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { addToast } = useToasts();
   const [email, setEmail] = useState<String>("");
   const [pass, setPass] = useState<String>("");
   const [totp, setTotp] = useState<String>("");
+  const [loading, setLoading] = useState<boolean>(false)
 
   const loginWithEmailAndPass = useMutation({
-    mutationFn: (user: { email: String; pass: String, totp:String }) =>
-      api.postUserLoginWithEmail(user.email, user.pass, user.totp),
+    mutationFn: (user: { email: String; pass: String, totp:String }) =>{
+      setLoading(true)
+      return api.postUserLoginWithEmail(user.email, user.pass, user.totp)
+    },
     onError: (error, variables, context) => {
+      setLoading(false)
       // An error happened!
       const msg = error.response?.data.message
         ? error.response.data.message
         : error.message;
       addToast(`${msg}`, { appearance: "error" });
+
     },
     onSuccess(data, variables, context) {
+      setLoading(false)
       addToast(`${data.data.message}`, { appearance: "success" });
-      dispatch(setLogged());
       navigate("/profile");
     },
   });
@@ -43,6 +47,7 @@ const LoginPage = () => {
   return (
     <div className="loginPage">
       <div className="loginPage__loginContainer">
+       <Loading loading={loading}/>
         <img
           className="loginPage__loginContainer__LogoAndName"
           src={devChallengeLogoAndName}

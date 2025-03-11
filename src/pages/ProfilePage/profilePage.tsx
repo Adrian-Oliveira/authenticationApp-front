@@ -15,7 +15,7 @@ const ProfilePage = ()=> {
     const { isPending, isError, data, error } = useQuery({
         queryKey: ['userData'],
         queryFn: api.getUserProfile,
-        
+        staleTime: Infinity    
     })
 
    if(isPending){

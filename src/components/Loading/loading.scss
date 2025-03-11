@@ -1,0 +1,15 @@
+.loading{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    z-index: 999;
+    border-radius: 24px;
+    display: grid;
+    background-color: #000;
+    opacity: 0.6;
+    align-items: center;
+    justify-items: center;
+    
+}
