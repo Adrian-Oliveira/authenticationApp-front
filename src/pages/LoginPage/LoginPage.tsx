@@ -15,6 +15,8 @@ import { useToasts } from "react-toast-notifications";
 import twoFAicon from '../../assets/mdi--two-factor-authentication.svg'
 import Loading from "../../components/Loading";
 
+const baseUrl = import.meta.env.VITE_BACKEND_API_URL;
+
 const LoginPage = () => {
   const navigate = useNavigate();
   const { addToast } = useToasts();
@@ -91,8 +93,12 @@ const LoginPage = () => {
         </span>
 
         <div className="loginPage__loginContainer__oAuthOptions">
-          <img src={googleLogo} alt="" />
-          <img src={githubLogo} alt="" />
+          <a href={`${baseUrl}/user/login/google`}>
+            <img src={googleLogo} alt="" />
+          </a>
+          <a href="">
+            <img src={githubLogo} alt="" />
+          </a>        
         </div>
 
         <span className="loginPage__loginContainer__reset">

@@ -160,6 +160,10 @@
 
         display: flex;
         gap: 2.093rem;
+        a:hover{
+            cursor: pointer;
+        }
+        
     }
 
     &__login, &__reset{

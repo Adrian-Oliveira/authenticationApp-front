@@ -80,8 +80,12 @@ export default {
 
       return true
 
-    } catch (err) {
+    } catch (err: any) {
       console.error(err)
+      if(err.status === 401){
+        // Navigate to another page
+        window.location.href = '/' ;
+      }
       return false
     }
   },
@@ -112,8 +116,12 @@ export default {
 
       return {... res.data}
 
-    } catch (err) {
+    } catch (err:any) {
       console.error(err)
+      if(err.status === 401){
+        // Navigate to another page
+        window.location.href = '/' ;
+      }
       throw err;
     }
   },
