@@ -6,7 +6,6 @@ import { CSSProperties } from "react";
 
 
 const Loading = ({loading}:{loading:boolean})=> {
-    console.log(loading)
     if(!loading){
         return (<></>)
     }

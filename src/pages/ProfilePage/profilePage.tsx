@@ -7,6 +7,7 @@ import { useState } from 'react';
 import { useMutation, useQueries, useQuery } from '@tanstack/react-query';
 import api from '../../core/api';
 import { setLogged,setUser } from '../../redux/user/userSlice';
+import Loading from '../../components/Loading';
 
 
 const ProfilePage = ()=> {
@@ -19,7 +20,7 @@ const ProfilePage = ()=> {
     })
 
    if(isPending){
-    return <div>fetching your data ...</div>
+    return <Loading loading={isPending}/>
    }
    if(error){
     

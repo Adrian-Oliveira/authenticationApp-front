@@ -12,7 +12,7 @@ import { DetailedHTMLProps, ImgHTMLAttributes } from 'react';
 
 import { QRCode } from 'qrcode';
 
-
+import Loading from '../../components/Loading';
 
 const Register2FAPage = ()=> {
    
@@ -23,6 +23,8 @@ const Register2FAPage = ()=> {
     const queryClient = useQueryClient();
 
     const [totp, setTotp] = useState<string>('');
+
+    const [loading, setLoading] = useState<boolean>(false);
 
     const { isPending, isError, data, error , isSuccess} = useQuery({
         queryKey: ['2fa'],
@@ -73,11 +75,7 @@ const Register2FAPage = ()=> {
 
 
     if(isPending){
-        return (
-            <>
-                <div>Loading ...</div>
-            </>
-        );
+        return <Loading loading={true} />
     }
 
     if(isError){
@@ -93,6 +91,7 @@ const Register2FAPage = ()=> {
             <>
                 <TopNav/>
                 <div className='register2FA'>
+                    
                     <Link to='/profile' className='register2FA__back'>
                         <i className="material-symbols-outlined">
                             arrow_back_ios

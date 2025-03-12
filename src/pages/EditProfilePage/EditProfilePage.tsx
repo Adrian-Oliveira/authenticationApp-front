@@ -9,6 +9,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import { DetailedHTMLProps, ImgHTMLAttributes } from "react";
+import Loading from "../../components/Loading";
 
 const EditProfilePage = () => {
 
@@ -23,6 +24,8 @@ const EditProfilePage = () => {
   const [bio, setBio] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   const [imageData, setImageData] = useState<Uint8Array | null>(null);
 
   const { isPending, isError, data, error, isSuccess } = useQuery({
@@ -31,11 +34,7 @@ const EditProfilePage = () => {
   });
 
   if (isPending) {
-    return (
-      <>
-        <div>Loading ...</div>
-      </>
-    );
+    return <Loading loading = {true}/>;
   }
 
   useEffect(() => {
@@ -53,22 +52,25 @@ const EditProfilePage = () => {
       phone: String;
       photo: Uint8Array | null;
       base64Image:String;
-    }) => api.putUserProfile(user.name, user.bio, user.phone, user.photo),
+    }) => {
+      setLoading(true)
+      return api.putUserProfile(user.name, user.bio, user.phone, user.photo)},
     onMutate: async(newUser)=>{
       // Cancel any outgoing refetches
       // (so they don't overwrite our optimistic update)
+      
+
       await queryClient.cancelQueries({ queryKey: ['userData'] })
 
-    // Snapshot the previous value
-    const previousUser = queryClient.getQueryData(['userData'])
-    console.log(previousUser)
-    // Optimistically update to the new value
-    queryClient.setQueryData(['userData'],{...newUser, email:previousUser.email})
-    
-    navigate("/profile");
-    
-    // Return a context with the previous and new todo
-    return { previousUser, newUser }
+      // Snapshot the previous value
+      const previousUser = queryClient.getQueryData(['userData'])
+      // Optimistically update to the new value
+      queryClient.setQueryData(['userData'],{...newUser, email:previousUser.email})
+      
+      navigate("/profile");
+      
+      // Return a context with the previous and new todo
+      return { previousUser, newUser }
     },
     onError: (error, variables, context) => {
       // An error happened!
@@ -83,14 +85,18 @@ const EditProfilePage = () => {
         ['todos'],
         context?.previousUser,
       )
+      setLoading(false)
     },
     onSuccess(data, variables, context) {
       addToast(`${data.data.message}`, { appearance: "success" });
       queryClient.invalidateQueries({ queryKey: ["userData"] }),
+      setLoading(false)
       navigate("/profile");
+
     },
     onSettled: (newUser)=>{
       queryClient.invalidateQueries({ queryKey: ['userData'] })
+      setLoading(false)
       navigate("/profile");
     }
   });
@@ -137,6 +143,7 @@ const EditProfilePage = () => {
           Back
         </Link>
         <div className="editProfilePage__edit">
+          <Loading loading={loading}/>
           <div className="editProfilePage__edit__titles">
             <h1 className="editProfilePage__edit__title">Change Info</h1>
             <h2 className="editProfilePage__edit__subtitle">
