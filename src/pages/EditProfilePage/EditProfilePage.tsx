@@ -41,8 +41,7 @@ const EditProfilePage = () => {
     setName(data.name);
     setBio(data.bio);
     setPhone(data.phone);
-    setImageData(data.photo);
-    setPhotoBase64Image(data.base64Image);
+    setPhotoBase64Image('');
   }, [data]);
 
   const updateUserProfile = useMutation({
@@ -87,7 +86,7 @@ const EditProfilePage = () => {
       )
       setLoading(false)
     },
-    onSuccess(data, variables, context) {
+    onSuccess:(data, variables, context)=> {
       addToast(`${data.data.message}`, { appearance: "success" });
       queryClient.invalidateQueries({ queryKey: ["userData"] }),
       setLoading(false)
@@ -96,6 +95,7 @@ const EditProfilePage = () => {
     },
     onSettled: (newUser)=>{
       queryClient.invalidateQueries({ queryKey: ['userData'] })
+     
       setLoading(false)
       navigate("/profile");
     }
@@ -115,23 +115,6 @@ const EditProfilePage = () => {
 
     reader.readAsDataURL(file);
 
-    const reader2 = new FileReader();
-
-    reader2.onload = () => {
-      if (reader2.result instanceof ArrayBuffer) {
-        const arrayBuffer = reader2.result;
-        const uint8Array = new Uint8Array(arrayBuffer);
-        setImageData(uint8Array); // Update the useState variable
-      } else {
-        console.error("Unexpected file reading result:", reader2.result);
-      }
-    };
-
-    reader2.onerror = (error) => {
-      console.error("Error reading file:", error);
-    };
-
-    reader2.readAsArrayBuffer(file);
   };
 
   return (

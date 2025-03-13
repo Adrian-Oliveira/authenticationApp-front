@@ -95,15 +95,19 @@ export default {
 
       return true
 
-    } catch (err) {
+    } catch (err:any) {
       console.error(err)
-      throw err;
+      if(err.status === 401){
+        // Navigate to another page
+        window.location.href = '/' ;
+      }
+      return false
     }
   },
   getUserProfile: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/profile`);
-      if(res.data.photo){
+      /* if(res.data.photo){
 
         const imageDataArray = res.data.photo.data.map((n:number)=>String.fromCharCode(n)).join('').split(',')
         imageDataArray[0].replace("{", "")
@@ -111,7 +115,7 @@ export default {
         const decodedStringImageData = imageDataArray.map((pair:string)=>String.fromCharCode(parseInt(pair.split(':')[1])))
         let base64Image = btoa(decodedStringImageData.join(''))
         return {... res.data, base64Image:`data:image/png;base64,${base64Image}`};
-      }
+      } */
       console.log(res.data)
 
       return {... res.data}
@@ -140,8 +144,12 @@ export default {
         photo
       });
       return res;
-    } catch (err) {
+    } catch (err:any) {
       console.error(err)
+      if(err.status === 401){
+        // Navigate to another page
+        window.location.href = '/' ;
+      }
       throw err;
     }
   },

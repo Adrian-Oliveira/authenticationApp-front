@@ -96,7 +96,7 @@ const LoginPage = () => {
           <a href={`${baseUrl}/user/login/google`}>
             <img src={googleLogo} alt="" />
           </a>
-          <a href="">
+          <a href={`${baseUrl}/user/login/github`}>
             <img src={githubLogo} alt="" />
           </a>        
         </div>
