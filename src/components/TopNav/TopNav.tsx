@@ -74,7 +74,7 @@ const TopNav = ()=> {
 
             <div className="topNav__menu" ref={menuRef} >
                 <div className='topNav__profile'>
-                    <img src={data?.base64Image} alt=""  className='topNav__profile__image' style={{width:'3.2rem', height:'3.2rem'}} />
+                    <img src={data?.base64Photo} alt=""  className='topNav__profile__image' style={{width:'3.2rem', height:'3.2rem'}} />
                     <p className='topNav__profile__name'>{user.name}</p>
 
                     {openPopup? 
