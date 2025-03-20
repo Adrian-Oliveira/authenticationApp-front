@@ -26,7 +26,7 @@ const EditProfilePage = () => {
 
   const [loading, setLoading] = useState<boolean>(false)
 
-  const [imageData, setImageData] = useState<Uint8Array | null>(null);
+  const [imageData, setImageData] = useState<any>(null);
 
   const { isPending, isError, data, error, isSuccess } = useQuery({
     queryKey: ["userData"],
@@ -41,15 +41,16 @@ const EditProfilePage = () => {
     setName(data.name);
     setBio(data.bio);
     setPhone(data.phone);
+    setImageData(data.photo);
     setPhotoBase64Image('');
   }, [data]);
 
   const updateUserProfile = useMutation({
     mutationFn: (user: {
-      name: String;
-      bio: String;
-      phone: String;
-      photo: Uint8Array | null;
+      name: string;
+      bio: string;
+      phone: string;
+      photo: any;
       base64Image:String;
     }) => {
       setLoading(true)
@@ -103,6 +104,7 @@ const EditProfilePage = () => {
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files[0];
+    
     if (!file) {
       return; // Handle potential error or no file selected
     }
@@ -114,7 +116,7 @@ const EditProfilePage = () => {
     };
 
     reader.readAsDataURL(file);
-
+    setImageData(file)
   };
 
   return (

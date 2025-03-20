@@ -107,16 +107,6 @@ export default {
   getUserProfile: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/profile`);
-      /* if(res.data.photo){
-
-        const imageDataArray = res.data.photo.data.map((n:number)=>String.fromCharCode(n)).join('').split(',')
-        imageDataArray[0].replace("{", "")
-        imageDataArray[imageDataArray.length -1].replace("}", "")
-        const decodedStringImageData = imageDataArray.map((pair:string)=>String.fromCharCode(parseInt(pair.split(':')[1])))
-        let base64Image = btoa(decodedStringImageData.join(''))
-        return {... res.data, base64Image:`data:image/png;base64,${base64Image}`};
-      } */
-      console.log(res.data)
 
       return {... res.data}
 
@@ -130,19 +120,27 @@ export default {
     }
   },
   putUserProfile: async (
-    name: String,
-    bio: String,
-    phone: String,
-    photo: Uint8Array|null 
+    name: string,
+    bio: string,
+    phone: string,
+    photo: any
   ) => {
     try {
+      const form = new FormData()
+      form.append('name',name)
+      form.append('bio',bio)
+      form.append('phone',phone)
+      if(photo.size !== undefined){
+        form.append('photo',photo)
 
-      const res = await axios.put(`${baseUrl}/user/profile`, {
-        name,
-        bio,
-        phone,
-        photo
+      }
+
+      const res = await axios.put(`${baseUrl}/user/profile`, form, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
       });
+
       return res;
     } catch (err:any) {
       console.error(err)
