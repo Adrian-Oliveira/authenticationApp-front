@@ -132,7 +132,6 @@ export default {
       form.append('phone',phone)
       if(photo.size !== undefined){
         form.append('photo',photo)
-
       }
 
       const res = await axios.put(`${baseUrl}/user/profile`, form, {

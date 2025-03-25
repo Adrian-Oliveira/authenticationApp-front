@@ -23,9 +23,9 @@ const ProfilePage = ()=> {
     return <Loading loading={isPending}/>
    }
    if(error){
-    
     return <div>error</div>
    }
+
    
    
     
@@ -92,7 +92,14 @@ const ProfilePage = ()=> {
                             {data.email}
                         </p>
                     </div>
-
+                    <div className="profilePage__profile__item">
+                        <div className="label">
+                            CREATED AT
+                        </div>
+                        <p className="data">
+                            {new Date(data.createdAt).toLocaleString()}
+                        </p>
+                    </div>
                 </div>         
             </div>
         </>
