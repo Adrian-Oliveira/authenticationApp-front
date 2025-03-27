@@ -12,7 +12,9 @@ const Loading = ({loading}:{loading:boolean})=> {
     else{
 
         return(
-            <div className='loading'>
+            <div 
+            data-test-id="loading-element"
+            className='loading'>
             <BarLoader
                 loading={loading}
                 color={"white"}

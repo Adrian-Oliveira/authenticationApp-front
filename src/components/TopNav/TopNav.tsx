@@ -69,7 +69,9 @@ const TopNav = ()=> {
 
 
     return(
-        <div className='topNav'>
+        <div 
+        data-test-id="profile-navbar"
+        className='topNav'>
             <img className='topNav__logo' src={devChallengeLogoAndName}/>
 
             <div className="topNav__menu" ref={menuRef} >

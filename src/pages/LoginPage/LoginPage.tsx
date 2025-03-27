@@ -80,6 +80,7 @@ const LoginPage = () => {
         </label>
 
         <button
+          data-test-id="login-button"
           className="loginPage__loginContainer__loginButton"
           onClick={() => {
             loginWithEmailAndPass.mutate({ email, pass, totp });

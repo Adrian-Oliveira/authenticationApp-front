@@ -54,7 +54,7 @@ const ProfilePage = ()=> {
                             PHOTO
                         </div>
 
-                        <img alt="" className='image' src={data.base64Photo}
+                        <img data-test-id="profile-image" alt="" className='image' src={data.base64Photo}
                             style={{width:'7.2rem', height:'7.2rem'}}
                         />
 
@@ -63,40 +63,55 @@ const ProfilePage = ()=> {
                         <div className="label">
                             NAME
                         </div>
-                        <p className="data">
+                        <p 
+                        data-test-id="profile-name"
+                        className="data">
                             {data.name ? data.name: ''}
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
-                        <div className="label">
+                        <div 
+                        className="label">
                             BIO
                         </div>
-                        <p className="data">
+                        <p 
+                        data-test-id="profile-bio" 
+                        
+                        className="data">
                             {data.bio}
 
                         </p>
                     </div>
                     <div className="profilePage__profile__item">
-                        <div className="label">
+                        <div 
+                        className="label">
                             PHONE
                         </div>
-                        <p className="data">
+                        <p 
+                        data-test-id="profile-phone"
+                        className="data">
                             {data.phone}
                         </p>
                     </div>
-                    <div className="profilePage__profile__item">
+                    <div 
+                    className="profilePage__profile__item">
                         <div className="label">
                             EMAIL
                         </div>
-                        <p className="data">
+                        <p 
+                        data-test-id="profile-email"
+                        className="data">
                             {data.email}
                         </p>
                     </div>
-                    <div className="profilePage__profile__item">
+                    <div 
+                    className="profilePage__profile__item">
                         <div className="label">
                             CREATED AT
                         </div>
-                        <p className="data">
+                        <p 
+                        data-test-id="profile-createAt"
+                        className="data">
                             {new Date(data.createdAt).toLocaleString()}
                         </p>
                     </div>
