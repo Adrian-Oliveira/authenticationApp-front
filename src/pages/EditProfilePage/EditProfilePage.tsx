@@ -31,19 +31,18 @@ const EditProfilePage = () => {
   const { isPending, isError, data, error, isSuccess } = useQuery({
     queryKey: ["userData"],
     queryFn: api.getUserProfile,
+    staleTime: Infinity,
   });
-
-  if (isPending) {
-    return <Loading loading = {true}/>;
-  }
-
+  
   useEffect(() => {
-    setName(data.name);
-    setBio(data.bio);
-    setPhone(data.phone);
-    setImageData(data.photo);
-    setPhotoBase64Image('');
-  }, [data]);
+    if(isSuccess){
+      setName(data.name);
+      setBio(data.bio);
+      setPhone(data.phone);
+      setImageData(data.photo);
+      setPhotoBase64Image('');
+    }
+  }, [data, isSuccess]);
 
   const updateUserProfile = useMutation({
     mutationFn: (user: {
@@ -101,7 +100,7 @@ const EditProfilePage = () => {
       navigate("/profile");
     }
   });
-
+  
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files[0];
     
@@ -118,6 +117,11 @@ const EditProfilePage = () => {
     reader.readAsDataURL(file);
     setImageData(file)
   };
+
+  if (isPending) {
+    return <Loading loading = {true}/>;
+  }
+
 
   return (
     <>
@@ -143,7 +147,10 @@ const EditProfilePage = () => {
                 src={photoBase64Image}
                 style={{ width: "7.2rem", height: "7.2rem" }}
               />
-              <input type="file" onChange={handleFileChange} />
+              <input 
+              data-test-id="edit-photo"
+              type="file"
+              onChange={handleFileChange} />
               <i className="material-icons">photo_camera</i>
             </div>
             <p className="editProfilePage__edit__photoInput__text">
@@ -156,6 +163,7 @@ const EditProfilePage = () => {
               <div className="editProfilePage__edit__inputName">Name</div>
               <input
                 className="editProfilePage__edit__inputValue"
+                data-test-id="edit-name"
                 defaultValue={name}
                 onChange={(e) => setName(e.target.value)}
                 type="text"
@@ -168,6 +176,7 @@ const EditProfilePage = () => {
             <label className="editProfilePage__edit__input">
               <div className="editProfilePage__edit__inputName">Bio</div>
               <textarea
+                data-test-id="edit-bio"
                 className="editProfilePage__edit__inputValue"
                 onChange={(e) => setBio(e.target.value)}
                 defaultValue={bio}
@@ -182,6 +191,7 @@ const EditProfilePage = () => {
               <div className="editProfilePage__edit__inputName">Phone</div>
               <input
                 className="editProfilePage__edit__inputValue"
+                data-test-id="edit-phone"
                 onChange={(e) => setPhone(e.target.value)}
                 defaultValue={phone}
                 type="tel"

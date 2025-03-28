@@ -46,8 +46,10 @@ const ProfilePage = ()=> {
                             </p>
                         </div>
 
-                        <button className="profilePage__profile__header__editButton"
-                                onClick={()=>{navigate("/editProfile")}}>Edit</button>
+                        <button 
+                            data-test-id="profile-edit-button"
+                            className="profilePage__profile__header__editButton"
+                            onClick={()=>{navigate("/editProfile")}}>Edit</button>
                     </div>
                     <div className="profilePage__profile__item">
                         <div className="label">
