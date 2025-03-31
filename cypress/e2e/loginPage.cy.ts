@@ -153,28 +153,89 @@ describe('e2e', () => {
         },
       }
     )
-    
+
     cy.visit(Cypress.env('frontEndUrl')+'/editProfile')
     
-/*     cy.wait(5000)
- */
-
     cy.get('[data-test-id="edit-name"]')
     .should('exist')
-    .and('contain.value',"name" ) 
+    .and('contain.value',"name" )
+    
+    cy.get('[data-test-id="edit-name"]')
+    .clear()
+
+    cy.get('[data-test-id="edit-name"]')
+    .type('new name') 
+    .should('contain.value', 'new name')
 
     cy.get('[data-test-id="edit-bio"]')
     .should('exist')
     .and('contain.text',"bio" ) 
     
+    cy.get('[data-test-id="edit-bio"]')
+    .clear({force:true})
+
+    cy.get('[data-test-id="edit-bio"]')
+    .type('new bio', {force: true}) 
+
+    cy.get('[data-test-id="edit-bio"]')
+    .should('contain.value', 'new bio')
+
     cy.get('[data-test-id="edit-phone"]')
     .should('exist')
-    .and('contain.value',"999999999999" ) 
-    
-/*     cy.fixture('profileImage.jpg')
-    .then((fileContent) => {
-      cy.get('[data-test-id="edit-photo"]').selectFile(fileContent)
-    }) */
-  })
+    .and('contain.value',"999999999999" )
 
+    cy.get('[data-test-id="edit-phone"]')
+    .clear()
+  
+    cy.get('[data-test-id="edit-phone"]')
+    .type('888888888888', {force: true}) 
+
+    cy.get('[data-test-id="edit-phone"]')
+    .should('contain.value', '888888888888')
+    
+    cy.get('[data-test-id="edit-photo"]')
+    .selectFile('./cypress/fixtures/profileImage.jpg',{force: true})
+
+    cy.get('[data-test-id="edit-button"]')
+    .click()
+
+    cy.url().should('match', /profile/i)
+
+    cy.get('[data-test-id="profile-name"]')
+    .should('exist')
+    .and('contain.text',"new name" ) 
+
+    cy.get('[data-test-id="profile-bio"]')
+    .should('exist')
+    .and('contain.text',"new bio" ) 
+
+    cy.get('[data-test-id="profile-phone"]')
+    .should('exist')
+    .and('contain.text',"888888888888" ) 
+
+    cy.intercept(
+      'PUT',
+      `${Cypress.env('backEndUrl')}/user/profile`,
+      {
+        statusCode: 200,
+        body: {
+          name:"new name",
+          email:"email@email.com",
+          phone:"888888888888",
+          bio:"new bio",
+          createdAt:1743116094402
+        },
+      }
+    )
+
+    
+
+  })
+  it('Profile after editing', ()=>{
+    cy.url().should('match', /profile/)
+    cy.get('[data-test-id="profile-name"]')
+    .should('exist')
+    .and('contain.text',"new name" ) 
+
+  })
 })

@@ -64,7 +64,7 @@ const EditProfilePage = () => {
       // Snapshot the previous value
       const previousUser = queryClient.getQueryData(['userData'])
       // Optimistically update to the new value
-      queryClient.setQueryData(['userData'],{...newUser, email:previousUser.email})
+      queryClient.setQueryData(['userData'],{...newUser, email:previousUser.email, createdAt: previousUser.createdAt})
       
       navigate("/profile");
       
@@ -187,11 +187,12 @@ const EditProfilePage = () => {
               ></textarea>
             </label>
 
-            <label className="editProfilePage__edit__input">
+            <label 
+            className="editProfilePage__edit__input">
               <div className="editProfilePage__edit__inputName">Phone</div>
               <input
-                className="editProfilePage__edit__inputValue"
                 data-test-id="edit-phone"
+                className="editProfilePage__edit__inputValue"
                 onChange={(e) => setPhone(e.target.value)}
                 defaultValue={phone}
                 type="tel"
@@ -203,6 +204,7 @@ const EditProfilePage = () => {
 
             <button
               className="editProfilePage__edit__button"
+              data-test-id="edit-button"
               onClick={() =>
                 updateUserProfile.mutate({ name, bio, phone, photo: imageData, base64Image:photoBase64Image})
               }
