@@ -103,7 +103,9 @@ const Register2FAPage = ()=> {
                         <div className='register2FA__edit__textInputs'>
     
                             <label className='register2FA__edit__input'>
-                                <input className='register2FA__edit__inputValue'
+                                <input 
+                                className='register2FA__edit__inputValue'
+                                data-test-id="2fa-input"
                                 defaultValue={totp}
                                 onChange={(e)=>setTotp(e.target.value)}
                                 type="text" name="" id="" placeholder='Enter the code...' 
@@ -111,7 +113,10 @@ const Register2FAPage = ()=> {
                                 />
                             </label>                             
     
-                            <button className='register2FA__edit__button--red' onClick={()=>disable2FA.mutate({totp})}>Disable 2FA</button>
+                            <button 
+                            className='register2FA__edit__button--red' 
+                            data-test-id="2fa-disableButton"
+                            onClick={()=>disable2FA.mutate({totp})}>Disable 2FA</button>
                         </div>
     
                     </div>
@@ -134,14 +139,20 @@ const Register2FAPage = ()=> {
                 <div className="register2FA__edit">
 
                     <h3>Scan the QR code</h3>
-                    <img src={data?.qrCodeDataUrl} className="register2FA__edit__qrcode" alt="Qr code" />
+                    <img 
+                    className="register2FA__edit__qrcode" 
+                    data-test-id="2fa-qrcode"
+                    src={data?.qrCodeDataUrl}
+                    alt="Qr code" />
                     <h3>Or use the secret in your authentication app:</h3>
                     <p>{data?.secret32}</p>
                     <div className='register2FA__edit__textInputs'>
 
                         <label className='register2FA__edit__input'>
                             <div className='register2FA__edit__inputName'>Scan the QR Code</div>
-                            <input className='register2FA__edit__inputValue'
+                            <input 
+                            className='register2FA__edit__inputValue'
+                            data-test-id="2fa-input"
                             defaultValue={totp}
                             onChange={(e)=>setTotp(e.target.value)}
                             type="text" name="" id="" placeholder='Enter the code...' 
@@ -152,6 +163,7 @@ const Register2FAPage = ()=> {
 
                         <button 
                             className='register2FA__edit__button'
+                            data-test-id="2fa-enableButton"
                             onClick={()=>enable2FA.mutate({totp})}
                             >
                                 Register

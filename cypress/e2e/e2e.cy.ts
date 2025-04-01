@@ -129,7 +129,7 @@ describe('e2e', () => {
     cy.url().should('match', /edit/i)
   })
 
-  it.only("Edit page", ()=>{
+  it("Edit page", ()=>{
 
     cy.intercept(
       'GET',
@@ -231,11 +231,74 @@ describe('e2e', () => {
     
 
   })
-  it('Profile after editing', ()=>{
-    cy.url().should('match', /profile/)
-    cy.get('[data-test-id="profile-name"]')
+
+  it('2FA Page to disable 2fa', ()=>{
+    cy.visit(Cypress.env('frontEndUrl')+'/registerTwoFA')  
+
+    
+    cy.intercept(
+      'GET',
+      `${Cypress.env('backEndUrl')}/user/logged`,
+      {
+        statusCode: 200,
+      }
+    )
+
+    cy.intercept(
+      'GET',
+      `${Cypress.env('backEndUrl')}/user/twofactor`,
+      {
+        statusCode: 200,
+        body: {
+          alreadyHave2FA:true
+        },
+      }
+    )
+
+    
+    cy.get('[data-test-id="2fa-input"]')
     .should('exist')
-    .and('contain.text',"new name" ) 
+
+    cy.get('[data-test-id="2fa-disableButton"]')
+    .should('exist')
+
+  })
+
+  it.only('2FA Page to enable 2fa', ()=>{
+    cy.visit(Cypress.env('frontEndUrl')+'/registerTwoFA')  
+    
+    cy.intercept(
+      'GET',
+      `${Cypress.env('backEndUrl')}/user/logged`,
+      {
+        statusCode: 200,
+      }
+    )
+
+    cy.intercept(
+      'GET',
+      `${Cypress.env('backEndUrl')}/user/twofactor`,
+      {
+        statusCode: 200,
+        body: {
+          alreadyHave2FA:false,
+          secret32:'11111111'
+        },
+      }
+    ).as('getTwoFactor')
+
+    cy.wait('@getTwoFactor')
+
+    cy.get('[data-test-id="2fa-qrcode"]')
+    .should('exist')
+    
+    cy.get('[data-test-id="2fa-input"]')
+    .should('exist')
+
+    cy.get('[data-test-id="2fa-enableButton"]')
+    .should('exist')
+
+
 
   })
 })
