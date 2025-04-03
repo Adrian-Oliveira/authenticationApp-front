@@ -5,7 +5,7 @@ import api from "./api";
 const PrivateRoutes=() =>{
     
 
-    const { isPending, isError, data, error } = useQuery({
+    const { isPending, isError} = useQuery({
         queryKey: ['isLogged'],
         queryFn: api.getIsLogged,
         

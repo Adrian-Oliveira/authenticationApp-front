@@ -4,13 +4,10 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import api from '../../core/api';
 
-import { useAppSelector } from '../../core/hooks';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { useToasts } from 'react-toast-notifications';
 import { useQueryClient,useMutation, useQuery } from '@tanstack/react-query';
-import { DetailedHTMLProps, ImgHTMLAttributes } from 'react';
 
-import { QRCode } from 'qrcode';
 
 import Loading from '../../components/Loading';
 
@@ -24,16 +21,14 @@ const Register2FAPage = ()=> {
 
     const [totp, setTotp] = useState<string>('');
 
-    const [loading, setLoading] = useState<boolean>(false);
-
-    const { isPending, isError, data, error , isSuccess} = useQuery({
+    const { isPending, isError, data} = useQuery({
         queryKey: ['2fa'],
         queryFn: api.getUserTwoFactor,
     })
 
     
     const disable2FA = useMutation({
-        mutationFn: (user:{totp:String}) =>
+        mutationFn: (user:{totp:string}) =>
           api.delUserTwoFactor(user.totp),
         onError: (error, variables, context) => {
             // An error happened!
@@ -53,7 +48,7 @@ const Register2FAPage = ()=> {
 
     
     const enable2FA = useMutation({
-        mutationFn: (user: { totp: String}) =>
+        mutationFn: (user: { totp: string}) =>
           api.postUserTwoFactor(user.totp),
         onError: (error, variables, context) => {
             // An error happened!

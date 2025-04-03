@@ -9,10 +9,10 @@ export const Step1 = ()=>{
 
     const { addToast } = useToasts();
 
-    const [email, setEmail] = useState<String>('')
+    const [email, setEmail] = useState<string>('')
 
     const generateToken2ResetPassword = useMutation({
-        mutationFn: (user:{email: String})=> api.postGenerateTokenToResetPassword(user.email),
+        mutationFn: (user:{email: string})=> api.postGenerateTokenToResetPassword(user.email),
         onError: (error, variables, context) => {
             // An error happened!
             const msg = error.response?.data.message ? error.response.data.message: error.message ;

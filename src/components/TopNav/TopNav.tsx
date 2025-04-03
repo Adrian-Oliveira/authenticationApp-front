@@ -1,9 +1,7 @@
 import './topNav.scss'
 import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
 
-import { useAppDispatch, useAppSelector } from '../../core/hooks';
-import { setLogged, setUser, removeUser } from '../../redux/user/userSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import api from '../../core/api';
@@ -12,9 +10,7 @@ import { useToasts } from 'react-toast-notifications';
 import twoFAicon from '../../assets/mdi--two-factor-authentication.svg'
 
 const TopNav = ()=> {
-    const dispatch = useAppDispatch();
     const navigate = useNavigate();
-
 
 
     const { data } = useQuery({
@@ -23,10 +19,9 @@ const TopNav = ()=> {
         
     })
 
-    const user =  useAppSelector(store=>store.user)
     const [openPopup, setOpenPopup] = useState(false)
-    let popupRef = useRef<HTMLDivElement>(null)
-    let menuRef = useRef<HTMLDivElement>(null)
+    const popupRef = useRef<HTMLDivElement>(null)
+    const menuRef = useRef<HTMLDivElement>(null)
 
 
     const { addToast } = useToasts();
@@ -77,7 +72,7 @@ const TopNav = ()=> {
             <div className="topNav__menu" ref={menuRef} >
                 <div className='topNav__profile'>
                     <img src={data?.base64Photo} alt=""  className='topNav__profile__image' style={{width:'3.2rem', height:'3.2rem'}} />
-                    <p className='topNav__profile__name'>{user.name}</p>
+                    <p className='topNav__profile__name'>{data.name}</p>
 
                     {openPopup? 
                     <i className='topNav__profile__icon' >

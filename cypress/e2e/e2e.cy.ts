@@ -298,7 +298,5 @@ describe('e2e', () => {
     cy.get('[data-test-id="2fa-enableButton"]')
     .should('exist')
 
-
-
   })
 })

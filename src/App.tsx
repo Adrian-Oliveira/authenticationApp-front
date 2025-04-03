@@ -12,7 +12,6 @@ import Register2FAPage from './pages/Register2FA';
 
 import { Step1 } from './pages/ResetPasswordPage/Step1';
 import { Step2 } from './pages/ResetPasswordPage/Step2';
-import { Step3 } from './pages/ResetPasswordPage/Step3';
 
 function App() {
 

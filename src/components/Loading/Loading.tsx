@@ -1,7 +1,6 @@
 import './loading.scss'
 
 import { BarLoader } from "react-spinners";
-import { CSSProperties } from "react";
 
 
 

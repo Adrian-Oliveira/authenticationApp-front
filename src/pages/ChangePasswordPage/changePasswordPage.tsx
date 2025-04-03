@@ -19,7 +19,7 @@ const ChangePasswordPage = ()=> {
     const navigate = useNavigate()
 
     const updatePassword = useMutation({
-        mutationFn: (user: { newPassword: String; repeatNewPassword: String }) =>
+        mutationFn: (user: { newPassword: string; repeatNewPassword: string }) =>
             api.postNewPasswordWithJwtToken(user.newPassword,user.repeatNewPassword),
         onError: (error, variables, context) => {
           // An error happened!

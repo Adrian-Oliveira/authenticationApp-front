@@ -2,18 +2,15 @@ import './profilePage.scss'
 import TopNav from '../../components/TopNav';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppSelector, useAppDispatch } from '../../core/hooks';
-import { useState } from 'react';
-import { useMutation, useQueries, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import api from '../../core/api';
-import { setLogged,setUser } from '../../redux/user/userSlice';
 import Loading from '../../components/Loading';
 
 
 const ProfilePage = ()=> {
 
     const navigate = useNavigate();
-    const { isPending, isError, data, error } = useQuery({
+    const { isPending, data, error } = useQuery({
         queryKey: ['userData'],
         queryFn: api.getUserProfile,
         staleTime: Infinity    

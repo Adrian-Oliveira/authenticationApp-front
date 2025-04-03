@@ -3,7 +3,7 @@ import devChallengeLogoAndName from "../../assets/devChallengeLogoAndName.svg";
 import googleLogo from "../../assets/Google.svg";
 import githubLogo from "../../assets/Github.svg";
 import { Link } from "react-router-dom";
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import api from "../../core/api";
 import { useState } from "react";
 import { useToasts } from "react-toast-notifications";
@@ -12,7 +12,7 @@ const RegisterPage = () => {
   const { addToast } = useToasts();
 
   const registerUserMutation = useMutation({
-    mutationFn: (user: { email: String; password: String }) =>
+    mutationFn: (user: { email: string; password: string }) =>
       api.postRegister(user.email, user.password),
     onError: (error, variables, context) => {
       // An error happened!
@@ -26,8 +26,8 @@ const RegisterPage = () => {
     },
   });
 
-  const [email, setEmail] = useState<String>("");
-  const [password, setPassword] = useState<String>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   return (
     <div className="registerPage">

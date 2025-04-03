@@ -1,11 +1,9 @@
 import './resetPasswordPage.scss'
 import devChallengeLogoAndName from '../../assets/devChallengeLogoAndName.svg'
-import { useState } from 'react';
-import { Outlet, useNavigate , Link} from 'react-router-dom';
+import { Outlet, Link} from 'react-router-dom';
 
 
 const ResetPasswordPage = ()=> {
-    const navigate = useNavigate();
 
     return(
         <div className='resetPasswordPage'>

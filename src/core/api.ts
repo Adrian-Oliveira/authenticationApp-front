@@ -3,7 +3,7 @@ import axios from "axios";
 import  QRCode  from "qrcode";
 axios.defaults.withCredentials = true
 export default {
-  delUserTwoFactor: async (totp:String) => {
+  delUserTwoFactor: async (totp:string) => {
     try {
       const res = await axios.delete(`${baseUrl}/user/twofactor`,{ data:{totp} });
       return res;
@@ -12,7 +12,7 @@ export default {
       throw err;
     }
   },
-  postUserTwoFactor: async (totp: String) => {
+  postUserTwoFactor: async (totp: string) => {
     try {
       const res = await axios.post(`${baseUrl}/user/twofactor`, { totp });
       return res;
@@ -37,7 +37,7 @@ export default {
       throw err;
     }
   },
-  postNewPasswordWithJwtToken: async (newPassword: String, repeatNewPassword:String) => {
+  postNewPasswordWithJwtToken: async (newPassword: string, repeatNewPassword:string) => {
     try {
       if(newPassword !== repeatNewPassword){
         throw new Error("New password and confirmation new password need to match.")
@@ -50,7 +50,7 @@ export default {
       throw err;
     }
   },
-  postGenerateTokenToResetPassword: async (email: String) => {
+  postGenerateTokenToResetPassword: async (email: string) => {
     try {
       const res = await axios.post(`${baseUrl}/resetPassword/generateToken`, {
         email,
@@ -60,7 +60,7 @@ export default {
       throw err;
     }
   },
-  postNewPasswordWithEmailToken: async (token: String, newPassword: String, confirmNewPassword:String) => {
+  postNewPasswordWithEmailToken: async (token: string, newPassword: string, confirmNewPassword:string) => {
     try {
       if(newPassword !== confirmNewPassword){
         throw new Error("New password and confirmation new password need to match. ")
@@ -151,9 +151,9 @@ export default {
     }
   },
   postUserLoginWithEmail: async (
-    email: String,
-    password: String,
-    totp: String 
+    email: string,
+    password: string,
+    totp: string 
   ) => {
 
     try {
@@ -167,7 +167,7 @@ export default {
       throw err;
     }
   },
-  postRegister: async (email: String, password: String) => {
+  postRegister: async (email: string, password: string) => {
     try {
       const now = new Date();
 

@@ -4,8 +4,6 @@ import googleLogo from "../../assets/Google.svg";
 import githubLogo from "../../assets/Github.svg";
 import { Link } from "react-router-dom";
 
-import { useAppDispatch } from "../../core/hooks";
-import { setLogged } from "../../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import api from "../../core/api";
 import { useMutation } from "@tanstack/react-query";
@@ -20,13 +18,13 @@ const baseUrl = import.meta.env.VITE_BACKEND_API_URL;
 const LoginPage = () => {
   const navigate = useNavigate();
   const { addToast } = useToasts();
-  const [email, setEmail] = useState<String>("");
-  const [pass, setPass] = useState<String>("");
-  const [totp, setTotp] = useState<String>("");
+  const [email, setEmail] = useState<string>("");
+  const [pass, setPass] = useState<string>("");
+  const [totp, setTotp] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false)
 
   const loginWithEmailAndPass = useMutation({
-    mutationFn: (user: { email: String; pass: String, totp:String }) =>{
+    mutationFn: (user: { email: string; pass: string, totp:string }) =>{
       setLoading(true)
       return api.postUserLoginWithEmail(user.email, user.pass, user.totp)
     },

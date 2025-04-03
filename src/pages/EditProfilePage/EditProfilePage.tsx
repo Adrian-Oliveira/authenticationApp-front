@@ -4,11 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 
 import api from "../../core/api";
 
-import { useAppSelector } from "../../core/hooks";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useToasts } from "react-toast-notifications";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
-import { DetailedHTMLProps, ImgHTMLAttributes } from "react";
 import Loading from "../../components/Loading";
 
 const EditProfilePage = () => {
@@ -28,7 +26,7 @@ const EditProfilePage = () => {
 
   const [imageData, setImageData] = useState<any>(null);
 
-  const { isPending, isError, data, error, isSuccess } = useQuery({
+  const { isPending, data, isSuccess } = useQuery({
     queryKey: ["userData"],
     queryFn: api.getUserProfile,
     staleTime: Infinity,
@@ -50,7 +48,7 @@ const EditProfilePage = () => {
       bio: string;
       phone: string;
       photo: any;
-      base64Image:String;
+      base64Image:string;
     }) => {
       setLoading(true)
       return api.putUserProfile(user.name, user.bio, user.phone, user.photo)},

@@ -11,12 +11,12 @@ export  const Step2 = ()=>{
     const { addToast } = useToasts();
 
 
-    const [token, setToken] = useState<String>('')
-    const [newPassword, setNewPassword] = useState<String>('')
-    const [confirmNewPassword, setConfirmNewPassword] = useState<String>('')
+    const [token, setToken] = useState<string>('')
+    const [newPassword, setNewPassword] = useState<string>('')
+    const [confirmNewPassword, setConfirmNewPassword] = useState<string>('')
 
     const changePassword = useMutation({
-        mutationFn: (user:{token:String, newPassword:String,confirmNewPassword:String })=> 
+        mutationFn: (user:{token:string, newPassword:string,confirmNewPassword:string })=> 
             api.postNewPasswordWithEmailToken(user.token,user.newPassword, user.confirmNewPassword),
         onError: (error, variables, context) => {
             // An error happened!
