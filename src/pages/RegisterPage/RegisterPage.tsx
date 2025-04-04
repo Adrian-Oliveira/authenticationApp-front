@@ -14,14 +14,14 @@ const RegisterPage = () => {
   const registerUserMutation = useMutation({
     mutationFn: (user: { email: string; password: string }) =>
       api.postRegister(user.email, user.password),
-    onError: (error, variables, context) => {
+    onError: (error: { response: any; message: any }) => {
       // An error happened!
       const msg = error.response?.data.message
         ? error.response.data.message
         : error.message;
       addToast(`${msg}`, { appearance: "error" });
     },
-    onSuccess(data, variables, context) {
+    onSuccess(data) {
       addToast(`${data.data.message}`, { appearance: "success" });
     },
   });

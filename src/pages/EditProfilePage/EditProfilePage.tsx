@@ -9,8 +9,15 @@ import { useToasts } from "react-toast-notifications";
 import { useQueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading";
 
-const EditProfilePage = () => {
+interface User {
+  name: string;
+  bio: string;
+  phone: string;
+  photo: any;
+  base64Image: string;
+}
 
+const EditProfilePage = () => {
   const { addToast } = useToasts();
 
   const navigate = useNavigate();
@@ -22,7 +29,7 @@ const EditProfilePage = () => {
   const [bio, setBio] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
 
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [imageData, setImageData] = useState<any>(null);
 
@@ -31,14 +38,14 @@ const EditProfilePage = () => {
     queryFn: api.getUserProfile,
     staleTime: Infinity,
   });
-  
+
   useEffect(() => {
-    if(isSuccess){
+    if (isSuccess) {
       setName(data.name);
       setBio(data.bio);
       setPhone(data.phone);
       setImageData(data.photo);
-      setPhotoBase64Image('');
+      setPhotoBase64Image("");
     }
   }, [data, isSuccess]);
 
@@ -48,28 +55,41 @@ const EditProfilePage = () => {
       bio: string;
       phone: string;
       photo: any;
-      base64Image:string;
+      base64Image: string;
     }) => {
-      setLoading(true)
-      return api.putUserProfile(user.name, user.bio, user.phone, user.photo)},
-    onMutate: async(newUser)=>{
+      setLoading(true);
+      return api.putUserProfile(user.name, user.bio, user.phone, user.photo);
+    },
+    //@ts-ignore
+    onMutate: async (newUser) => {
       // Cancel any outgoing refetches
       // (so they don't overwrite our optimistic update)
-      
 
-      await queryClient.cancelQueries({ queryKey: ['userData'] })
+      await queryClient.cancelQueries({ queryKey: ["userData"] });
 
       // Snapshot the previous value
-      const previousUser = queryClient.getQueryData(['userData'])
+      let previousUser: { email: string | null; createdAt: number | null };
+      previousUser = queryClient.getQueryData(["userData"]) ?? {
+        email: "",
+        createdAt: null,
+      };
       // Optimistically update to the new value
-      queryClient.setQueryData(['userData'],{...newUser, email:previousUser.email, createdAt: previousUser.createdAt})
-      
+      queryClient.setQueryData(["userData"], {
+        ...newUser,
+        email: previousUser.email,
+        createdAt: previousUser.createdAt,
+      });
+
       navigate("/profile");
-      
+
       // Return a context with the previous and new todo
-      return { previousUser, newUser }
+      return { previousUser, newUser };
     },
-    onError: (error, variables, context) => {
+    onError: (
+      error: { response: any; message: any },
+      _,
+      context: { previousUser: User } | undefined,
+    ) => {
       // An error happened!
       const msg = error.response?.data.message
         ? error.response.data.message
@@ -78,30 +98,26 @@ const EditProfilePage = () => {
       addToast(`${msg}`, { appearance: "error" });
 
       // undo the optimistic update if the request fail
-      queryClient.setQueryData(
-        ['todos'],
-        context?.previousUser,
-      )
-      setLoading(false)
+      queryClient.setQueryData(["todos"], context?.previousUser);
+      setLoading(false);
     },
-    onSuccess:(data, variables, context)=> {
+    onSuccess: (data) => {
       addToast(`${data.data.message}`, { appearance: "success" });
       queryClient.invalidateQueries({ queryKey: ["userData"] }),
-      setLoading(false)
+        setLoading(false);
       navigate("/profile");
-
     },
-    onSettled: (newUser)=>{
-      queryClient.invalidateQueries({ queryKey: ['userData'] })
-     
-      setLoading(false)
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey: ["userData"] });
+
+      setLoading(false);
       navigate("/profile");
-    }
+    },
   });
-  
+
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files[0];
-    
+    const file = event.target.files ? event.target.files[0] : false;
+
     if (!file) {
       return; // Handle potential error or no file selected
     }
@@ -113,13 +129,12 @@ const EditProfilePage = () => {
     };
 
     reader.readAsDataURL(file);
-    setImageData(file)
+    setImageData(file);
   };
 
   if (isPending) {
-    return <Loading loading = {true}/>;
+    return <Loading loading={true} />;
   }
-
 
   return (
     <>
@@ -130,7 +145,7 @@ const EditProfilePage = () => {
           Back
         </Link>
         <div className="editProfilePage__edit">
-          <Loading loading={loading}/>
+          <Loading loading={loading} />
           <div className="editProfilePage__edit__titles">
             <h1 className="editProfilePage__edit__title">Change Info</h1>
             <h2 className="editProfilePage__edit__subtitle">
@@ -145,10 +160,11 @@ const EditProfilePage = () => {
                 src={photoBase64Image}
                 style={{ width: "7.2rem", height: "7.2rem" }}
               />
-              <input 
-              data-test-id="edit-photo"
-              type="file"
-              onChange={handleFileChange} />
+              <input
+                data-test-id="edit-photo"
+                type="file"
+                onChange={handleFileChange}
+              />
               <i className="material-icons">photo_camera</i>
             </div>
             <p className="editProfilePage__edit__photoInput__text">
@@ -185,8 +201,7 @@ const EditProfilePage = () => {
               ></textarea>
             </label>
 
-            <label 
-            className="editProfilePage__edit__input">
+            <label className="editProfilePage__edit__input">
               <div className="editProfilePage__edit__inputName">Phone</div>
               <input
                 data-test-id="edit-phone"
@@ -204,7 +219,13 @@ const EditProfilePage = () => {
               className="editProfilePage__edit__button"
               data-test-id="edit-button"
               onClick={() =>
-                updateUserProfile.mutate({ name, bio, phone, photo: imageData, base64Image:photoBase64Image})
+                updateUserProfile.mutate({
+                  name,
+                  bio,
+                  phone,
+                  photo: imageData,
+                  base64Image: photoBase64Image,
+                })
               }
             >
               Save

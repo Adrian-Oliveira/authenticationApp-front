@@ -1,3 +1,3 @@
 import { ChangePasswordPage } from "./changePasswordPage";
 
-export default ChangePasswordPage; 
+export default ChangePasswordPage;

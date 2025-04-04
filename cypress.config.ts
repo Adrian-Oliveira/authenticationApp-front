@@ -7,7 +7,7 @@ export default defineConfig({
     },
   },
   env: {
-    frontEndUrl: ' http://localhost:5173/#',
-    backEndUrl: 'http://localhost:3000',
+    frontEndUrl: " http://localhost:5173/#",
+    backEndUrl: "http://localhost:3000",
   },
 });

@@ -1,14 +1,16 @@
 const baseUrl = import.meta.env.VITE_BACKEND_API_URL;
 import axios from "axios";
-import  QRCode  from "qrcode";
-axios.defaults.withCredentials = true
+import QRCode from "qrcode";
+axios.defaults.withCredentials = true;
 export default {
-  delUserTwoFactor: async (totp:string) => {
+  delUserTwoFactor: async (totp: string) => {
     try {
-      const res = await axios.delete(`${baseUrl}/user/twofactor`,{ data:{totp} });
+      const res = await axios.delete(`${baseUrl}/user/twofactor`, {
+        data: { totp },
+      });
       return res;
     } catch (err) {
-      console.log(err)
+      console.log(err);
       throw err;
     }
   },
@@ -17,7 +19,7 @@ export default {
       const res = await axios.post(`${baseUrl}/user/twofactor`, { totp });
       return res;
     } catch (err) {
-      console.error(err)
+      console.error(err);
       throw err;
     }
   },
@@ -25,22 +27,27 @@ export default {
     try {
       const res = await axios.get(`${baseUrl}/user/twofactor`);
 
-      if(res.data.alreadyHave2FA){
-        return {...res.data}
+      if (res.data.alreadyHave2FA) {
+        return { ...res.data };
       }
       // @ts-ignore
-      const qrCodeDataUrl = await QRCode.toDataURL(res.data.secret32)
-      return{ ...res.data, qrCodeDataUrl};
+      const qrCodeDataUrl = await QRCode.toDataURL(res.data.secret32);
+      return { ...res.data, qrCodeDataUrl };
     } catch (err) {
       console.error(err);
 
       throw err;
     }
   },
-  postNewPasswordWithJwtToken: async (newPassword: string, repeatNewPassword:string) => {
+  postNewPasswordWithJwtToken: async (
+    newPassword: string,
+    repeatNewPassword: string,
+  ) => {
     try {
-      if(newPassword !== repeatNewPassword){
-        throw new Error("New password and confirmation new password need to match.")
+      if (newPassword !== repeatNewPassword) {
+        throw new Error(
+          "New password and confirmation new password need to match.",
+        );
       }
       const res = await axios.post(`${baseUrl}/resetPassword/withJwtToken`, {
         newPassword,
@@ -60,10 +67,16 @@ export default {
       throw err;
     }
   },
-  postNewPasswordWithEmailToken: async (token: string, newPassword: string, confirmNewPassword:string) => {
+  postNewPasswordWithEmailToken: async (
+    token: string,
+    newPassword: string,
+    confirmNewPassword: string,
+  ) => {
     try {
-      if(newPassword !== confirmNewPassword){
-        throw new Error("New password and confirmation new password need to match. ")
+      if (newPassword !== confirmNewPassword) {
+        throw new Error(
+          "New password and confirmation new password need to match. ",
+        );
       }
       const res = await axios.post(`${baseUrl}/resetPassword/withEmailToken`, {
         token,
@@ -78,43 +91,40 @@ export default {
     try {
       await axios.get(`${baseUrl}/user/logged`);
 
-      return true
-
+      return true;
     } catch (err: any) {
-      console.error(err)
-      if(err.status === 401){
+      console.error(err);
+      if (err.status === 401) {
         // Navigate to another page
-        window.location.href = '/' ;
+        window.location.href = "/";
       }
-      return false
+      return false;
     }
   },
-  getLogout:async()=>{
+  getLogout: async () => {
     try {
       await axios.get(`${baseUrl}/user/logout`);
 
-      return true
-
-    } catch (err:any) {
-      console.error(err)
-      if(err.status === 401){
+      return true;
+    } catch (err: any) {
+      console.error(err);
+      if (err.status === 401) {
         // Navigate to another page
-        window.location.href = '/' ;
+        window.location.href = "/";
       }
-      return false
+      return false;
     }
   },
   getUserProfile: async () => {
     try {
       const res = await axios.get(`${baseUrl}/user/profile`);
 
-      return {... res.data}
-
-    } catch (err:any) {
-      console.error(err)
-      if(err.status === 401){
+      return { ...res.data };
+    } catch (err: any) {
+      console.error(err);
+      if (err.status === 401) {
         // Navigate to another page
-        window.location.href = '/' ;
+        window.location.href = "/";
       }
       throw err;
     }
@@ -123,29 +133,29 @@ export default {
     name: string,
     bio: string,
     phone: string,
-    photo: any
+    photo: any,
   ) => {
     try {
-      const form = new FormData()
-      form.append('name',name)
-      form.append('bio',bio)
-      form.append('phone',phone)
-      if(photo.size !== undefined){
-        form.append('photo',photo)
+      const form = new FormData();
+      form.append("name", name);
+      form.append("bio", bio);
+      form.append("phone", phone);
+      if (photo.size !== undefined) {
+        form.append("photo", photo);
       }
 
       const res = await axios.put(`${baseUrl}/user/profile`, form, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       });
 
       return res;
-    } catch (err:any) {
-      console.error(err)
-      if(err.status === 401){
+    } catch (err: any) {
+      console.error(err);
+      if (err.status === 401) {
         // Navigate to another page
-        window.location.href = '/' ;
+        window.location.href = "/";
       }
       throw err;
     }
@@ -153,9 +163,8 @@ export default {
   postUserLoginWithEmail: async (
     email: string,
     password: string,
-    totp: string 
+    totp: string,
   ) => {
-
     try {
       const res = await axios.post(`${baseUrl}/user/login`, {
         email,
@@ -177,7 +186,7 @@ export default {
       // Create a Date object with the specified timezone
       const dateWithTimezone = new Date(timestamp);
       dateWithTimezone.setMinutes(
-        dateWithTimezone.getMinutes() - dateWithTimezone.getTimezoneOffset()
+        dateWithTimezone.getMinutes() - dateWithTimezone.getTimezoneOffset(),
       );
 
       // Format the timestamp as ISO 8601 string with timezone

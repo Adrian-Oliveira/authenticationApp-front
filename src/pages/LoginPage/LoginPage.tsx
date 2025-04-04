@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { useToasts } from "react-toast-notifications";
 
-import twoFAicon from '../../assets/mdi--two-factor-authentication.svg'
+import twoFAicon from "../../assets/mdi--two-factor-authentication.svg";
 import Loading from "../../components/Loading";
 
 const baseUrl = import.meta.env.VITE_BACKEND_API_URL;
@@ -21,24 +21,23 @@ const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [pass, setPass] = useState<string>("");
   const [totp, setTotp] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(false);
 
   const loginWithEmailAndPass = useMutation({
-    mutationFn: (user: { email: string; pass: string, totp:string }) =>{
-      setLoading(true)
-      return api.postUserLoginWithEmail(user.email, user.pass, user.totp)
+    mutationFn: (user: { email: string; pass: string; totp: string }) => {
+      setLoading(true);
+      return api.postUserLoginWithEmail(user.email, user.pass, user.totp);
     },
-    onError: (error, variables, context) => {
-      setLoading(false)
+    onError: (error: { response: any; message: any }) => {
+      setLoading(false);
       // An error happened!
       const msg = error.response?.data.message
         ? error.response.data.message
         : error.message;
       addToast(`${msg}`, { appearance: "error" });
-
     },
-    onSuccess(data, variables, context) {
-      setLoading(false)
+    onSuccess(data) {
+      setLoading(false);
       addToast(`${data.data.message}`, { appearance: "success" });
       navigate("/profile");
     },
@@ -47,7 +46,7 @@ const LoginPage = () => {
   return (
     <div className="loginPage">
       <div data-test-id="login-container" className="loginPage__loginContainer">
-       <Loading loading={loading}/>
+        <Loading loading={loading} />
         <img
           className="loginPage__loginContainer__LogoAndName"
           src={devChallengeLogoAndName}
@@ -57,10 +56,17 @@ const LoginPage = () => {
         <h1 className="loginPage__loginContainer__title">Login</h1>
 
         <label className="loginPage__loginContainer__email">
-          <i  className="material-symbols-outlined loginPage__loginContainer__email__icon">
+          <i className="material-symbols-outlined loginPage__loginContainer__email__icon">
             mail
           </i>
-          <input data-test-id="login-mail" onChange={(e)=>setEmail(e.target.value)} type="email" name="" id="" placeholder="Email" />
+          <input
+            data-test-id="login-mail"
+            onChange={(e) => setEmail(e.target.value)}
+            type="email"
+            name=""
+            id=""
+            placeholder="Email"
+          />
         </label>
 
         <label className="loginPage__loginContainer__password">
@@ -68,13 +74,27 @@ const LoginPage = () => {
             lock
           </i>
 
-          <input data-test-id="login-password" onChange={(e)=>setPass(e.target.value)} type="password" name="" id="" placeholder="Password" />
+          <input
+            data-test-id="login-password"
+            onChange={(e) => setPass(e.target.value)}
+            type="password"
+            name=""
+            id=""
+            placeholder="Password"
+          />
         </label>
-        
-        <label className="loginPage__loginContainer__password">
-          <img src={twoFAicon} alt="Two factor authentication icon" />    
 
-          <input data-test-id="login-totp" onChange={(e)=>setTotp(e.target.value)} type="text" name="" id="" placeholder="Totp" />
+        <label className="loginPage__loginContainer__password">
+          <img src={twoFAicon} alt="Two factor authentication icon" />
+
+          <input
+            data-test-id="login-totp"
+            onChange={(e) => setTotp(e.target.value)}
+            type="text"
+            name=""
+            id=""
+            placeholder="Totp"
+          />
         </label>
 
         <button
@@ -97,7 +117,7 @@ const LoginPage = () => {
           </a>
           <a href={`${baseUrl}/user/login/github`}>
             <img src={githubLogo} alt="" />
-          </a>        
+          </a>
         </div>
 
         <span className="loginPage__loginContainer__reset">
